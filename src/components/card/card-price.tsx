@@ -1,5 +1,5 @@
 // Import Components
-import Bookmark from '../bookmark/bookmark';
+import CardBookmark from './card-bookmark';
 
 // Create CardPrice
 function CardPrice(): JSX.Element {
@@ -9,7 +9,7 @@ function CardPrice(): JSX.Element {
         <b className="place-card__price-value">&euro;120</b>
         <span className="place-card__price-text">&#47;&nbsp;night</span>
       </div>
-      <Bookmark />
+      <CardBookmark />
     </div>
   );
 }

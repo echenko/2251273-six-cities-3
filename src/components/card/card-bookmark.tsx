@@ -1,5 +1,5 @@
-// Create Bookmark
-function Bookmark(): JSX.Element {
+// Create CardBookmark
+function CardBookmark(): JSX.Element {
   return (
     <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
       <svg className="place-card__bookmark-icon" width="18" height="19">
@@ -10,5 +10,5 @@ function Bookmark(): JSX.Element {
   );
 }
 
-// Export Bookmark
-export default Bookmark;
+// Export CardBookmark
+export default CardBookmark;
