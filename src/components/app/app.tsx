@@ -1,4 +1,4 @@
-// App
+// Import Components Pages
 import MainPage from '../../pages/main-page';
 
 // Create App

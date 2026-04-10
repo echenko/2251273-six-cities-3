@@ -1,6 +1,7 @@
+// Import Libraries
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// Components
+// Import Components
 import App from './components/app/app';
 
 const root = ReactDOM.createRoot(
