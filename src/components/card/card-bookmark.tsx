@@ -1,7 +1,7 @@
 // Create CardBookmark
-function CardBookmark(): JSX.Element {
+function CardBookmark({isFavorite}: {isFavorite: boolean}): JSX.Element {
   return (
-    <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
+    <button className={isFavorite ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'place-card__bookmark-button button'} type="button">
       <svg className="place-card__bookmark-icon" width="18" height="19">
         <use xlinkHref="#icon-bookmark"></use>
       </svg>

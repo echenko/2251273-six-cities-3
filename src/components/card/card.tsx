@@ -5,18 +5,20 @@ import CardPrice from './card-price';
 import CardRating from './card-rating';
 import CardName from './card-name';
 import CardType from './card-type';
+// Import Types
+import { OfferType } from '../../mocks/offers-mocks';
 
 // Create Card
-function Card(): JSX.Element {
+function Card({offer}: {offer: OfferType}): JSX.Element {
   return (
     <article className="cities__card place-card">
-      <CardMark />
-      <CardImage />
+      {offer.isPremium && <CardMark />}
+      <CardImage cardImgSrc={offer.previewImage} cardImgAlt={offer.title} />
       <div className="place-card__info">
-        <CardPrice />
-        <CardRating />
-        <CardName />
-        <CardType />
+        <CardPrice cardPrice={offer.price} isFavorite={offer.isFavorite} />
+        <CardRating cardRating={offer.rating} />
+        <CardName cardName={offer.title} />
+        <CardType cardType={offer.type} />
       </div>
     </article>
   );

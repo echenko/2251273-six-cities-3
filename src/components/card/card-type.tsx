@@ -1,7 +1,7 @@
 // Create CardType
-function CardType(): JSX.Element {
+function CardType({cardType}: {cardType: string}): JSX.Element {
   return (
-    <p className="place-card__type">Apartment</p>
+    <p className="place-card__type">{cardType}</p>
   );
 }
 

@@ -18,7 +18,7 @@ const OFFERS = [
       'longitude': 2.342499,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 4.6
   },
@@ -41,8 +41,8 @@ const OFFERS = [
       'longitude': 2.330499,
       'zoom': 16
     },
-    'isFavorite': false,
-    'isPremium': false,
+    'isFavorite': true,
+    'isPremium': true,
     'rating': 2
   },
   {
@@ -64,7 +64,7 @@ const OFFERS = [
       'longitude': 2.335499,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': true,
     'rating': 4.1
   },
@@ -133,7 +133,7 @@ const OFFERS = [
       'longitude': 2.353499,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 1.5
   },
@@ -271,7 +271,7 @@ const OFFERS = [
       'longitude': 2.340499,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': true,
     'rating': 1.9
   },
@@ -386,7 +386,7 @@ const OFFERS = [
       'longitude': 2.374499,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 2.7
   },
@@ -455,7 +455,7 @@ const OFFERS = [
       'longitude': 2.374499,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': true,
     'rating': 2.6
   },
@@ -2761,4 +2761,31 @@ const OFFERS = [
   }
 ];
 
-export { OFFERS };
+// Types Props
+export type OfferType = {
+  id: string;
+  title: string;
+  type: string;
+  price: number;
+  city: {
+    name: string;
+    location: {
+      latitude: number;
+      longitude: number;
+      zoom: number;
+    };
+  };
+  location: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  previewImage: string;
+}
+
+export {
+  OFFERS,
+};

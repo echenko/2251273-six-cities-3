@@ -1,8 +1,8 @@
 // Create CardName
-function CardName(): JSX.Element {
+function CardName({cardName}: {cardName: string}): JSX.Element {
   return (
     <h2 className="place-card__name">
-      <a href="#">Beautiful &amp; luxurious apartment at great location</a>
+      <a href="#">{cardName}</a>
     </h2>
   );
 }

@@ -2,18 +2,20 @@
 import Header from '../components/header/header';
 import Locations from '../components/locations/locations';
 import Cities from '../components/cities/cities';
+// Import Types
+import { OfferType } from '../mocks/offers-mocks';
 
 // Create MainPage
-function MainPage(): JSX.Element {
+function MainPage({ offers }: { offers: OfferType[] }): JSX.Element {
   return (
     <div className="page page--gray page--main">
-      <Header />
+      <Header offers={offers} />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <Locations />
+          <Locations offers={offers} />
         </div>
-        <Cities />
+        <Cities offers={offers} />
       </main>
     </div>
   );

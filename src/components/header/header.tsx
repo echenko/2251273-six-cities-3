@@ -2,8 +2,12 @@
 import Logo from '../logo/logo';
 import Navigation from '../navigation/navigation';
 
+// Import Types
+import {OfferType} from '../../mocks/offers-mocks';
+
 // Create Header
-function Header(): JSX.Element {
+function Header({offers}: {offers: OfferType[]}): JSX.Element {
+
   return (
     <header className="header">
       <div className="container">
@@ -11,7 +15,7 @@ function Header(): JSX.Element {
           <div className="header__left">
             <Logo />
           </div>
-          <Navigation />
+          <Navigation offers={offers} />
         </div>
       </div>
     </header>

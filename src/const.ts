@@ -1,12 +1,3 @@
-const LOCATIONS = [
-  'Paris',
-  'Cologne',
-  'Brussels',
-  'Amsterdam',
-  'Hamburg',
-  'Dusseldorf',
-];
-
 const PLACES_OPTIONS = [
   'Popular',
   'Price: low to high',
@@ -14,7 +5,11 @@ const PLACES_OPTIONS = [
   'Top rated first',
 ];
 
+const OFFER_RATING = {
+  MAX_STARS: 5,
+};
+
 export {
-  LOCATIONS,
   PLACES_OPTIONS,
+  OFFER_RATING,
 };

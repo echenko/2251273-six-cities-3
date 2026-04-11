@@ -1,5 +1,10 @@
+// Import Types
+import {OfferType} from '../../mocks/offers-mocks';
+// Import Utils
+import { countFavoritesOffers } from '../../utils';
+
 // Create Navigation
-function Navigation(): JSX.Element {
+function Navigation({offers}: {offers: OfferType[]}): JSX.Element {
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
@@ -8,7 +13,7 @@ function Navigation(): JSX.Element {
             <div className="header__avatar-wrapper user__avatar-wrapper">
             </div>
             <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-            <span className="header__favorite-count">3</span>
+            <span className="header__favorite-count">{countFavoritesOffers(offers)}</span>
           </a>
         </li>
         <li className="header__nav-item">

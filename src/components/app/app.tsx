@@ -1,13 +1,19 @@
 // Import Components Pages
 import MainPage from '../../pages/main-page';
-import OffersPage from '../../pages/offers-page';
+// TODO: Исправить!
+// import OffersPage from '../../pages/offers-page';
+// Import Types
+import { OfferType } from '../../mocks/offers-mocks';
 
 // Create App
-function App(): JSX.Element {
+function App({offers}: {offers: OfferType[]}): JSX.Element {
   return (
     <>
-      <MainPage />
-      <OffersPage />
+      <MainPage
+        offers={offers}
+      />
+      {/* TODO: Исправить! */}
+      {/* <OffersPage offers={offers}/> */}
     </>
   );
 }
