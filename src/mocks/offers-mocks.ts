@@ -2762,7 +2762,7 @@ const OFFERS = [
 ];
 
 // Types Props
-export type OfferType = {
+export type OffersElementType = {
   id: string;
   title: string;
   type: string;

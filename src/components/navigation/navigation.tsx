@@ -1,10 +1,10 @@
 // Import Types
-import {OfferType} from '../../mocks/offers-mocks';
+import {OffersElementType} from '../../mocks/offers-mocks';
 // Import Utils
 import { countFavoritesOffers } from '../../utils';
 
 // Create Navigation
-function Navigation({offers}: {offers: OfferType[]}): JSX.Element {
+function Navigation({offers}: {offers: OffersElementType[]}): JSX.Element {
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">

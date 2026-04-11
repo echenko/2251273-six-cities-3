@@ -3,10 +3,10 @@ import Header from '../components/header/header';
 import Locations from '../components/locations/locations';
 import Cities from '../components/cities/cities';
 // Import Types
-import { OfferType } from '../mocks/offers-mocks';
+import { OffersElementType } from '../mocks/offers-mocks';
 
 // Create MainPage
-function MainPage({ offers }: { offers: OfferType[] }): JSX.Element {
+function MainPage({ offers }: { offers: OffersElementType[] }): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header offers={offers} />

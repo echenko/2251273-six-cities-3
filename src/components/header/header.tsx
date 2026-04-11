@@ -3,10 +3,10 @@ import Logo from '../logo/logo';
 import Navigation from '../navigation/navigation';
 
 // Import Types
-import {OfferType} from '../../mocks/offers-mocks';
+import {OffersElementType} from '../../mocks/offers-mocks';
 
 // Create Header
-function Header({offers}: {offers: OfferType[]}): JSX.Element {
+function Header({offers}: {offers: OffersElementType[]}): JSX.Element {
 
   return (
     <header className="header">

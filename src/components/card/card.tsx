@@ -6,10 +6,10 @@ import CardRating from './card-rating';
 import CardName from './card-name';
 import CardType from './card-type';
 // Import Types
-import { OfferType } from '../../mocks/offers-mocks';
+import { OffersElementType } from '../../mocks/offers-mocks';
 
 // Create Card
-function Card({offer}: {offer: OfferType}): JSX.Element {
+function Card({offer}: {offer: OffersElementType}): JSX.Element {
   return (
     <article className="cities__card place-card">
       {offer.isPremium && <CardMark />}

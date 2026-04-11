@@ -1,10 +1,10 @@
 // Import Types
-import { OfferType } from '../../mocks/offers-mocks';
+import { OffersElementType } from '../../mocks/offers-mocks';
 // Import Utils
 import {getArrayAllCities } from '../../utils';
 
 // Create Locations
-function Locations({offers}: {offers: OfferType[]}): JSX.Element {
+function Locations({offers}: {offers: OffersElementType[]}): JSX.Element {
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">

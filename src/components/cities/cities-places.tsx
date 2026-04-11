@@ -2,17 +2,17 @@
 import Sorting from '../sorting/sorting';
 import Card from '../card/card';
 // Import Types
-import { OfferType } from '../../mocks/offers-mocks';
+import { OffersElementType } from '../../mocks/offers-mocks';
 
 // Create CitiesPlaces
-function CitiesPlaces({offers}: {offers: OfferType[]}): JSX.Element {
+function CitiesPlaces({offers}: {offers: OffersElementType[]}): JSX.Element {
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">312 places to stay in Amsterdam</b>
       <Sorting />
       <div className="cities__places-list places__list tabs__content">
-        {offers.map((offer: OfferType) => (
+        {offers.map((offer: OffersElementType) => (
           <Card key={offer.id} offer={offer} />
         ))}
       </div>

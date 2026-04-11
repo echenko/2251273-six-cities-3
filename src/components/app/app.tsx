@@ -3,10 +3,10 @@ import MainPage from '../../pages/main-page';
 // TODO: Исправить!
 // import OffersPage from '../../pages/offers-page';
 // Import Types
-import { OfferType } from '../../mocks/offers-mocks';
+import { OffersElementType } from '../../mocks/offers-mocks';
 
 // Create App
-function App({offers}: {offers: OfferType[]}): JSX.Element {
+function App({offers}: {offers: OffersElementType[]}): JSX.Element {
   return (
     <>
       <MainPage
