@@ -1,6 +1,8 @@
 import {OffersElementType} from './mocks/offers-mocks';
+import {OfferType} from './mocks/offer-mock';
+import {CommentElementType} from './mocks/comments-mocks';
 
-import {OFFER_RATING} from './const';
+import {OFFER_RATING, TEST_COUNT_CARD} from './const';
 
 /**
  * Returns the number of favorite offers in the given array of offers.
@@ -34,12 +36,32 @@ function getArrayAllCities(offers: OffersElementType[]): string[] {
   return cities;
 }
 
-function convertRatingToStars(rating: number): number {
-  return 100 / OFFER_RATING.MAX_STARS * rating;
+function convertRatingToStars(rating: number): string {
+  return `${Number(100 / OFFER_RATING.MAX_STARS * rating)}%`;
+}
+
+function checkGoodOffer(offer: OfferType): boolean {
+  return offer.goods.length > 0;
+}
+
+function getFirstName(name: string): string {
+  return name.split(' ')[0];
+}
+
+function getCommentLength(comments: CommentElementType[]): number {
+  return comments.length;
+}
+
+function getTestOffers(offers: OffersElementType[]): OffersElementType[] {
+  return offers.slice(0, TEST_COUNT_CARD);
 }
 
 export {
   countFavoritesOffers,
   getArrayAllCities,
   convertRatingToStars,
+  checkGoodOffer,
+  getFirstName,
+  getCommentLength,
+  getTestOffers
 };

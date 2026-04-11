@@ -1,8 +1,8 @@
 // Create OfferImage
-function OfferImage(): JSX.Element {
+function OfferImage({imgSrc, imgAlt}: {imgSrc: string; imgAlt: string}): JSX.Element {
   return (
     <div className='offer__image-wrapper'>
-      <img className='offer__image' src='img/room.jpg' alt='Photo studio' />
+      <img className='offer__image' src={imgSrc} alt={imgAlt} />
     </div>
   );
 }

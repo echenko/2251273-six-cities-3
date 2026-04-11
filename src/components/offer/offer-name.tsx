@@ -1,14 +1,17 @@
 // Import Components
 import OfferBookmark from './offer-bookmark';
 
+// Import Types
+import { OfferType } from '../../mocks/offer-mock';
+
 // Create OfferName
-function OfferName(): JSX.Element {
+function OfferName({offer}: {offer: OfferType}): JSX.Element {
   return (
     <div className='offer__name-wrapper'>
       <h1 className='offer__name'>
-        Beautiful &amp; luxurious studio at great location
+        {offer.title}
       </h1>
-      <OfferBookmark />
+      <OfferBookmark offer={offer} />
     </div>
   );
 }

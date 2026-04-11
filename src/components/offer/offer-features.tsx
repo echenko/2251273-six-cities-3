@@ -1,16 +1,18 @@
+// Import Types
+import { OfferType } from '../../mocks/offer-mock';
+
 // Create OfferFeatures
-function OfferFeatures(): JSX.Element {
+function OfferFeatures({offer}: {offer: OfferType}): JSX.Element {
   return (
     <ul className='offer__features'>
-      {/* TODO: Доработать! */}
       <li className='offer__feature offer__feature--entire'>
-        Apartment
+        {offer.type}
       </li>
       <li className='offer__feature offer__feature--bedrooms'>
-        3 Bedrooms
+        {offer.bedrooms} Bedrooms
       </li>
       <li className='offer__feature offer__feature--adults'>
-        Max 4 adults
+        Max {offer.maxAdults} adult{offer.maxAdults === 1 ? '' : 's'}
       </li>
     </ul>
   );
