@@ -1,5 +1,9 @@
+// Import Libraries
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+// Import Components
+import App from './components/app/app';
+import { OFFERS } from './mocks/offers-mocks';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -7,6 +11,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <h1>Hello, World!</h1>
+    <App offers={OFFERS} />
   </React.StrictMode>
 );
