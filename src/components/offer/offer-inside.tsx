@@ -1,8 +1,13 @@
 // Import Types
 import { OfferType } from '../../mocks/offer-mock';
 
+// Create Types
+type OfferInsideProps = {
+  offer: OfferType;
+}
+
 // Create OfferInside
-function OfferInside({offer}: {offer: OfferType}): JSX.Element {
+function OfferInside({offer}: OfferInsideProps): JSX.Element {
   return (
     <div className='offer__inside'>
       <h2 className='offer__inside-title'>What&apos;s inside</h2>
@@ -21,4 +26,4 @@ function OfferInside({offer}: {offer: OfferType}): JSX.Element {
 }
 
 // Export OfferInside
-export default OfferInside;
+export {OfferInside};

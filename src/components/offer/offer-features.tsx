@@ -1,8 +1,13 @@
 // Import Types
-import { OfferType } from '../../mocks/offer-mock';
+import {OfferType} from '../../mocks/offer-mock';
+
+// Create Types
+type OfferFeaturesProps = {
+  offer: OfferType;
+}
 
 // Create OfferFeatures
-function OfferFeatures({offer}: {offer: OfferType}): JSX.Element {
+function OfferFeatures({offer}: OfferFeaturesProps): JSX.Element {
   return (
     <ul className='offer__features'>
       <li className='offer__feature offer__feature--entire'>
@@ -19,4 +24,4 @@ function OfferFeatures({offer}: {offer: OfferType}): JSX.Element {
 }
 
 // Export OfferFeatures
-export default OfferFeatures;
+export {OfferFeatures};

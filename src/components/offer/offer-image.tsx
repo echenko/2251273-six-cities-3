@@ -1,5 +1,10 @@
+type OfferImageProps = {
+  imgSrc: string;
+  imgAlt: string;
+}
+
 // Create OfferImage
-function OfferImage({imgSrc, imgAlt}: {imgSrc: string; imgAlt: string}): JSX.Element {
+function OfferImage({imgSrc, imgAlt}: OfferImageProps): JSX.Element {
   return (
     <div className='offer__image-wrapper'>
       <img className='offer__image' src={imgSrc} alt={imgAlt} />
@@ -8,4 +13,4 @@ function OfferImage({imgSrc, imgAlt}: {imgSrc: string; imgAlt: string}): JSX.Ele
 }
 
 // Export OfferImage
-export default OfferImage;
+export {OfferImage};

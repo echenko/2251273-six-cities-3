@@ -1,5 +1,5 @@
 // Import Components
-import Card from '../card/card';
+import {Card} from '../card/card';
 // Import Types
 import { OffersElementType } from '../../mocks/offers-mocks';
 // Import Utils

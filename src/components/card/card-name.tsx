@@ -1,5 +1,10 @@
+// Create Types
+type CardNameProps = {
+  cardName: string;
+}
+
 // Create CardName
-function CardName({cardName}: {cardName: string}): JSX.Element {
+function CardName({cardName}: CardNameProps): JSX.Element {
   return (
     <h2 className="place-card__name">
       <a href="#">{cardName}</a>
@@ -8,4 +13,4 @@ function CardName({cardName}: {cardName: string}): JSX.Element {
 }
 
 // Export CardName
-export default CardName;
+export {CardName};

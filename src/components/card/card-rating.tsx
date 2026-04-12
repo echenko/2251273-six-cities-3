@@ -1,9 +1,13 @@
 // Import Utils
 import {convertRatingToStars} from '../../utils';
 
-// Create CardRating
-function CardRating({cardRating}: {cardRating: number}): JSX.Element {
+// Create Types
+type CardRatingProps = {
+  cardRating: number;
+}
 
+// Create CardRating
+function CardRating({cardRating}: CardRatingProps): JSX.Element {
   return (
     <div className="place-card__rating rating">
       <div className="place-card__stars rating__stars">
@@ -15,4 +19,4 @@ function CardRating({cardRating}: {cardRating: number}): JSX.Element {
 }
 
 // Export CardRating
-export default CardRating;
+export {CardRating};

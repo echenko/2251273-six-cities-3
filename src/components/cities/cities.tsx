@@ -1,11 +1,17 @@
 // Import Components
-import CitiesPlaces from './cities-places';
-import Map from '../map/map';
+import {CitiesPlaces} from './cities-places';
+import {Map} from '../map/map';
+
 // Import Types
-import { OffersElementType } from '../../mocks/offers-mocks';
+import {OffersElementType} from '../../mocks/offers-mocks';
+
+// Create Types
+type CitiesProps = {
+  offers: OffersElementType[];
+}
 
 // Create Cities
-function Cities({offers}: {offers: OffersElementType[]}): JSX.Element {
+function Cities({offers}: CitiesProps): JSX.Element {
   return (
     <div className="cities">
       <div className="cities__places-container container">
@@ -17,4 +23,4 @@ function Cities({offers}: {offers: OffersElementType[]}): JSX.Element {
 }
 
 // Export Cities
-export default Cities;
+export {Cities};

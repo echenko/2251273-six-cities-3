@@ -1,8 +1,13 @@
 // Import Types
 import { OfferType } from '../../mocks/offer-mock';
 
+// Create Types
+type OfferPriceProps = {
+  offer: OfferType;
+}
+
 // Create OfferPrice
-function OfferPrice({offer}: {offer: OfferType}): JSX.Element {
+function OfferPrice({offer}: OfferPriceProps): JSX.Element {
   return (
     <div className='offer__price'>
       <b className='offer__price-value'>&euro;{offer.price}</b>
@@ -12,4 +17,4 @@ function OfferPrice({offer}: {offer: OfferType}): JSX.Element {
 }
 
 // Export OfferPrice
-export default OfferPrice;
+export {OfferPrice};

@@ -1,12 +1,16 @@
 // Import Components
-import Header from '../components/header/header';
-import Locations from '../components/locations/locations';
-import Cities from '../components/cities/cities';
+import {Header} from '../components/header/header';
+import {Locations} from '../components/locations/locations';
+import {Cities} from '../components/cities/cities';
 // Import Types
-import { OffersElementType } from '../mocks/offers-mocks';
+import {OffersElementType} from '../mocks/offers-mocks';
+// Create Types
+type MainPageProps = {
+  offers: OffersElementType[];
+};
 
 // Create MainPage
-function MainPage({ offers }: { offers: OffersElementType[] }): JSX.Element {
+function MainPage({ offers }: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header offers={offers} />
@@ -22,4 +26,4 @@ function MainPage({ offers }: { offers: OffersElementType[] }): JSX.Element {
 }
 
 // Export MainPage
-export default MainPage;
+export {MainPage};

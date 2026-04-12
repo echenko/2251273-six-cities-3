@@ -1,11 +1,17 @@
 // Import Components
-import Sorting from '../sorting/sorting';
-import Card from '../card/card';
+import {Sorting} from '../sorting/sorting';
+import {Card} from '../card/card';
+
 // Import Types
-import { OffersElementType } from '../../mocks/offers-mocks';
+import {OffersElementType} from '../../mocks/offers-mocks';
+
+// Create Types
+type CitiesPlacesProps = {
+  offers: OffersElementType[];
+}
 
 // Create CitiesPlaces
-function CitiesPlaces({offers}: {offers: OffersElementType[]}): JSX.Element {
+function CitiesPlaces({offers}: CitiesPlacesProps): JSX.Element {
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
@@ -21,4 +27,4 @@ function CitiesPlaces({offers}: {offers: OffersElementType[]}): JSX.Element {
 }
 
 // Export CitiesPlaces
-export default CitiesPlaces;
+export {CitiesPlaces};

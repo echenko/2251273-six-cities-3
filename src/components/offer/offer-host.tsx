@@ -1,11 +1,16 @@
-// Import Types
-
-import { OfferType } from '../../mocks/offer-mock';
 // Import Utils
 import {getFirstName} from '../../utils';
 
+// Import Types
+import {OfferType} from '../../mocks/offer-mock';
+
+// Create Types
+type OfferHostProps = {
+  offer: OfferType;
+}
+
 // Create OfferHost
-function OfferHost({offer}: {offer: OfferType}): JSX.Element {
+function OfferHost({offer}: OfferHostProps): JSX.Element {
   return (
     <div className='offer__host'>
       <h2 className='offer__host-title'>Meet the host</h2>
@@ -27,4 +32,4 @@ function OfferHost({offer}: {offer: OfferType}): JSX.Element {
 }
 
 // Export OfferHost
-export default OfferHost;
+export {OfferHost};

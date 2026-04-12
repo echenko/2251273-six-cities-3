@@ -1,25 +1,28 @@
 // Import Components
-import Header from '../components/header/header';
-import OfferGallery from '../components/offer/offer-gallery';
-import Offer from '../components/offer/offer';
+import {Header} from '../components/header/header';
+import {OfferGallery} from '../components/offer/offer-gallery';
+import {Offer} from '../components/offer/offer';
 import OfferMap from '../components/offer/offer-map';
 import NearPlaces from '../components/offer/offer-places';
 
 // Import Types
-import { OffersElementType } from '../mocks/offers-mocks';
-import { OfferType } from '../mocks/offer-mock';
-import { CommentElementType } from '../mocks/comments-mocks';
+import {OffersElementType} from '../mocks/offers-mocks';
+import {OfferType} from '../mocks/offer-mock';
+import {CommentElementType} from '../mocks/comments-mocks';
+
+// Create Types
+type OfferPageProps = {
+  offers: OffersElementType[];
+  offer: OfferType;
+  comments: CommentElementType[];
+}
 
 // Create OfferPage
 function OfferPage({
   offers,
   offer,
   comments
-} : {
-  offers: OffersElementType[];
-  offer: OfferType;
-  comments: CommentElementType[];
-}): JSX.Element {
+} : OfferPageProps): JSX.Element {
 
   return (
     <div className='page'>
@@ -40,4 +43,4 @@ function OfferPage({
 }
 
 // Export OffersPage
-export default OfferPage;
+export {OfferPage};

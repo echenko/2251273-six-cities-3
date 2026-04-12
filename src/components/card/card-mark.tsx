@@ -8,4 +8,4 @@ function CardMark(): JSX.Element {
 }
 
 // Export CardMark
-export default CardMark;
+export {CardMark};

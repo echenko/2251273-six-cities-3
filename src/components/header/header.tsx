@@ -1,12 +1,17 @@
 // Import Components
-import Logo from '../logo/logo';
-import Navigation from '../navigation/navigation';
+import {Logo} from '../logo/logo';
+import {Navigation} from '../navigation/navigation';
 
 // Import Types
 import {OffersElementType} from '../../mocks/offers-mocks';
 
+// Create Types
+type HeaderProps = {
+  offers: OffersElementType[];
+};
+
 // Create Header
-function Header({offers}: {offers: OffersElementType[]}): JSX.Element {
+function Header({offers}: HeaderProps): JSX.Element {
 
   return (
     <header className="header">
@@ -23,4 +28,4 @@ function Header({offers}: {offers: OffersElementType[]}): JSX.Element {
 }
 
 // Export Header
-export default Header;
+export {Header};

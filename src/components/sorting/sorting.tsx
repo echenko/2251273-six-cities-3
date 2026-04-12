@@ -1,5 +1,5 @@
 // Import constants
-import { PLACES_OPTIONS } from '../../const';
+import {PLACES_OPTIONS} from '../../const';
 
 // Create Sorting
 function Sorting(): JSX.Element {
@@ -22,4 +22,4 @@ function Sorting(): JSX.Element {
 }
 
 // Export Sorting
-export default Sorting;
+export {Sorting};

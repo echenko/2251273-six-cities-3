@@ -1,8 +1,14 @@
 // Import Components
-import CardBookmark from './card-bookmark';
+import {CardBookmark} from './card-bookmark';
+
+// Create Types
+type CardPriceProps = {
+  cardPrice: number;
+  isFavorite: boolean;
+};
 
 // Create CardPrice
-function CardPrice({cardPrice, isFavorite}: {cardPrice: number; isFavorite: boolean}): JSX.Element {
+function CardPrice({cardPrice, isFavorite}: CardPriceProps): JSX.Element {
   return (
     <div className="place-card__price-wrapper">
       <div className="place-card__price">
@@ -15,4 +21,4 @@ function CardPrice({cardPrice, isFavorite}: {cardPrice: number; isFavorite: bool
 }
 
 // Export CardPrice
-export default CardPrice;
+export {CardPrice};

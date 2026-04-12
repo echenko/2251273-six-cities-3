@@ -1,10 +1,16 @@
-// Import Types
-import { OfferType } from '../../mocks/offer-mock';
-
+// Import Utils
 import {convertRatingToStars} from '../../utils';
 
+// Import Types
+import {OfferType} from '../../mocks/offer-mock';
+
+// Create Types
+type OfferRatingProps = {
+  offer: OfferType;
+}
+
 // Create OfferRating
-function OfferRating({offer}: {offer: OfferType}): JSX.Element {
+function OfferRating({offer}: OfferRatingProps): JSX.Element {
   return (
     <div className='offer__rating rating'>
       <div className='offer__stars rating__stars'>
@@ -17,4 +23,4 @@ function OfferRating({offer}: {offer: OfferType}): JSX.Element {
 }
 
 // Export OfferRating
-export default OfferRating;
+export {OfferRating};

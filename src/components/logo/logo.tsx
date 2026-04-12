@@ -8,4 +8,4 @@ function Logo(): JSX.Element {
 }
 
 // Export Logo
-export default Logo;
+export {Logo};

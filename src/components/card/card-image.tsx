@@ -1,5 +1,11 @@
+// Create Types
+type CardImageProps = {
+  cardImgSrc: string;
+  cardImgAlt: string;
+};
+
 // Create CardImage
-function CardImage({cardImgSrc, cardImgAlt}: {cardImgSrc: string; cardImgAlt: string}): JSX.Element {
+function CardImage({cardImgSrc, cardImgAlt}: CardImageProps): JSX.Element {
   return (
     <div className="cities__image-wrapper place-card__image-wrapper">
       <a href="#">
@@ -10,4 +16,4 @@ function CardImage({cardImgSrc, cardImgAlt}: {cardImgSrc: string; cardImgAlt: st
 }
 
 // Export CardImage
-export default CardImage;
+export {CardImage};
