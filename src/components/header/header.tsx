@@ -12,7 +12,6 @@ type HeaderProps = {
 
 // Create Header
 function Header({offers}: HeaderProps): JSX.Element {
-
   return (
     <header className="header">
       <div className="container">
@@ -20,7 +19,9 @@ function Header({offers}: HeaderProps): JSX.Element {
           <div className="header__left">
             <Logo />
           </div>
-          <Navigation offers={offers} />
+          <Navigation
+            offers={offers}
+          />
         </div>
       </div>
     </header>
