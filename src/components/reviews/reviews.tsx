@@ -1,10 +1,8 @@
 // Import Components
 import {ReviewsList} from './reviews-list';
 import {ReviewsForm} from './reviews-form';
-
 //Import Utils
 import {getCommentLength} from '../../utils';
-
 //Import Types
 import {CommentElementType} from '../../mocks/comments-mocks';
 

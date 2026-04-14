@@ -1,6 +1,5 @@
 // Import Components
 import {OfferBookmark} from './offer-bookmark';
-
 // Import Types
 import {OfferType} from '../../mocks/offer-mock';
 

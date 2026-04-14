@@ -1,6 +1,5 @@
 // Import Utils
 import {getFirstName} from '../../utils';
-
 // Import Types
 import {OfferType} from '../../mocks/offer-mock';
 

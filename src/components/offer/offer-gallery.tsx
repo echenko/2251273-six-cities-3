@@ -1,6 +1,5 @@
 // Import Components
 import {OfferImage} from './offer-image';
-
 // Import Types
 import { OfferType } from '../../mocks/offer-mock';
 

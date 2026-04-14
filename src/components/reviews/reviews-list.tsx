@@ -1,6 +1,5 @@
 // Import Utils
 import { convertRatingToStars } from '../../utils';
-
 // Import Types
 import { CommentElementType } from '../../mocks/comments-mocks';
 

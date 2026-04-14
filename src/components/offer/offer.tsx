@@ -7,10 +7,8 @@ import {OfferPrice} from './offer-price';
 import {OfferInside} from './offer-inside';
 import {OfferHost} from './offer-host';
 import {Reviews} from '../reviews/reviews';
-
 // Import Utils
 import {checkGoodOffer} from '../../utils';
-
 // Import Types
 import {OfferType} from '../../mocks/offer-mock';
 import {CommentElementType} from '../../mocks/comments-mocks';

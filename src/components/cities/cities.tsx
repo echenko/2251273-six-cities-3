@@ -1,7 +1,6 @@
 // Import Components
 import {CitiesPlaces} from './cities-places';
 import {Map} from '../map/map';
-
 // Import Types
 import {OffersElementType} from '../../mocks/offers-mocks';
 

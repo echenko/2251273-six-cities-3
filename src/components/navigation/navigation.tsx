@@ -1,6 +1,5 @@
 // Import Utils
 import {countFavoritesOffers} from '../../utils';
-
 // Import Types
 import {OffersElementType} from '../../mocks/offers-mocks';
 
