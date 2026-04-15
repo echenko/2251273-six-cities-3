@@ -1,12 +1,13 @@
 // Import React
 import { useSearchParams } from 'react-router-dom';
-
 // Import Components
 import { Locations } from '../components/locations/locations';
 import { Cities } from '../components/cities/cities';
-
 // Import Types
 import { OffersElementType } from '../mocks/offers-mocks';
+
+// Get City
+const getCity = (searchParams: URLSearchParams): string => searchParams.get('city') || 'all';
 
 // Create Types
 type MainPageProps = {
@@ -23,7 +24,7 @@ function MainPage({ offers }: MainPageProps): JSX.Element {
       <div className="tabs">
         <Locations
           offers={offers}
-          city={searchParams.get('city') || ''}
+          city={getCity(searchParams)}
         />
       </div>
       <Cities offers={offers} />

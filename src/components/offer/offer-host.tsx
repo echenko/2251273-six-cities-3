@@ -1,7 +1,7 @@
 // Import Utils
-import {getFirstName} from '../../utils';
+import { getFirstName } from '../../utils';
 // Import Types
-import {OfferType} from '../../mocks/offer-mock';
+import { OfferType } from '../../mocks/offer-mock';
 
 // Create Types
 type OfferHostProps = {

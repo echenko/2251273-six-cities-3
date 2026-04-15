@@ -3,13 +3,19 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // Import Components Pages
 import { MainPage } from '../../pages/main-page';
 import { OfferPage } from '../../pages/offer-page';
-import { Layout } from '../layout';
+import { LoginPage } from '../../pages/login-page';
+import { FavoritesPage } from '../../pages/favorites-page';
+// Import Components
+import { Layout } from '../layout/layout';
+import { Private } from '../private/private';
+// Import Constants
+import { AppRoute } from '../../const';
+// Import Utils
+import { getStatusAuth } from '../../utils';
 // Import Types
 import { OffersElementType } from '../../mocks/offers-mocks';
 import { OFFER } from '../../mocks/offer-mock';
 import { COMMENTS } from '../../mocks/comments-mocks';
-// Import Constants
-import { AppRoute } from '../../const';
 
 // Create Types
 type AppProps = {
@@ -45,6 +51,22 @@ function App({ offers }: AppProps): JSX.Element {
               />
             }
           />
+          <Route
+            path={AppRoute.Login}
+            element={
+              <LoginPage />
+            }
+          />
+          <Route
+            path={AppRoute.Favorites}
+            element={
+              <Private
+                statusAuthorization={getStatusAuth()}
+              >
+                <FavoritesPage />
+              </Private>
+            }
+          />
           {/* TODO: Add 404! */}
           <Route
             path={AppRoute.NotFound}
@@ -54,7 +76,7 @@ function App({ offers }: AppProps): JSX.Element {
           />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter >
 
   );
 }

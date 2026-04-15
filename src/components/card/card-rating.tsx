@@ -1,5 +1,5 @@
 // Import Utils
-import {convertRatingToStars} from '../../utils';
+import { convertRatingToStars } from '../../utils';
 
 // Create Types
 type CardRatingProps = {

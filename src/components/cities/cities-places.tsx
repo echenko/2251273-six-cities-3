@@ -1,8 +1,8 @@
 // Import Components
-import {Sorting} from '../sorting/sorting';
-import {Card} from '../card/card';
+import { Sorting } from '../sorting/sorting';
+import { Card } from '../card/card';
 // Import Types
-import {OffersElementType} from '../../mocks/offers-mocks';
+import { OffersElementType } from '../../mocks/offers-mocks';
 
 // Create Types
 type CitiesPlacesProps = {

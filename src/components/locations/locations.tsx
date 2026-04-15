@@ -1,9 +1,9 @@
 // Import Components
-import {LocationsItem} from './locations-item';
+import { LocationsItem } from './locations-item';
 // Import Utils
-import {getArrayAllCities} from '../../utils';
+import { getArrayAllCities } from '../../utils';
 // Import Types
-import {OffersElementType} from '../../mocks/offers-mocks';
+import { OffersElementType } from '../../mocks/offers-mocks';
 
 
 // Create Types

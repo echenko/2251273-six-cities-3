@@ -1,8 +1,9 @@
-import {OffersElementType} from './mocks/offers-mocks';
-import {OfferType} from './mocks/offer-mock';
-import {CommentElementType} from './mocks/comments-mocks';
+import { OffersElementType } from './mocks/offers-mocks';
+import { OfferType } from './mocks/offer-mock';
+import { CommentElementType } from './mocks/comments-mocks';
 
-import {OFFER_RATING, TEST_COUNT_CARD} from './const';
+import { OFFER_RATING, TEST_COUNT_CARD } from './const';
+import { AuthorizationStatus } from './const';
 
 /**
  * Returns the number of favorite offers in the given array of offers.
@@ -56,6 +57,11 @@ function getTestOffers(offers: OffersElementType[]): OffersElementType[] {
   return offers.slice(0, TEST_COUNT_CARD);
 }
 
+function getStatusAuth(): AuthorizationStatus {
+  // TODO: refactor Authorization
+  return AuthorizationStatus.Auth;
+}
+
 export {
   countFavoritesOffers,
   getArrayAllCities,
@@ -63,5 +69,6 @@ export {
   checkGoodOffer,
   getFirstName,
   getCommentLength,
-  getTestOffers
+  getTestOffers,
+  getStatusAuth
 };

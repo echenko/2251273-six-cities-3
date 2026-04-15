@@ -1,9 +1,8 @@
 // Import Components
 import { OfferGallery } from '../components/offer/offer-gallery';
 import { Offer } from '../components/offer/offer';
-import OfferMap from '../components/offer/offer-map';
-import NearPlaces from '../components/offer/offer-places';
-
+import { OfferMap } from '../components/offer/offer-map';
+import { NearPlaces } from '../components/offer/offer-places';
 // Import Types
 import { OffersElementType } from '../mocks/offers-mocks';
 import { OfferType } from '../mocks/offer-mock';

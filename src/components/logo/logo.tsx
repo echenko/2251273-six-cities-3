@@ -1,7 +1,7 @@
 // Import React
-import {Link} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 // Import Constants
-import {AppRoute} from '../../const';
+import { AppRoute } from '../../const';
 
 // Create Types
 type LogoProps = {

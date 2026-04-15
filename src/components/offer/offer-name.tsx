@@ -1,7 +1,7 @@
 // Import Components
-import {OfferBookmark} from './offer-bookmark';
+import { OfferBookmark } from './offer-bookmark';
 // Import Types
-import {OfferType} from '../../mocks/offer-mock';
+import { OfferType } from '../../mocks/offer-mock';
 
 // Create Types
 type OfferNameProps = {

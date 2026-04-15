@@ -6,4 +6,4 @@ function OfferMap(): JSX.Element {
 }
 
 // Export OfferMap
-export default OfferMap;
+export {OfferMap};
