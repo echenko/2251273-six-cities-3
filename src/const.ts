@@ -13,7 +13,7 @@ const TEST_COUNT_CARD = 5;
 
 export enum AppRoute {
   Main = '/',
-  Offer = '/offer/:id',
+  Offer = '/offer',
   Favorites = '/favorites',
   Login = '/login',
   NotFound = '*',

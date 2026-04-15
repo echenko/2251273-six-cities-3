@@ -18,7 +18,7 @@ function Card({offer}: CardProps): JSX.Element {
   return (
     <article className="cities__card place-card">
       {offer.isPremium && <CardMark />}
-      <CardImage cardImgSrc={offer.previewImage} cardImgAlt={offer.title} />
+      <CardImage cardImgSrc={offer.previewImage} cardImgAlt={offer.title} offer={offer} />
       <div className="place-card__info">
         <CardPrice cardPrice={offer.price} isFavorite={offer.isFavorite} />
         <CardRating cardRating={offer.rating} />

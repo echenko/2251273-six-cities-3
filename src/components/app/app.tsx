@@ -11,11 +11,12 @@ import { Private } from '../private/private';
 // Import Constants
 import { AppRoute } from '../../const';
 // Import Utils
-import { getStatusAuth } from '../../utils';
+import { getStatusAuth, getFavoriteOffers } from '../../utils';
 // Import Types
 import { OffersElementType } from '../../mocks/offers-mocks';
 import { OFFER } from '../../mocks/offer-mock';
 import { COMMENTS } from '../../mocks/comments-mocks';
+import { FAVORITES } from '../../mocks/favorite-mocks';
 
 // Create Types
 type AppProps = {
@@ -42,7 +43,7 @@ function App({ offers }: AppProps): JSX.Element {
             }
           />
           <Route
-            path={AppRoute.Offer}
+            path={`${AppRoute.Offer}/:id`}
             element={
               <OfferPage
                 offers={offers}
@@ -63,7 +64,7 @@ function App({ offers }: AppProps): JSX.Element {
               <Private
                 statusAuthorization={getStatusAuth()}
               >
-                <FavoritesPage />
+                <FavoritesPage favoritesOffers={getFavoriteOffers(FAVORITES)} />
               </Private>
             }
           />
