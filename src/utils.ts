@@ -59,7 +59,7 @@ function getTestOffers(offers: OffersElementType[]): OffersElementType[] {
 
 function getStatusAuth(): AuthorizationStatus {
   // TODO: refactor Authorization
-  return AuthorizationStatus.Auth;
+  return AuthorizationStatus.NoAuth;
 }
 
 export {
