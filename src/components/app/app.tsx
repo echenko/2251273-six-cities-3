@@ -66,14 +66,14 @@ function App(): JSX.Element {
                 </Private>
               }
             />
-            {/* TODO: Add 404! */}
-            <Route
-              path={AppRoute.NotFound}
-              element={
-                <><h1>Page not found</h1><a href={AppRoute.Main}>Go to main page</a></>
-              }
-            />
           </Route>
+          {/* TODO: Add 404! */}
+          <Route
+            path={AppRoute.NotFound}
+            element={
+              <><h1>Page not found</h1><a href={AppRoute.Main}>Go to main page</a></>
+            }
+          />
         </Routes>
       </BrowserRouter >
     </HelmetProvider>
