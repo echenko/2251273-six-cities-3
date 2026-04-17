@@ -14,18 +14,14 @@ import { AppRoute } from '../../const';
 // Import Utils
 import { getStatusAuth, getFavoriteOffers } from '../../utils';
 // Import Types
-import { OffersElementType } from '../../mocks/offers-mocks';
+import { OffersElementType, OFFERS } from '../../mocks/offers-mocks';
 import { OFFER } from '../../mocks/offer-mock';
 import { COMMENTS } from '../../mocks/comments-mocks';
 import { FAVORITES } from '../../mocks/favorite-mocks';
 
-// Create Types
-type AppProps = {
-  offers: OffersElementType[];
-};
-
 // Create App
-function App({ offers }: AppProps): JSX.Element {
+function App(): JSX.Element {
+  const offers: OffersElementType[] = OFFERS;
   return (
     <HelmetProvider>
       <BrowserRouter>
