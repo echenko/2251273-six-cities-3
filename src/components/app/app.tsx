@@ -15,7 +15,6 @@ import { AppRoute } from '../../const';
 import { getStatusAuth, getFavoriteOffers } from '../../utils';
 // Import Types
 import { OffersElementType, OFFERS } from '../../mocks/offers-mocks';
-import { OFFER } from '../../mocks/offer-mock';
 import { COMMENTS } from '../../mocks/comments-mocks';
 import { FAVORITES } from '../../mocks/favorite-mocks';
 
@@ -45,7 +44,6 @@ function App(): JSX.Element {
               element={
                 <OfferPage
                   offers={offers}
-                  offer={OFFER}
                   comments={COMMENTS}
                 />
               }
