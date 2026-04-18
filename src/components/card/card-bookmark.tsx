@@ -1,7 +1,15 @@
+// Create Types
+type CardBookmarkProps = {
+  isFavorite: boolean;
+}
+
+// Create setClassName
+const setClassName = (isFavorite: boolean): string => isFavorite ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'place-card__bookmark-button button';
+
 // Create CardBookmark
-function CardBookmark({isFavorite}: {isFavorite: boolean}): JSX.Element {
+function CardBookmark({isFavorite}: CardBookmarkProps): JSX.Element {
   return (
-    <button className={isFavorite ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'place-card__bookmark-button button'} type="button">
+    <button className={setClassName(isFavorite)} type="button">
       <svg className="place-card__bookmark-icon" width="18" height="19">
         <use xlinkHref="#icon-bookmark"></use>
       </svg>
@@ -11,4 +19,4 @@ function CardBookmark({isFavorite}: {isFavorite: boolean}): JSX.Element {
 }
 
 // Export CardBookmark
-export default CardBookmark;
+export {CardBookmark};

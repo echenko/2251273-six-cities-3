@@ -1,21 +1,26 @@
 // Import Components
-import OfferMark from './offer-mark';
-import OfferName from './offer-name';
-import OfferRating from './offer-rating';
-import OfferFeatures from './offer-features';
-import OfferPrice from './offer-price';
-import OfferInside from './offer-inside';
-import OfferHost from './offer-host';
-import Reviews from '../reviews/reviews';
-
+import { OfferMark } from './offer-mark';
+import { OfferName } from './offer-name';
+import { OfferRating } from './offer-rating';
+import { OfferFeatures } from './offer-features';
+import { OfferPrice } from './offer-price';
+import { OfferInside } from './offer-inside';
+import { OfferHost } from './offer-host';
+import { Reviews } from '../reviews/reviews';
+// Import Utils
+import { checkGoodOffer } from '../../utils';
 // Import Types
 import { OfferType } from '../../mocks/offer-mock';
 import { CommentElementType } from '../../mocks/comments-mocks';
 
-import {checkGoodOffer} from '../../utils';
+// Create Types
+type OfferProps = {
+  offer: OfferType;
+  comments: CommentElementType[];
+}
 
 // Create Offer
-function Offer({offer, comments}: {offer: OfferType; comments: CommentElementType[]}): JSX.Element {
+function Offer({offer, comments}: OfferProps): JSX.Element {
   return (
     <div className='offer__container container'>
       <div className='offer__wrapper'>
@@ -34,4 +39,4 @@ function Offer({offer, comments}: {offer: OfferType; comments: CommentElementTyp
 }
 
 // Export Offer
-export default Offer;
+export {Offer};

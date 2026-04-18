@@ -11,6 +11,20 @@ const OFFER_RATING = {
 
 const TEST_COUNT_CARD = 5;
 
+export enum AppRoute {
+  Main = '/',
+  Offer = '/offer',
+  Favorites = '/favorites',
+  Login = '/login',
+  NotFound = '*',
+}
+
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
+
 export {
   PLACES_OPTIONS,
   OFFER_RATING,

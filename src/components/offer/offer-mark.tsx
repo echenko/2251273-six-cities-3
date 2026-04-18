@@ -8,4 +8,4 @@ function OfferMark(): JSX.Element {
 }
 
 // Export OfferMark
-export default OfferMark;
+export {OfferMark};

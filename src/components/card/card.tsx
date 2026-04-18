@@ -1,19 +1,24 @@
 // Import Components
-import CardMark from './card-mark';
-import CardImage from './card-image';
-import CardPrice from './card-price';
-import CardRating from './card-rating';
-import CardName from './card-name';
-import CardType from './card-type';
+import {CardMark} from './card-mark';
+import {CardImage} from './card-image';
+import {CardPrice} from './card-price';
+import {CardRating} from './card-rating';
+import {CardName} from './card-name';
+import {CardType} from './card-type';
 // Import Types
-import { OffersElementType } from '../../mocks/offers-mocks';
+import {OffersElementType} from '../../mocks/offers-mocks';
+
+// Create Types
+type CardProps = {
+  offer: OffersElementType;
+}
 
 // Create Card
-function Card({offer}: {offer: OffersElementType}): JSX.Element {
+function Card({offer}: CardProps): JSX.Element {
   return (
     <article className="cities__card place-card">
       {offer.isPremium && <CardMark />}
-      <CardImage cardImgSrc={offer.previewImage} cardImgAlt={offer.title} />
+      <CardImage cardImgSrc={offer.previewImage} cardImgAlt={offer.title} offer={offer} />
       <div className="place-card__info">
         <CardPrice cardPrice={offer.price} isFavorite={offer.isFavorite} />
         <CardRating cardRating={offer.rating} />
@@ -25,4 +30,4 @@ function Card({offer}: {offer: OffersElementType}): JSX.Element {
 }
 
 // Export Card
-export default Card;
+export {Card};

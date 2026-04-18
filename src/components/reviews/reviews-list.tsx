@@ -1,10 +1,15 @@
+// Import Utils
+import { convertRatingToStars } from '../../utils';
 // Import Types
 import { CommentElementType } from '../../mocks/comments-mocks';
-//
-import { convertRatingToStars } from '../../utils';
+
+// Create Types
+type ReviewsListProps = {
+  comments: CommentElementType[];
+};
 
 // Create ReviewsList
-function ReviewsList({ comments }: { comments: CommentElementType[] }): JSX.Element {
+function ReviewsList({ comments }: ReviewsListProps): JSX.Element {
   return (
     <ul className='reviews__list'>
       {/* TODO: Доработать! PRO! */}
@@ -38,4 +43,4 @@ function ReviewsList({ comments }: { comments: CommentElementType[] }): JSX.Elem
 }
 
 // Export ReviewsList
-export default ReviewsList;
+export {ReviewsList};

@@ -52,4 +52,4 @@ function ReviewsForm(): JSX.Element {
 }
 
 // Export ReviewsForm
-export default ReviewsForm;
+export {ReviewsForm};

@@ -1,8 +1,10 @@
-import {OffersElementType} from './mocks/offers-mocks';
-import {OfferType} from './mocks/offer-mock';
-import {CommentElementType} from './mocks/comments-mocks';
+import { OffersElementType } from './mocks/offers-mocks';
+import { OfferType } from './mocks/offer-mock';
+import { CommentElementType } from './mocks/comments-mocks';
+import { FavoriteType } from './mocks/favorite-mocks';
 
-import {OFFER_RATING, TEST_COUNT_CARD} from './const';
+import { OFFER_RATING, TEST_COUNT_CARD } from './const';
+import { AuthorizationStatus } from './const';
 
 /**
  * Returns the number of favorite offers in the given array of offers.
@@ -56,6 +58,30 @@ function getTestOffers(offers: OffersElementType[]): OffersElementType[] {
   return offers.slice(0, TEST_COUNT_CARD);
 }
 
+function getStatusAuth(): AuthorizationStatus {
+  // TODO: refactor Authorization
+  return AuthorizationStatus.Auth;
+}
+
+function getFavoriteOffers(offers: FavoriteType[]): FavoriteType[] {
+  return offers.filter((offer) => offer.isFavorite);
+}
+
+// TODO: РАЗОБРАТЬ!
+function getFavoriteOffersCities(offers: FavoriteType[]): Record<string, FavoriteType[]> {
+  const ANSWER: Record<string, FavoriteType[]> = {};
+
+  offers.forEach((offer) => {
+    if (ANSWER[offer.city.name]) {
+      ANSWER[offer.city.name].push(offer);
+    } else {
+      ANSWER[offer.city.name] = [offer];
+    }
+  });
+
+  return ANSWER;
+}
+
 export {
   countFavoritesOffers,
   getArrayAllCities,
@@ -63,5 +89,8 @@ export {
   checkGoodOffer,
   getFirstName,
   getCommentLength,
-  getTestOffers
+  getTestOffers,
+  getStatusAuth,
+  getFavoriteOffers,
+  getFavoriteOffersCities
 };

@@ -1,19 +1,24 @@
+// Import Components
+import { LocationsItem } from './locations-item';
+// Import Utils
+import { getArrayAllCities } from '../../utils';
 // Import Types
 import { OffersElementType } from '../../mocks/offers-mocks';
-// Import Utils
-import {getArrayAllCities } from '../../utils';
+
+
+// Create Types
+type LocationsProps = {
+  offers: OffersElementType[];
+  city: string;
+};
 
 // Create Locations
-function Locations({offers}: {offers: OffersElementType[]}): JSX.Element {
+function Locations({offers, city}: LocationsProps): JSX.Element {
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        {getArrayAllCities(offers).map((location) => (
-          <li className="locations__item" key={location}>
-            <a className="locations__item-link tabs__item tabs__item--active" href="#">
-              <span>{location}</span>
-            </a>
-          </li>
+        {getArrayAllCities(offers).map((location, index) => (
+          <LocationsItem key={`${location + index}`} location={location} city={city}/>
         ))}
       </ul>
     </section>
@@ -21,4 +26,4 @@ function Locations({offers}: {offers: OffersElementType[]}): JSX.Element {
 }
 
 // Export Locations
-export default Locations;
+export {Locations};

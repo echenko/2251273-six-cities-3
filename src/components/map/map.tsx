@@ -8,4 +8,4 @@ function Map(): JSX.Element {
 }
 
 // Export Map
-export default Map;
+export {Map};

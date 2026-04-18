@@ -22,4 +22,4 @@ function Sorting(): JSX.Element {
 }
 
 // Export Sorting
-export default Sorting;
+export {Sorting};

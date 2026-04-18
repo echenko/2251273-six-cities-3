@@ -1,16 +1,19 @@
 // Import Types
 import { OfferType } from '../../mocks/offer-mock';
 
+// Create Types
+type OfferInsideProps = {
+  offer: OfferType;
+}
+
 // Create OfferInside
-function OfferInside({offer}: {offer: OfferType}): JSX.Element {
+function OfferInside({offer}: OfferInsideProps): JSX.Element {
   return (
     <div className='offer__inside'>
       <h2 className='offer__inside-title'>What&apos;s inside</h2>
       <ul className='offer__inside-list'>
         {offer.goods.map((good, index) => (
-          // TODO: Add key!
-          // eslint-disable-next-line
-          <li className='offer__inside-item' key={index}>
+          <li className='offer__inside-item' key={`${good + index}`}>
             {good}
           </li>
         ))}
@@ -21,4 +24,4 @@ function OfferInside({offer}: {offer: OfferType}): JSX.Element {
 }
 
 // Export OfferInside
-export default OfferInside;
+export {OfferInside};

@@ -1,9 +1,9 @@
 // Import Components
-import Card from '../card/card';
-// Import Types
-import { OffersElementType } from '../../mocks/offers-mocks';
+import { Card } from '../card/card';
 // Import Utils
 import { getTestOffers } from '../../utils';
+// Import Types
+import { OffersElementType } from '../../mocks/offers-mocks';
 
 // Create NearPlaces
 function NearPlaces({offers}: {offers: OffersElementType[]}): JSX.Element {
@@ -20,4 +20,4 @@ function NearPlaces({offers}: {offers: OffersElementType[]}): JSX.Element {
 }
 
 // Export NearPlaces
-export default NearPlaces;
+export {NearPlaces};
