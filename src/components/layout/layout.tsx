@@ -21,11 +21,10 @@ type LayoutState = {
 
 // Get Layout State
 const getLayoutState = (pathname: AppRoute): LayoutState => {
-  // TODO: Correct!
-  const page = pathname.match(/\/[wa-z]+/i) || '/';
-  const path = page && page[0] || pathname;
-  // TODO: Correct!
-  switch (path) {
+
+  const pathPage = pathname.match(/\/[wa-z]+/i)?.[0] || pathname;
+
+  switch (pathPage) {
     case AppRoute.Main:
       return {
         classNamePage: 'page page--gray page--main',
@@ -37,7 +36,6 @@ const getLayoutState = (pathname: AppRoute): LayoutState => {
     case AppRoute.Offer:
       return {
         classNamePage: 'page',
-        // TODO: Correct to true!
         navigationState: true,
         logoState: false,
         footerState: false,
