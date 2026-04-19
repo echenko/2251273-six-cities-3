@@ -19,7 +19,7 @@ function FavoriteItem({ city, favoriteOffers }: FavoriteItemProps): JSX.Element 
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <Link className="locations__item-link" to={`${AppRoute.Main}?city=${city.toLowerCase()}`}>
+          <Link className="locations__item-link" to={`${AppRoute.Main}?city=${city}`}>
             <span>{city}</span>
           </Link>
         </div>
