@@ -7,6 +7,8 @@ import { OfferPrice } from './offer-price';
 import { OfferInside } from './offer-inside';
 import { OfferHost } from './offer-host';
 import { Reviews } from '../reviews/reviews';
+// Import Constants
+import { AuthorizationStatus } from '../../const';
 // Import Utils
 import { checkGoodOffer } from '../../utils';
 // Import Types
@@ -17,10 +19,11 @@ import { CommentElementType } from '../../mocks/comments-mocks';
 type OfferProps = {
   offer: OfferType;
   comments: CommentElementType[];
+  statusAuthorization: AuthorizationStatus;
 }
 
 // Create Offer
-function Offer({offer, comments}: OfferProps): JSX.Element {
+function Offer({offer, comments, statusAuthorization}: OfferProps): JSX.Element {
   return (
     <div className='offer__container container'>
       <div className='offer__wrapper'>
@@ -32,7 +35,7 @@ function Offer({offer, comments}: OfferProps): JSX.Element {
         {checkGoodOffer(offer) && <OfferInside offer={offer} />}
         <OfferHost offer={offer} />
 
-        <Reviews comments={comments} />
+        <Reviews comments={comments} statusAuthorization={statusAuthorization} />
       </div>
     </div>
   );

@@ -5,11 +5,23 @@ const PLACES_OPTIONS = [
   'Top rated first',
 ];
 
-const OFFER_RATING = {
-  MAX_STARS: 5,
-};
-
 const TEST_COUNT_CARD = 5;
+
+const RATING_OFFER = [
+  {value: 5, label: 'perfect'},
+  {value: 4, label: 'good'},
+  {value: 3, label: 'not bad'},
+  {value: 2, label: 'badly'},
+  {value: 1, label: 'terribly'},
+
+];
+
+const REVIEW_OFFER = {
+  MIN_COMMENT_LENGTH: 50,
+  MAX_COMMENT_LENGTH: 300,
+  MIN_RATING_OFFER: 1,
+  MAX_RATING_OFFER: 5,
+};
 
 export enum AppRoute {
   Main = '/',
@@ -27,6 +39,7 @@ export enum AuthorizationStatus {
 
 export {
   PLACES_OPTIONS,
-  OFFER_RATING,
-  TEST_COUNT_CARD
+  TEST_COUNT_CARD,
+  RATING_OFFER,
+  REVIEW_OFFER
 };

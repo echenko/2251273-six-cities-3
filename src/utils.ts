@@ -3,7 +3,7 @@ import { OfferType } from './mocks/offer-mock';
 import { CommentElementType } from './mocks/comments-mocks';
 import { FavoriteType } from './mocks/favorite-mocks';
 
-import { OFFER_RATING, TEST_COUNT_CARD } from './const';
+import { REVIEW_OFFER, TEST_COUNT_CARD } from './const';
 import { AuthorizationStatus } from './const';
 
 /**
@@ -39,7 +39,7 @@ function getArrayAllCities(offers: OffersElementType[]): string[] {
 }
 
 function convertRatingToStars(rating: number): string {
-  return `${Number(100 / OFFER_RATING.MAX_STARS * rating)}%`;
+  return `${Number(100 / REVIEW_OFFER.MAX_RATING_OFFER * rating)}%`;
 }
 
 function checkGoodOffer(offer: OfferType): boolean {

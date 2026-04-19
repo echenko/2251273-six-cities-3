@@ -37,6 +37,7 @@ export const GlobalStyle = createGlobalStyle`
 // Create App
 function App(): JSX.Element {
   const offers: OffersElementType[] = OFFERS;
+  const statusAuthorization = getStatusAuth();
   return (
     <HelmetProvider>
       <GlobalStyle />
@@ -62,6 +63,7 @@ function App(): JSX.Element {
                 <OfferPage
                   offers={offers}
                   comments={COMMENTS}
+                  statusAuthorization={statusAuthorization}
                 />
               }
             />
@@ -75,7 +77,7 @@ function App(): JSX.Element {
               path={AppRoute.Favorites}
               element={
                 <Private
-                  statusAuthorization={getStatusAuth()}
+                  statusAuthorization={statusAuthorization}
                 >
                   <FavoritesPage favoritesOffers={getFavoriteOffers(FAVORITES)} />
                 </Private>

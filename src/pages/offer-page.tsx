@@ -7,17 +7,21 @@ import { NearPlaces } from '../components/offer/offer-places';
 import { OffersElementType } from '../mocks/offers-mocks';
 import { OFFER, OfferType } from '../mocks/offer-mock';
 import { CommentElementType } from '../mocks/comments-mocks';
+// Import Constants
+import { AuthorizationStatus } from '../const';
 
 // Create Types
 type OfferPageProps = {
   offers: OffersElementType[];
   comments: CommentElementType[];
+  statusAuthorization: AuthorizationStatus;
 }
 
 // Create OfferPage
 function OfferPage({
   offers,
-  comments
+  comments,
+  statusAuthorization
 }: OfferPageProps): JSX.Element {
   const offer: OfferType = OFFER;
 
@@ -25,7 +29,7 @@ function OfferPage({
     <main className='page__main page__main--offer'>
       <section className='offer'>
         <OfferGallery offer={offer} />
-        <Offer offer={offer} comments={comments} />
+        <Offer offer={offer} comments={comments} statusAuthorization={statusAuthorization} />
         <OfferMap />
       </section>
       <div className='container'>
