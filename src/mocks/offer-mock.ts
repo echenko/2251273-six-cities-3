@@ -1,5 +1,5 @@
 const OFFER = {
-  'id': '6af6f711-c28d-4121-82cd-e0b462a27f00',
+  'id': '831162e9-478b-4df9-9432-85be2bb5f531',
   'title': 'Beautiful & luxurious studio at great location',
   'type': 'apartment',
   'price': 777,

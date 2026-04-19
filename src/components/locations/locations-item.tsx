@@ -11,7 +11,7 @@ function setStyle(location: string, city: string): string {
 
 // Create Functions setCity
 function setCity(location: string = 'all'): string {
-  return location.toLowerCase();
+  return location;
 }
 
 // Create Types

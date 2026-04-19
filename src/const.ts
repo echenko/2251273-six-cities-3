@@ -7,6 +7,8 @@ const PLACES_OPTIONS = [
 
 const TEST_COUNT_CARD = 5;
 
+const DEFAULT_CITY = 'Amsterdam';
+
 const RATING_OFFER = [
   {value: 5, label: 'perfect'},
   {value: 4, label: 'good'},
@@ -21,6 +23,11 @@ const REVIEW_OFFER = {
   MAX_COMMENT_LENGTH: 300,
   MIN_RATING_OFFER: 1,
   MAX_RATING_OFFER: 5,
+};
+
+const PAGE_NOT_FOUND_MESSAGE = {
+  PAGE: 'Page not found',
+  OFFER: 'Offer not found',
 };
 
 export enum AppRoute {
@@ -38,8 +45,10 @@ export enum AuthorizationStatus {
 }
 
 export {
+  DEFAULT_CITY,
   PLACES_OPTIONS,
   TEST_COUNT_CARD,
   RATING_OFFER,
-  REVIEW_OFFER
+  REVIEW_OFFER,
+  PAGE_NOT_FOUND_MESSAGE,
 };

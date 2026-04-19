@@ -3,11 +3,15 @@ import { useSearchParams } from 'react-router-dom';
 // Import Components
 import { Locations } from '../components/locations/locations';
 import { Cities } from '../components/cities/cities';
+// Import Constants
+import { DEFAULT_CITY } from '../const';
+// Import Utils
+import { filterOffersByCity } from '../utils';
 // Import Types
 import { OffersElementType } from '../mocks/offers-mocks';
 
 // Get City
-const getCity = (searchParams: URLSearchParams): string => searchParams.get('city') || 'all';
+const getCity = (searchParams: URLSearchParams): string => searchParams.get('city') || DEFAULT_CITY;
 
 // Create Types
 type MainPageProps = {
@@ -17,6 +21,8 @@ type MainPageProps = {
 // Create MainPage
 function MainPage({ offers }: MainPageProps): JSX.Element {
   const [searchParams] = useSearchParams();
+  const filteredOffers = filterOffersByCity(offers, getCity(searchParams));
+  const city = getCity(searchParams);
 
   return (
     <main className="page__main page__main--index">
@@ -24,10 +30,10 @@ function MainPage({ offers }: MainPageProps): JSX.Element {
       <div className="tabs">
         <Locations
           offers={offers}
-          city={getCity(searchParams)}
+          city={city}
         />
       </div>
-      <Cities offers={offers} />
+      <Cities offers={filteredOffers} city={city} />
     </main>
   );
 }

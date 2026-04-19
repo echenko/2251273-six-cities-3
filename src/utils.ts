@@ -59,7 +59,6 @@ function getTestOffers(offers: OffersElementType[]): OffersElementType[] {
 }
 
 function getStatusAuth(): AuthorizationStatus {
-  // TODO: refactor Authorization
   return AuthorizationStatus.Auth;
 }
 
@@ -82,6 +81,18 @@ function getFavoriteOffersCities(offers: FavoriteType[]): Record<string, Favorit
   return ANSWER;
 }
 
+function checkOfferId(offers: OffersElementType[], offerID: string): boolean {
+  return offers.some((offer) => offer.id === offerID);
+}
+
+function filterOffersByCity(offers: OffersElementType[], city: string): OffersElementType[] {
+  return offers.filter((offer) => offer.city.name.toLowerCase() === city.toLowerCase());
+}
+
+function getCounterOffers(offers: OffersElementType[]): number {
+  return offers.length;
+}
+
 export {
   countFavoritesOffers,
   getArrayAllCities,
@@ -92,5 +103,8 @@ export {
   getTestOffers,
   getStatusAuth,
   getFavoriteOffers,
-  getFavoriteOffersCities
+  getFavoriteOffersCities,
+  checkOfferId,
+  filterOffersByCity,
+  getCounterOffers
 };
