@@ -20,7 +20,7 @@ function Card({offer}: CardProps): JSX.Element {
       {offer.isPremium && <CardMark />}
       <CardImage cardImgSrc={offer.previewImage} cardImgAlt={offer.title} offer={offer} />
       <div className="place-card__info">
-        <CardPrice cardPrice={offer.price} isFavorite={offer.isFavorite} />
+        <CardPrice offer={offer} />
         <CardRating cardRating={offer.rating} />
         <CardName cardName={offer.title} />
         <CardType cardType={offer.type} />
