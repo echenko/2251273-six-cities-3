@@ -48,6 +48,7 @@ function ReviewsForm(): JSX.Element {
                 </svg>
               </label>
             </Fragment>
+
           )
         ))}
       </div>
