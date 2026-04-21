@@ -19,7 +19,6 @@ function OfferBookmark({ offer }: OfferBookmarkProps): JSX.Element {
   }
 
   return (
-    // <button className={isFavoriteState ? 'offer__bookmark-button offer__bookmark-button--active button' : 'offer__bookmark-button button'} type='button' onClick={handleClick}>
     <button className={
       clsx(
         'offer__bookmark-button button',
