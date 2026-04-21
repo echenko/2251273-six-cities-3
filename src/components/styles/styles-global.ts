@@ -2,7 +2,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 // Create GlobalStyle
-// TODO: Create GlobalStyle!
 const GlobalStyle = createGlobalStyle`
   body,
   html {

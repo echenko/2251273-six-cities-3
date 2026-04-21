@@ -1,6 +1,7 @@
+// Import React
 import { Link } from 'react-router-dom';
 
-//
+// Create Types
 type PageNotFoundProps = {
   message: string;
 }

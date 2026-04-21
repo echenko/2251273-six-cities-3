@@ -1,3 +1,4 @@
+// Import React
 import { useParams } from 'react-router-dom';
 // Import Components
 import { OfferGallery } from '../components/offer/offer-gallery';
@@ -35,22 +36,20 @@ function OfferPage({
 
   if (!checkOfferId(offers, offerId)) {
     return children;
-  } else {
-    return (
-      <main className='page__main page__main--offer'>
-        <section className='offer'>
-          <OfferGallery offer={offer} />
-          <Offer offer={offer} comments={comments} statusAuthorization={statusAuthorization} />
-          <OfferMap />
-        </section>
-        <div className='container'>
-          <NearPlaces offers={offers} />
-        </div>
-      </main>
-    );
-
   }
 
+  return (
+    <main className='page__main page__main--offer'>
+      <section className='offer'>
+        <OfferGallery offer={offer} />
+        <Offer offer={offer} comments={comments} statusAuthorization={statusAuthorization} />
+        <OfferMap />
+      </section>
+      <div className='container'>
+        <NearPlaces offers={offers} />
+      </div>
+    </main>
+  );
 
 }
 
