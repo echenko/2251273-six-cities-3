@@ -2,20 +2,19 @@
 import {Link} from 'react-router-dom';
 // Import Constants
 import {AppRoute} from '../../const';
-import { OffersElementType } from '../../mocks/offers-mocks';
 
 // Create Types
 type CardImageProps = {
   cardImgSrc: string;
   cardImgAlt: string;
-  offer: OffersElementType;
+  offerId: string;
 };
 
 // Create CardImage
-function CardImage({cardImgSrc, cardImgAlt, offer}: CardImageProps): JSX.Element {
+function CardImage({cardImgSrc, cardImgAlt, offerId}: CardImageProps): JSX.Element {
   return (
     <div className="cities__image-wrapper place-card__image-wrapper">
-      <Link to={`${AppRoute.Offer}/${offer.id}`}>
+      <Link to={`${AppRoute.Offer}/${offerId}`}>
         <img className="place-card__image" src={cardImgSrc} width="260" height="200" alt={cardImgAlt} />
       </Link>
     </div>

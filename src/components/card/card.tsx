@@ -18,11 +18,11 @@ function Card({offer}: CardProps): JSX.Element {
   return (
     <article className="cities__card place-card">
       {offer.isPremium && <CardMark />}
-      <CardImage cardImgSrc={offer.previewImage} cardImgAlt={offer.title} offer={offer} />
+      <CardImage cardImgSrc={offer.previewImage} cardImgAlt={offer.title} offerId={offer.id} />
       <div className="place-card__info">
         <CardPrice offer={offer} />
         <CardRating cardRating={offer.rating} />
-        <CardName cardName={offer.title} />
+        <CardName cardName={offer.title} offerId={offer.id} />
         <CardType cardType={offer.type} />
       </div>
     </article>

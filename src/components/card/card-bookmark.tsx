@@ -18,7 +18,7 @@ function CardBookmark({offer}: CardBookmarkProps): JSX.Element {
 
   function handleClick(): void {
     setIsFavoriteState(!isFavoriteState);
-    // TODO: Доработать!
+    // TODO: Доработать добавление в избранное!
   }
 
   return (

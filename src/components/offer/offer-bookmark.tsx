@@ -14,8 +14,7 @@ function OfferBookmark({ offer }: OfferBookmarkProps): JSX.Element {
 
   function handleClick(): void {
     setIsFavorite(!isFavorite);
-    // TODO: Доработать!
-    offer.isFavorite = !isFavorite;
+    // TODO: Доработать добавление в избранное!
   }
 
   return (
