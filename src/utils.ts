@@ -3,7 +3,7 @@ import { OfferType } from './mocks/offer-mock';
 import { CommentElementType } from './mocks/comments-mocks';
 import { FavoriteType } from './mocks/favorite-mocks';
 
-import { OFFER_RATING, TEST_COUNT_CARD } from './const';
+import { REVIEW_OFFER, TEST_COUNT_CARD } from './const';
 import { AuthorizationStatus } from './const';
 
 /**
@@ -39,7 +39,7 @@ function getArrayAllCities(offers: OffersElementType[]): string[] {
 }
 
 function convertRatingToStars(rating: number): string {
-  return `${Number(100 / OFFER_RATING.MAX_STARS * rating)}%`;
+  return `${Number(100 / REVIEW_OFFER.MAX_RATING_OFFER * rating)}%`;
 }
 
 function checkGoodOffer(offer: OfferType): boolean {
@@ -59,7 +59,6 @@ function getTestOffers(offers: OffersElementType[]): OffersElementType[] {
 }
 
 function getStatusAuth(): AuthorizationStatus {
-  // TODO: refactor Authorization
   return AuthorizationStatus.Auth;
 }
 
@@ -82,6 +81,18 @@ function getFavoriteOffersCities(offers: FavoriteType[]): Record<string, Favorit
   return ANSWER;
 }
 
+function checkOfferId(offers: OffersElementType[], offerID: string): boolean {
+  return offers.some((offer) => offer.id === offerID);
+}
+
+function filterOffersByCity(offers: OffersElementType[], city: string): OffersElementType[] {
+  return offers.filter((offer) => offer.city.name.toLowerCase() === city.toLowerCase());
+}
+
+function getCounterOffers(offers: OffersElementType[]): number {
+  return offers.length;
+}
+
 export {
   countFavoritesOffers,
   getArrayAllCities,
@@ -92,5 +103,8 @@ export {
   getTestOffers,
   getStatusAuth,
   getFavoriteOffers,
-  getFavoriteOffersCities
+  getFavoriteOffersCities,
+  checkOfferId,
+  filterOffersByCity,
+  getCounterOffers
 };

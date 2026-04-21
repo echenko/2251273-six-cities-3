@@ -7,14 +7,15 @@ import {OffersElementType} from '../../mocks/offers-mocks';
 // Create Types
 type CitiesProps = {
   offers: OffersElementType[];
+  city: string;
 }
 
 // Create Cities
-function Cities({offers}: CitiesProps): JSX.Element {
+function Cities({offers, city}: CitiesProps): JSX.Element {
   return (
     <div className="cities">
       <div className="cities__places-container container">
-        <CitiesPlaces offers={offers} />
+        <CitiesPlaces offers={offers} city={city} />
         <Map />
       </div>
     </div>

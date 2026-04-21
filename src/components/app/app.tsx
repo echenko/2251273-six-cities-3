@@ -1,6 +1,8 @@
 // Import React
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+// Import Styles
+import { GlobalStyle } from '../styles/styles-global';
 // Import Components Pages
 import { MainPage } from '../../pages/main-page';
 import { OfferPage } from '../../pages/offer-page';
@@ -9,8 +11,9 @@ import { FavoritesPage } from '../../pages/favorites-page';
 // Import Components
 import { Layout } from '../layout/layout';
 import { Private } from '../private/private';
+import { PageNotFound } from '../page-not-found/page-not-found';
 // Import Constants
-import { AppRoute } from '../../const';
+import { AppRoute, PAGE_NOT_FOUND_MESSAGE } from '../../const';
 // Import Utils
 import { getStatusAuth, getFavoriteOffers } from '../../utils';
 // Import Types
@@ -21,8 +24,10 @@ import { FAVORITES } from '../../mocks/favorite-mocks';
 // Create App
 function App(): JSX.Element {
   const offers: OffersElementType[] = OFFERS;
+  const statusAuthorization = getStatusAuth();
   return (
     <HelmetProvider>
+      <GlobalStyle />
       <BrowserRouter>
         <Routes>
           <Route
@@ -40,12 +45,15 @@ function App(): JSX.Element {
               }
             />
             <Route
-              path={`${AppRoute.Offer}/:id`}
+              path={`${AppRoute.Offer}/:offerId`}
               element={
                 <OfferPage
                   offers={offers}
                   comments={COMMENTS}
-                />
+                  statusAuthorization={statusAuthorization}
+                >
+                  <PageNotFound message={PAGE_NOT_FOUND_MESSAGE.OFFER} />
+                </OfferPage>
               }
             />
             <Route
@@ -58,7 +66,7 @@ function App(): JSX.Element {
               path={AppRoute.Favorites}
               element={
                 <Private
-                  statusAuthorization={getStatusAuth()}
+                  statusAuthorization={statusAuthorization}
                 >
                   <FavoritesPage favoritesOffers={getFavoriteOffers(FAVORITES)} />
                 </Private>
@@ -69,7 +77,7 @@ function App(): JSX.Element {
           <Route
             path={AppRoute.NotFound}
             element={
-              <><h1>Page not found</h1><a href={AppRoute.Main}>Go to main page</a></>
+              <PageNotFound message={PAGE_NOT_FOUND_MESSAGE.PAGE} />
             }
           />
         </Routes>

@@ -27,9 +27,9 @@ function FavoriteCard({ offer }: FavoriteCardProps): JSX.Element {
         </Link>
       </div>
       <div className="favorites__card-info place-card__info">
-        <CardPrice cardPrice={offer.price} isFavorite={offer.isFavorite} />
+        <CardPrice offer={offer} />
         <CardRating cardRating={offer.rating} />
-        <CardName cardName={offer.title} />
+        <CardName cardName={offer.title} offerId={offer.id} />
         <CardType cardType={offer.type} />
       </div>
     </article>
