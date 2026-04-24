@@ -17,7 +17,7 @@ function Cities({offers, city}: CitiesProps): JSX.Element {
       <div className="cities__places-container container">
         <CitiesPlaces offers={offers} city={city} />
         <div className="cities__right-section">
-          <Map />
+          <Map className="cities__map" offers={offers} />
         </div>
       </div>
     </div>
