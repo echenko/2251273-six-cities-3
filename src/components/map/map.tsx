@@ -17,10 +17,10 @@ function Map({className, offers}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const isRendered = useRef(false);
   // State
-
-  const [, setMap] = useState<leaflet.Map | null>(null);
+  const [map, setMap] = useState<leaflet.Map | null>(null);
 
   useEffect(() => {
+    console.log('render');
     if (!isRendered.current && mapRef.current !== null) {
 
       // Create Map (Создание карты)
@@ -40,16 +40,6 @@ function Map({className, offers}: MapProps): JSX.Element {
         },
       );
 
-      // Add Markers (Добавление маркеров)
-      offers.forEach((offer) => {
-        leaflet.marker(
-          {
-            lat: offer.location.latitude,
-            lng: offer.location.longitude,
-          },
-        ).addTo(mapInstance);
-      });
-
       // Add Layer (Добавление слоя)
       layer.addTo(mapInstance);
 
@@ -58,6 +48,10 @@ function Map({className, offers}: MapProps): JSX.Element {
 
       isRendered.current = true;
     }
+
+    return () => {
+      console.log('unmount');
+    };
   }, [offers]);
 
   return (
