@@ -14,7 +14,7 @@ type MapProps = {
 
 // Create Map
 function Map({className, offers, zoom}: MapProps): JSX.Element {
-  console.log(zoom);
+  console.log(zoom, offers.length);
   // Ref
   const mapRef = useRef(null);
   const isRendered = useRef(false);
@@ -54,8 +54,9 @@ function Map({className, offers, zoom}: MapProps): JSX.Element {
     return () => {
       console.log('unmount');
       setMap(null);
+      // isRendered.current = false;
     };
-  }, [offers, zoom]);
+  }, [offers, zoom, mapRef]);
 
   return (
     <section className={`${className} map`} ref={mapRef}></section>
