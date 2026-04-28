@@ -17,7 +17,7 @@ function Cities({offers, city}: CitiesProps): JSX.Element {
       <div className="cities__places-container container">
         <CitiesPlaces offers={offers} city={city} />
         <div className="cities__right-section">
-          <Map className="cities__map" offers={offers} />
+          <Map className="cities__map" offers={offers} zoom={Math.random() * (10 - 5) + 5} />
         </div>
       </div>
     </div>

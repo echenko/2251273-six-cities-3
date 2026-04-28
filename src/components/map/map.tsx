@@ -9,10 +9,12 @@ import { OffersElementType } from '../../mocks/offers-mocks';
 type MapProps = {
   className: string;
   offers: OffersElementType[];
+  zoom: number
 }
 
 // Create Map
-function Map({className, offers}: MapProps): JSX.Element {
+function Map({className, offers, zoom}: MapProps): JSX.Element {
+  console.log(zoom);
   // Ref
   const mapRef = useRef(null);
   const isRendered = useRef(false);
@@ -29,7 +31,7 @@ function Map({className, offers}: MapProps): JSX.Element {
           lat: 52.35514938496378,
           lng: 4.673877537499948,
         },
-        zoom: 8,
+        zoom: zoom,
       });
 
       // Create Layer (Создание слоя)
@@ -51,8 +53,9 @@ function Map({className, offers}: MapProps): JSX.Element {
 
     return () => {
       console.log('unmount');
+      setMap(null);
     };
-  }, [offers]);
+  }, [offers, zoom]);
 
   return (
     <section className={`${className} map`} ref={mapRef}></section>
