@@ -11,12 +11,17 @@ import {OffersElementType} from '../../mocks/offers-mocks';
 // Create Types
 type CardProps = {
   offer: OffersElementType;
+  onOfferHover: (offerId: string) => void;
 }
 
 // Create Card
-function Card({offer}: CardProps): JSX.Element {
+function Card({offer, onOfferHover}: CardProps): JSX.Element {
   return (
-    <article className="cities__card place-card">
+    <article
+      className="cities__card place-card"
+      onMouseEnter={() => onOfferHover(offer.id)}
+      onMouseLeave={() => onOfferHover('')}
+    >
       {offer.isPremium && <CardMark />}
       <CardImage cardImgSrc={offer.previewImage} cardImgAlt={offer.title} offerId={offer.id} />
       <div className="place-card__info">

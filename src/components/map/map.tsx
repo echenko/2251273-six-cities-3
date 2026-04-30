@@ -4,34 +4,35 @@ import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 // Import Types
 import { OffersElementType } from '../../mocks/offers-mocks';
+// Import Constants
+import { MAP_PIN_ICON } from '../../const';
 
 // Create Types
 type MapProps = {
   className: string;
   offers: OffersElementType[];
-  zoom: number
+  location: OffersElementType['location'];
+  currentOffer: string | null;
 }
 
 // Create Map
-function Map({className, offers, zoom}: MapProps): JSX.Element {
-  console.log(zoom, offers.length);
+function Map({ className, offers, location, currentOffer }: MapProps): JSX.Element {
   // Ref
   const mapRef = useRef(null);
   const isRendered = useRef(false);
   // State
   const [map, setMap] = useState<leaflet.Map | null>(null);
 
+  // Create Map
   useEffect(() => {
-    console.log('render');
-    if (!isRendered.current && mapRef.current !== null) {
-
+    if (mapRef.current !== null && !isRendered.current) {
       // Create Map (Создание карты)
       const mapInstance = leaflet.map(mapRef.current, {
         center: {
-          lat: 52.35514938496378,
-          lng: 4.673877537499948,
+          lat: location.latitude,
+          lng: location.longitude,
         },
-        zoom: zoom,
+        zoom: location.zoom,
       });
 
       // Create Layer (Создание слоя)
@@ -41,25 +42,61 @@ function Map({className, offers, zoom}: MapProps): JSX.Element {
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         },
       );
-
       // Add Layer (Добавление слоя)
       layer.addTo(mapInstance);
-
       // Set Map (Установка карты)
       setMap(mapInstance);
-
+      // Set Rendered
       isRendered.current = true;
     }
+  }, [mapRef, location]);
+
+  // Update Map
+  useEffect(() => {
+    if (isRendered.current) {
+      map?.setView({ lat: location.latitude, lng: location.longitude }, location.zoom);
+    }
+
+  }, [map, location]);
+
+  useEffect(() => {
+    if (!map) {
+      return;
+    }
+    // Create Markers Layer (Создание слоя маркеров)
+    const markersLayer = leaflet.layerGroup().addTo(map);
+
+    // Add Markers (Добавление маркеров)
+    offers.forEach((offer) => {
+      // Create Marker (Создание маркера)
+      const marker = leaflet.marker({
+        lat: offer.location.latitude,
+        lng: offer.location.longitude,
+      });
+      // Add Popup (Добавление попапа)
+      marker.bindPopup(offer.title);
+      // Add Icon (Добавление иконки)
+      marker.setIcon(leaflet.icon({
+        iconUrl: offer.id === currentOffer ? MAP_PIN_ICON.ACTIVE : MAP_PIN_ICON.DEFAULT,
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+      }));
+      // Add Marker to Layer (Добавление маркера в слой)
+      marker.addTo(markersLayer);
+    });
 
     return () => {
-      console.log('unmount');
-      setMap(null);
-      // isRendered.current = false;
+      // Remove Markers Layer (Удаление слоя маркеров)
+      map?.removeLayer(markersLayer);
     };
-  }, [offers, zoom, mapRef]);
+  }, [map, offers, currentOffer]);
 
   return (
-    <section className={`${className} map`} ref={mapRef}></section>
+    <section
+      className={`${className} map`}
+      ref={mapRef}
+    >
+    </section>
   );
 }
 

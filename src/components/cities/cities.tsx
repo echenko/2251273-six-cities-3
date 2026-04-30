@@ -1,3 +1,5 @@
+// Import React
+import { useState } from 'react';
 // Import Components
 import {CitiesPlaces} from './cities-places';
 import {Map} from '../map/map';
@@ -12,12 +14,27 @@ type CitiesProps = {
 
 // Create Cities
 function Cities({offers, city}: CitiesProps): JSX.Element {
+  const [currentOffer, setCurrentOffer] = useState<string>('');
+
+  const handleOfferHover = (offerId: string) => {
+    setCurrentOffer(offerId);
+  };
+
   return (
     <div className="cities">
       <div className="cities__places-container container">
-        <CitiesPlaces offers={offers} city={city} />
+        <CitiesPlaces
+          offers={offers}
+          city={city}
+          onOfferHover={handleOfferHover}
+        />
         <div className="cities__right-section">
-          <Map className="cities__map" offers={offers} zoom={Math.random() * (10 - 5) + 5} />
+          <Map
+            className="cities__map"
+            offers={offers}
+            location={offers[0].city.location}
+            currentOffer={currentOffer}
+          />
         </div>
       </div>
     </div>

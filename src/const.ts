@@ -30,6 +30,12 @@ const PAGE_NOT_FOUND_MESSAGE = {
   OFFER: 'Offer not found',
 };
 
+const MAP_PIN_ICON = {
+  DEFAULT: 'img/pin.svg',
+  ACTIVE: 'img/pin-active.svg',
+};
+
+
 export enum AppRoute {
   Main = '/',
   Offer = '/offer',
@@ -51,4 +57,5 @@ export {
   RATING_OFFER,
   REVIEW_OFFER,
   PAGE_NOT_FOUND_MESSAGE,
+  MAP_PIN_ICON,
 };
