@@ -35,6 +35,8 @@ const MAP_PIN_ICON = {
   ACTIVE: 'img/pin-active.svg',
 };
 
+const ICON_SIZE: [number, number] = [40, 40];
+const ICON_ANCHOR: [number, number] = [20, 40];
 
 export enum AppRoute {
   Main = '/',
@@ -58,4 +60,6 @@ export {
   REVIEW_OFFER,
   PAGE_NOT_FOUND_MESSAGE,
   MAP_PIN_ICON,
+  ICON_SIZE,
+  ICON_ANCHOR,
 };

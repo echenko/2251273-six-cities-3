@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css';
 // Import Types
 import { OffersElementType } from '../../mocks/offers-mocks';
 // Import Constants
-import { MAP_PIN_ICON } from '../../const';
+import { MAP_PIN_ICON, ICON_SIZE, ICON_ANCHOR } from '../../const';
 
 // Create Types
 type MapProps = {
@@ -78,8 +78,8 @@ function Map({ className, offers, location, currentOffer }: MapProps): JSX.Eleme
       // Add Icon (Добавление иконки)
       marker.setIcon(leaflet.icon({
         iconUrl: offer.id === currentOffer ? MAP_PIN_ICON.ACTIVE : MAP_PIN_ICON.DEFAULT,
-        iconSize: [40, 40],
-        iconAnchor: [20, 40],
+        iconSize: ICON_SIZE,
+        iconAnchor: ICON_ANCHOR,
       }));
       // Add Marker to Layer (Добавление маркера в слой)
       marker.addTo(markersLayer);
