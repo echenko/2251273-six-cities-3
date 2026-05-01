@@ -13,7 +13,11 @@ function NearPlaces({offers}: {offers: OffersElementType[]}): JSX.Element {
       <div className='near-places__list places__list'>
         {getTestOffers(offers).map((offer: OffersElementType) => (
           // TODO: Доработать!
-          <Card key={offer.id} offer={offer} onOfferHover={() => {}} />
+          <Card
+            key={offer.id}
+            offer={offer}
+            onOfferHover={() => {}}
+          />
         ))}
       </div>
     </section>
