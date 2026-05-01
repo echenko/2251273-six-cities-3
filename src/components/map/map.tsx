@@ -13,10 +13,11 @@ type MapProps = {
   offers: OffersElementType[];
   location: OffersElementType['location'];
   currentOffer: string | null;
+  onOfferHover: (offerId: string) => void;
 }
 
 // Create Map
-function Map({ className, offers, location, currentOffer }: MapProps): JSX.Element {
+function Map({ className, offers, location, currentOffer, onOfferHover }: MapProps): JSX.Element {
   // Ref
   const mapRef = useRef(null);
   const isRendered = useRef(false);
@@ -75,6 +76,11 @@ function Map({ className, offers, location, currentOffer }: MapProps): JSX.Eleme
       });
       // Add Popup (Добавление попапа)
       marker.bindPopup(offer.title);
+      // Add Mouse Events (Добавление событий мыши)
+      marker.on('mouseover', () => onOfferHover(offer.id));
+      marker.on('mouseout', () => onOfferHover(''));
+      // Set Z-Index (Установка индекса Z)
+      marker.setZIndexOffset(offer.id === currentOffer ? 1000 : 0);
       // Add Icon (Добавление иконки)
       marker.setIcon(leaflet.icon({
         iconUrl: offer.id === currentOffer ? MAP_PIN_ICON.ACTIVE : MAP_PIN_ICON.DEFAULT,
@@ -89,7 +95,7 @@ function Map({ className, offers, location, currentOffer }: MapProps): JSX.Eleme
       // Remove Markers Layer (Удаление слоя маркеров)
       map?.removeLayer(markersLayer);
     };
-  }, [map, offers, currentOffer]);
+  }, [map, offers, currentOffer, onOfferHover]);
 
   return (
     <section

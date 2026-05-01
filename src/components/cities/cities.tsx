@@ -34,6 +34,7 @@ function Cities({offers, city}: CitiesProps): JSX.Element {
             offers={offers}
             location={offers[0].city.location}
             currentOffer={currentOffer}
+            onOfferHover={handleOfferHover}
           />
         </div>
       </div>
