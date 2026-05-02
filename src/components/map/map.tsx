@@ -6,7 +6,6 @@ import 'leaflet/dist/leaflet.css';
 import { OffersElementType } from '../../mocks/offers-mocks';
 // Import Constants
 import { MAP_PIN_ICON, ICON_SIZE, ICON_ANCHOR } from '../../const';
-import { Link } from 'react-router-dom';
 
 // Create Types
 type MapProps = {
