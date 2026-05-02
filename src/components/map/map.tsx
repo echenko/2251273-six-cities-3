@@ -11,7 +11,7 @@ import { MAP_PIN_ICON, ICON_SIZE, ICON_ANCHOR } from '../../const';
 type MapProps = {
   className: string;
   offers: OffersElementType[];
-  location: OffersElementType['location'];
+  location: OffersElementType['location'] | null;
   currentOffer: string | null;
   onOfferHover: (offerId: string) => void;
 }
@@ -26,7 +26,7 @@ function Map({ className, offers, location, currentOffer, onOfferHover }: MapPro
 
   // Create Map
   useEffect(() => {
-    if (mapRef.current !== null && !isRendered.current) {
+    if (mapRef.current !== null && !isRendered.current && location !== null) {
       // Create Map (Создание карты)
       const mapInstance = leaflet.map(mapRef.current, {
         center: {
@@ -50,11 +50,11 @@ function Map({ className, offers, location, currentOffer, onOfferHover }: MapPro
       // Set Rendered
       isRendered.current = true;
     }
-  }, [mapRef, location]);
+  }, [location]);
 
   // Update Map
   useEffect(() => {
-    if (isRendered.current) {
+    if (isRendered.current && location !== null) {
       map?.setView({ lat: location.latitude, lng: location.longitude }, location.zoom);
     }
 

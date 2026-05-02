@@ -3,6 +3,8 @@ import { useState } from 'react';
 // Import Components
 import {CitiesPlaces} from './cities-places';
 import {Map} from '../map/map';
+// Import Utils
+import { getLocation } from '../../utils';
 // Import Types
 import {OffersElementType} from '../../mocks/offers-mocks';
 
@@ -32,7 +34,7 @@ function Cities({offers, city}: CitiesProps): JSX.Element {
           <Map
             className="cities__map"
             offers={offers}
-            location={offers[0].city.location}
+            location={getLocation(offers)}
             currentOffer={currentOffer}
             onOfferHover={handleOfferHover}
           />
