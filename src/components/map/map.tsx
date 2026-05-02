@@ -6,6 +6,7 @@ import 'leaflet/dist/leaflet.css';
 import { OffersElementType } from '../../mocks/offers-mocks';
 // Import Constants
 import { MAP_PIN_ICON, ICON_SIZE, ICON_ANCHOR } from '../../const';
+import { Link } from 'react-router-dom';
 
 // Create Types
 type MapProps = {
@@ -79,6 +80,12 @@ function Map({ className, offers, location, currentOffer, onOfferHover }: MapPro
       // Add Mouse Events (Добавление событий мыши)
       marker.on('mouseover', () => onOfferHover(offer.id));
       marker.on('mouseout', () => onOfferHover(''));
+      marker.on('click', () => {
+        map?.flyTo({
+          lat: offer.location.latitude,
+          lng: offer.location.longitude,
+        });
+      });
       // Set Z-Index (Установка индекса Z)
       marker.setZIndexOffset(offer.id === currentOffer ? 1000 : 0);
       // Add Icon (Добавление иконки)
@@ -87,6 +94,7 @@ function Map({ className, offers, location, currentOffer, onOfferHover }: MapPro
         iconSize: ICON_SIZE,
         iconAnchor: ICON_ANCHOR,
       }));
+
       // Add Marker to Layer (Добавление маркера в слой)
       marker.addTo(markersLayer);
     });
