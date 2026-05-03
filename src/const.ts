@@ -37,6 +37,7 @@ const MAP_MARKER_DEFAULT: leaflet.IconOptions = {
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 };
+
 const MAP_MARKER_ACTIVE: leaflet.IconOptions = {
   iconUrl: 'img/pin-active.svg',
   iconSize: [40, 40],
