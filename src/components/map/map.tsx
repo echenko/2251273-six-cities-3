@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css';
 // Import Types
 import { OffersElementType } from '../../mocks/offers-mocks';
 // Import Constants
-import { MAP_PIN_ICON, ICON_SIZE, ICON_ANCHOR } from '../../const';
+import { MAP_MARKER_DEFAULT, MAP_MARKER_ACTIVE } from '../../const';
 
 // Create Types
 type MapProps = {
@@ -13,11 +13,10 @@ type MapProps = {
   offers: OffersElementType[];
   location: OffersElementType['location'] | null;
   currentOffer: string | null;
-  onOfferHover: (offerId: string) => void;
 }
 
 // Create Map
-function Map({ className, offers, location, currentOffer, onOfferHover }: MapProps): JSX.Element {
+function Map({ className, offers, location, currentOffer }: MapProps): JSX.Element {
   // Ref
   const mapRef = useRef(null);
   const isRendered = useRef(false);
@@ -55,7 +54,10 @@ function Map({ className, offers, location, currentOffer, onOfferHover }: MapPro
   // Update Map
   useEffect(() => {
     if (isRendered.current && location !== null) {
-      map?.setView({ lat: location.latitude, lng: location.longitude }, location.zoom);
+      map?.flyTo({
+        lat: location.latitude,
+        lng: location.longitude,
+      });
     }
 
   }, [map, location]);
@@ -77,23 +79,22 @@ function Map({ className, offers, location, currentOffer, onOfferHover }: MapPro
       // Add Popup (Добавление попапа)
       marker.bindPopup(offer.title);
       // Add Mouse Events (Добавление событий мыши)
-      marker.on('mouseover', () => onOfferHover(offer.id));
-      marker.on('mouseout', () => onOfferHover(''));
+      marker.on('mouseover', () => {
+        marker.setIcon(leaflet.icon(MAP_MARKER_ACTIVE));
+        marker.setZIndexOffset(1000);
+      });
+      marker.on('mouseout', () => {
+        marker.setIcon(leaflet.icon(MAP_MARKER_DEFAULT));
+        marker.setZIndexOffset(0);
+      });
       marker.on('click', () => {
         map?.flyTo({
           lat: offer.location.latitude,
           lng: offer.location.longitude,
         });
       });
-      // Set Z-Index (Установка индекса Z)
-      marker.setZIndexOffset(offer.id === currentOffer ? 1000 : 0);
       // Add Icon (Добавление иконки)
-      marker.setIcon(leaflet.icon({
-        iconUrl: offer.id === currentOffer ? MAP_PIN_ICON.ACTIVE : MAP_PIN_ICON.DEFAULT,
-        iconSize: ICON_SIZE,
-        iconAnchor: ICON_ANCHOR,
-      }));
-
+      marker.setIcon(leaflet.icon(currentOffer === offer.id ? MAP_MARKER_ACTIVE : MAP_MARKER_DEFAULT));
       // Add Marker to Layer (Добавление маркера в слой)
       marker.addTo(markersLayer);
     });
@@ -102,7 +103,7 @@ function Map({ className, offers, location, currentOffer, onOfferHover }: MapPro
       // Remove Markers Layer (Удаление слоя маркеров)
       map?.removeLayer(markersLayer);
     };
-  }, [map, offers, currentOffer, onOfferHover]);
+  }, [map, offers, currentOffer]);
 
   return (
     <section
