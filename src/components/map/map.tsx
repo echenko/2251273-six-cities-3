@@ -54,10 +54,11 @@ function Map({ className, offers, location, currentOffer }: MapProps): JSX.Eleme
   // Update Map
   useEffect(() => {
     if (isRendered.current && location !== null) {
-      map?.flyTo({
+      map?.setView({
         lat: location.latitude,
         lng: location.longitude,
       });
+      map?.setZoom(location.zoom);
     }
 
   }, [map, location]);
