@@ -1,6 +1,6 @@
 // Import React
 import { useEffect, useRef, useState } from 'react';
-import leaflet from 'leaflet';
+import leaflet, { marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 // Import Types
 import { OffersElementType } from '../../mocks/offers-mocks';
@@ -96,6 +96,8 @@ function Map({ className, offers, location, currentOffer }: MapProps): JSX.Eleme
       });
       // Add Icon (Добавление иконки)
       marker.setIcon(leaflet.icon(currentOffer === offer.id ? MAP_MARKER_ACTIVE : MAP_MARKER_DEFAULT));
+      // Add ZIndex (Добавление индекса)
+      marker.setZIndexOffset(currentOffer === offer.id ? 1000 : 0);
       // Add Marker to Layer (Добавление маркера в слой)
       marker.addTo(markersLayer);
     });
