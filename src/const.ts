@@ -7,7 +7,7 @@ const PLACES_OPTIONS = [
   'Top rated first',
 ];
 
-const TEST_COUNT_CARD = 5;
+const NEAREST_OFFERS_COUNT = 3;
 
 const DEFAULT_CITY = 'Amsterdam';
 
@@ -61,7 +61,7 @@ export enum AuthorizationStatus {
 export {
   DEFAULT_CITY,
   PLACES_OPTIONS,
-  TEST_COUNT_CARD,
+  NEAREST_OFFERS_COUNT,
   RATING_OFFER,
   REVIEW_OFFER,
   PAGE_NOT_FOUND_MESSAGE,

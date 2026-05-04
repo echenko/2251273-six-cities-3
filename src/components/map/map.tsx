@@ -19,6 +19,7 @@ type MapProps = {
 
 // Create Map
 function Map({ className, offers, location, currentOffer }: MapProps): JSX.Element {
+  console.log(offers);
   // Ref
   const mapRef = useRef(null);
   const isRendered = useRef(false);

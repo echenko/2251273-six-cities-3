@@ -3,7 +3,7 @@ import { OfferType } from './mocks/offer-mock';
 import { CommentElementType } from './mocks/comments-mocks';
 import { FavoriteType } from './mocks/favorite-mocks';
 
-import { REVIEW_OFFER, TEST_COUNT_CARD } from './const';
+import { REVIEW_OFFER, NEAREST_OFFERS_COUNT } from './const';
 import { AuthorizationStatus } from './const';
 
 /**
@@ -55,7 +55,7 @@ function getCommentLength(comments: CommentElementType[]): number {
 }
 
 function getTestOffers(offers: OffersElementType[]): OffersElementType[] {
-  return offers.slice(0, TEST_COUNT_CARD);
+  return offers.slice(0, NEAREST_OFFERS_COUNT);
 }
 
 function getStatusAuth(): AuthorizationStatus {
@@ -64,6 +64,10 @@ function getStatusAuth(): AuthorizationStatus {
 
 function getFavoriteOffers(offers: FavoriteType[]): FavoriteType[] {
   return offers.filter((offer) => offer.isFavorite);
+}
+
+function getNearestOffers(offers: OffersElementType[], offer: OffersElementType): OffersElementType[] {
+  return offers.filter((item) => item.city.name === offer.city.name).slice(0, NEAREST_OFFERS_COUNT).concat(offer);
 }
 
 // TODO: РАЗОБРАТЬ!
@@ -113,6 +117,7 @@ export {
   getTestOffers,
   getStatusAuth,
   getFavoriteOffers,
+  getNearestOffers,
   getFavoriteOffersCities,
   checkOfferId,
   filterOffersByCity,
