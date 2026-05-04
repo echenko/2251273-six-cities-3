@@ -34,7 +34,7 @@ function Cities({offers, city}: CitiesProps): JSX.Element {
           <Map
             className="cities__map"
             offers={offers}
-            location={getLocation(offers)}
+            location={getLocation(offers[0])}
             currentOffer={currentOffer}
           />
         </div>
