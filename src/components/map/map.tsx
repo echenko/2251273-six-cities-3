@@ -1,11 +1,13 @@
 // Import React
 import { useEffect, useRef, useState } from 'react';
-import leaflet, { marker } from 'leaflet';
+// Import Leaflet
+import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-// Import Types
-import { OffersElementType } from '../../mocks/offers-mocks';
 // Import Constants
 import { MAP_MARKER_DEFAULT, MAP_MARKER_ACTIVE } from '../../const';
+// Import Types
+import { OffersElementType } from '../../mocks/offers-mocks';
+
 
 // Create Types
 type MapProps = {
