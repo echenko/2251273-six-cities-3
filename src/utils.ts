@@ -93,6 +93,25 @@ function getCounterOffers(offers: OffersElementType[]): number {
   return offers.length;
 }
 
+function getLocation(offers: OffersElementType[]): OffersElementType['location'] {
+  const location: OffersElementType['location'] = {
+    latitude: 0,
+    longitude: 0,
+    zoom: 0,
+  };
+
+  offers.forEach((offer) => {
+    if(offer.city.location.latitude && offer.city.location.longitude && offer.city.location.zoom) {
+      location.latitude = offer.city.location.latitude;
+      location.longitude = offer.city.location.longitude;
+      location.zoom = offer.city.location.zoom;
+      return location;
+    }
+  });
+
+  return location;
+}
+
 export {
   countFavoritesOffers,
   getArrayAllCities,
@@ -106,5 +125,6 @@ export {
   getFavoriteOffersCities,
   checkOfferId,
   filterOffersByCity,
-  getCounterOffers
+  getCounterOffers,
+  getLocation
 };

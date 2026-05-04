@@ -1,6 +1,6 @@
 const FAVORITES = [
   {
-    'id': '6af6f711-c28d-4121-82cd-e0b462a27f001',
+    'id': '51c8695f-a2d7-462a-853b-15477cb583c9',
     'title': 'Beautiful',
     'type': 'apartment',
     'price': 120,
@@ -23,7 +23,7 @@ const FAVORITES = [
     'previewImage': 'img/room-small.jpg'
   },
   {
-    'id': '6af6f711-c28d-4121-82cd-e0b462a27f702',
+    'id': '6993dc1a-4932-41ea-a0f7-5f8bfbf6080e',
     'title': 'Luxurious studio at great location',
     'type': 'apartment',
     'price': 120,
@@ -46,7 +46,7 @@ const FAVORITES = [
     'previewImage': 'img/room-small.jpg'
   },
   {
-    'id': '6af6f711-c28d-4121-82cd-e0b462a57f003',
+    'id': '1e7d5e43-9cc3-4420-897f-acc83825c675',
     'title': 'Studio at great location',
     'type': 'house',
     'price': 120,
@@ -69,7 +69,7 @@ const FAVORITES = [
     'previewImage': 'img/apartment-small-04.jpg'
   },
   {
-    'id': '6af5f711-c28d-4121-85cd-e0b462a27f704',
+    'id': '57c9ea60-2b60-43d9-a136-7e5b19f20698',
     'title': 'Great location',
     'type': 'room',
     'price': 120,

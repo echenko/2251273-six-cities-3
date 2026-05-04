@@ -10,10 +10,11 @@ import { OffersElementType } from '../../mocks/offers-mocks';
 type CitiesPlacesProps = {
   offers: OffersElementType[];
   city: string;
+  onOfferHover: (offerId: string) => void;
 }
 
 // Create CitiesPlaces
-function CitiesPlaces({offers, city}: CitiesPlacesProps): JSX.Element {
+function CitiesPlaces({offers, city, onOfferHover}: CitiesPlacesProps): JSX.Element {
   const countOffers: number = getCounterOffers(offers);
   return (
     <section className="cities__places places">
@@ -22,7 +23,11 @@ function CitiesPlaces({offers, city}: CitiesPlacesProps): JSX.Element {
       <Sorting />
       <div className="cities__places-list places__list tabs__content">
         {offers.map((offer: OffersElementType) => (
-          <Card key={offer.id} offer={offer} />
+          <Card
+            key={offer.id}
+            offer={offer}
+            onOfferHover={onOfferHover}
+          />
         ))}
       </div>
     </section>
