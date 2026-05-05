@@ -19,7 +19,6 @@ type MapProps = {
 
 // Create Map
 function Map({ className, offers, location, currentOffer }: MapProps): JSX.Element {
-  console.log(offers);
   // Ref
   const mapRef = useRef(null);
   const isRendered = useRef(false);
@@ -60,8 +59,7 @@ function Map({ className, offers, location, currentOffer }: MapProps): JSX.Eleme
       map?.setView({
         lat: location.latitude,
         lng: location.longitude,
-      });
-      map?.setZoom(location.zoom);
+      }, location.zoom);
     }
 
   }, [map, location]);

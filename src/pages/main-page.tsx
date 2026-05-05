@@ -33,7 +33,10 @@ function MainPage({ offers }: MainPageProps): JSX.Element {
           city={city}
         />
       </div>
-      <Cities offers={filteredOffers} city={city} />
+      <Cities
+        offers={filteredOffers}
+        city={city}
+      />
     </main>
   );
 }

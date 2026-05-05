@@ -67,7 +67,7 @@ function getFavoriteOffers(offers: FavoriteType[]): FavoriteType[] {
 }
 
 function getNearestOffers(offers: OffersElementType[], offer: OffersElementType): OffersElementType[] {
-  return offers.filter((item) => item.city.name === offer.city.name).slice(0, NEAREST_OFFERS_COUNT).concat(offer);
+  return offers.filter((item) => item.city.name === offer.city.name && item.id !== offer.id).slice(0, NEAREST_OFFERS_COUNT);
 }
 
 // TODO: РАЗОБРАТЬ!

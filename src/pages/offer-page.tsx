@@ -1,5 +1,6 @@
 // Import React
 import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 // Import Components
 import { OfferGallery } from '../components/offer/offer-gallery';
 import { Offer } from '../components/offer/offer';
@@ -32,6 +33,7 @@ function OfferPage({
   // TODO: Доработать!
   const offer: OfferType = OFFER;
   const offerId: string = useParams().offerId || '';
+  const [currentOffer, setCurrentOffer] = useState<string>('');
 
 
   if (!checkOfferId(offers, offerId)) {
@@ -40,6 +42,10 @@ function OfferPage({
 
   const activeOffer: OffersElementType = offers.find((item) => item.id === offerId)!;
   const NEAREST_OFFERS: OffersElementType[] = getNearestOffers(offers, activeOffer);
+
+  const handleOfferHover = (idOffer: string) => {
+    setCurrentOffer(idOffer);
+  };
 
   return (
     <main className='page__main page__main--offer'>
@@ -50,11 +56,14 @@ function OfferPage({
           className="offer__map"
           offers={NEAREST_OFFERS}
           location={getLocation(activeOffer)}
-          currentOffer={activeOffer.id}
+          currentOffer={currentOffer}
         />
       </section>
       <div className='container'>
-        <NearPlaces offers={NEAREST_OFFERS} />
+        <NearPlaces
+          offers={NEAREST_OFFERS}
+          onOfferHover={handleOfferHover}
+        />
       </div>
     </main>
   );
