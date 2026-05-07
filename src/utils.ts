@@ -3,7 +3,7 @@ import { OfferType } from './mocks/offer-mock';
 import { CommentElementType } from './mocks/comments-mocks';
 import { FavoriteType } from './mocks/favorite-mocks';
 
-import { REVIEW_OFFER, TEST_COUNT_CARD } from './const';
+import { REVIEW_OFFER, NEAREST_OFFERS_COUNT } from './const';
 import { AuthorizationStatus } from './const';
 
 /**
@@ -55,7 +55,7 @@ function getCommentLength(comments: CommentElementType[]): number {
 }
 
 function getTestOffers(offers: OffersElementType[]): OffersElementType[] {
-  return offers.slice(0, TEST_COUNT_CARD);
+  return offers.slice(0, NEAREST_OFFERS_COUNT);
 }
 
 function getStatusAuth(): AuthorizationStatus {
@@ -64,6 +64,10 @@ function getStatusAuth(): AuthorizationStatus {
 
 function getFavoriteOffers(offers: FavoriteType[]): FavoriteType[] {
   return offers.filter((offer) => offer.isFavorite);
+}
+
+function getNearestOffers(offers: OffersElementType[], offer: OffersElementType): OffersElementType[] {
+  return offers.filter((item) => item.city.name === offer.city.name && item.id !== offer.id).slice(0, NEAREST_OFFERS_COUNT);
 }
 
 // TODO: РАЗОБРАТЬ!
@@ -93,21 +97,12 @@ function getCounterOffers(offers: OffersElementType[]): number {
   return offers.length;
 }
 
-function getLocation(offers: OffersElementType[]): OffersElementType['location'] {
+function getLocation(offer: OffersElementType): OffersElementType['location'] {
   const location: OffersElementType['location'] = {
-    latitude: 0,
-    longitude: 0,
-    zoom: 0,
+    latitude: offer?.city?.location.latitude || 0,
+    longitude: offer?.city?.location.longitude || 0,
+    zoom: offer?.city?.location.zoom || 0,
   };
-
-  offers.forEach((offer) => {
-    if(offer.city.location.latitude && offer.city.location.longitude && offer.city.location.zoom) {
-      location.latitude = offer.city.location.latitude;
-      location.longitude = offer.city.location.longitude;
-      location.zoom = offer.city.location.zoom;
-      return location;
-    }
-  });
 
   return location;
 }
@@ -122,6 +117,7 @@ export {
   getTestOffers,
   getStatusAuth,
   getFavoriteOffers,
+  getNearestOffers,
   getFavoriteOffersCities,
   checkOfferId,
   filterOffersByCity,

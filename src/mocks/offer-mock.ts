@@ -23,6 +23,7 @@ const OFFER = {
   'bedrooms': 7,
   'goods': [
     'Heating',
+    'Kitchen',
     'Wifi',
     'Dishwasher',
     'Conditioner',

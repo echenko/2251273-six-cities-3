@@ -5,8 +5,13 @@ import { getTestOffers } from '../../utils';
 // Import Types
 import { OffersElementType } from '../../mocks/offers-mocks';
 
+type NearPlacesProps = {
+  offers: OffersElementType[];
+  onOfferHover: (offerId: string) => void;
+};
+
 // Create NearPlaces
-function NearPlaces({offers}: {offers: OffersElementType[]}): JSX.Element {
+function NearPlaces({offers, onOfferHover}: NearPlacesProps): JSX.Element {
   return (
     <section className='near-places places'>
       <h2 className='near-places__title'>Other places in the neighbourhood</h2>
@@ -16,7 +21,7 @@ function NearPlaces({offers}: {offers: OffersElementType[]}): JSX.Element {
           <Card
             key={offer.id}
             offer={offer}
-            onOfferHover={() => {}}
+            onOfferHover={onOfferHover}
           />
         ))}
       </div>

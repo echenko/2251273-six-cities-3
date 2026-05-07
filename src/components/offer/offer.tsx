@@ -34,7 +34,6 @@ function Offer({offer, comments, statusAuthorization}: OfferProps): JSX.Element 
         <OfferPrice offer={offer} />
         {checkGoodOffer(offer) && <OfferInside offer={offer} />}
         <OfferHost offer={offer} />
-
         <Reviews comments={comments} statusAuthorization={statusAuthorization} />
       </div>
     </div>

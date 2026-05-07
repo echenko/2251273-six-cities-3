@@ -11,7 +11,7 @@ import {OffersElementType} from '../../mocks/offers-mocks';
 // Create Types
 type CardProps = {
   offer: OffersElementType;
-  onOfferHover: (offerId: string) => void ;
+  onOfferHover: (offerId: string) => void;
 }
 
 // Create Card

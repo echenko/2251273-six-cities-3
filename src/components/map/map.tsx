@@ -59,8 +59,7 @@ function Map({ className, offers, location, currentOffer }: MapProps): JSX.Eleme
       map?.setView({
         lat: location.latitude,
         lng: location.longitude,
-      });
-      map?.setZoom(location.zoom);
+      }, location.zoom);
     }
 
   }, [map, location]);
