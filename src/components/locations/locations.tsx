@@ -9,16 +9,19 @@ import { OffersElementType } from '../../mocks/offers-mocks';
 // Create Types
 type LocationsProps = {
   offers: OffersElementType[];
-  city: string;
 };
 
 // Create Locations
-function Locations({offers, city}: LocationsProps): JSX.Element {
+function Locations({offers}: LocationsProps): JSX.Element {
+
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
         {getArrayAllCities(offers).map((location, index) => (
-          <LocationsItem key={`${location + index}`} location={location} city={city}/>
+          <LocationsItem
+            key={`${location + index}`}
+            location={location}
+          />
         ))}
       </ul>
     </section>

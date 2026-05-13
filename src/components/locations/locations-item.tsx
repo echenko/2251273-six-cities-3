@@ -2,6 +2,10 @@
 import { Link } from 'react-router-dom';
 // Import Constants
 import { AppRoute } from '../../const';
+import { useAppDispatch } from '../../hooks/hooks';
+import { changeCity } from '../../store/action';
+// Import Store
+import { store } from '../../store/store';
 
 // Create Functions setStyle
 function setStyle(location: string, city: string): string {
@@ -17,14 +21,19 @@ function setCity(location: string = 'all'): string {
 // Create Types
 type LocationsItemProps = {
   location: string;
-  city: string;
 };
 
 // Create LocationsItem
-function LocationsItem({location, city}: LocationsItemProps): JSX.Element {
+function LocationsItem({location}: LocationsItemProps): JSX.Element {
+  const {city} = store.getState();
+  const dispatch = useAppDispatch();
   return (
     <li className="locations__item" key={location}>
-      <Link to={`${AppRoute.Main}?city=${setCity(location)}`} className={setStyle(location, city)}>
+      <Link
+        to={`${AppRoute.Main}?city=${setCity(location)}`}
+        className={setStyle(location, city)}
+        onClick={() => dispatch(changeCity(location))}
+      >
         <span>{location}</span>
       </Link>
     </li>
