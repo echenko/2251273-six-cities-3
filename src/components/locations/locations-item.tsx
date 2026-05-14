@@ -26,6 +26,7 @@ type LocationsItemProps = {
 // Create LocationsItem
 function LocationsItem({location}: LocationsItemProps): JSX.Element {
   const {city} = store.getState();
+  // Create Dispatch
   const dispatch = useAppDispatch();
   return (
     <li className="locations__item" key={location}>
