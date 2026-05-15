@@ -9,7 +9,8 @@ import { DEFAULT_CITY } from '../const';
 import { filterOffersByCity } from '../utils';
 // Import Types
 import { OffersElementType } from '../mocks/offers-mocks';
-import { store } from '../store/store';
+// Import Hooks
+import { useAppSelector } from '../hooks/hooks';
 
 // Get City
 const getCity = (searchParams: URLSearchParams): string => searchParams.get('city') || DEFAULT_CITY;
@@ -24,7 +25,7 @@ function MainPage({ offers }: MainPageProps): JSX.Element {
   const [searchParams] = useSearchParams();
   const filteredOffers = filterOffersByCity(offers, getCity(searchParams));
 
-  const {city} = store.getState();
+  const city = useAppSelector((state) => state.city);
 
   return (
     <main className="page__main page__main--index">

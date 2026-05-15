@@ -1,22 +1,13 @@
 // Import React
 import { Link } from 'react-router-dom';
+// Import Utils
+import { clsx } from 'clsx';
 // Import Constants
 import { AppRoute } from '../../const';
-import { useAppDispatch } from '../../hooks/hooks';
+// Import Hooks
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+// Import Actions
 import { changeCity } from '../../store/action';
-// Import Store
-import { store } from '../../store/store';
-
-// Create Functions setStyle
-function setStyle(location: string, city: string): string {
-  return location.toLowerCase() === city.toLowerCase() ?
-    'locations__item-link tabs__item tabs__item--active' : 'locations__item-link tabs__item';
-}
-
-// Create Functions setCity
-function setCity(location: string = 'all'): string {
-  return location;
-}
 
 // Create Types
 type LocationsItemProps = {
@@ -25,17 +16,29 @@ type LocationsItemProps = {
 
 // Create LocationsItem
 function LocationsItem({location}: LocationsItemProps): JSX.Element {
-  const {city} = store.getState();
   // Create Dispatch
   const dispatch = useAppDispatch();
+  // Create Selector
+  const city = useAppSelector((state) => state.city);
+
+  // Create handleClick
+  function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void {
+    event.preventDefault();
+    dispatch(changeCity(location));
+  }
+
   return (
-    <li className="locations__item" key={location}>
+    <li className="locations__item">
       <Link
-        to={`${AppRoute.Main}?city=${setCity(location)}`}
-        className={setStyle(location, city)}
-        onClick={() => dispatch(changeCity(location))}
+        // TODO: Correct path ()
+        to={AppRoute.Main}
+        className={clsx(
+          'locations__item-link tabs__item',
+          { 'tabs__item--active': location.toLowerCase() === city.toLowerCase() }
+        )}
+        onClick={handleClick}
       >
-        <span>{location}</span>
+        <span >{location}</span>
       </Link>
     </li>
   );

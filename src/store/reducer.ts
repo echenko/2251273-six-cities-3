@@ -1,9 +1,12 @@
+// Import Create Reducer
 import { createReducer } from '@reduxjs/toolkit';
-
+// Import Actions
 import { changeCity, resetCity } from './action';
+// Import Constants
+import { DEFAULT_CITY } from '../const';
 
 const initialState = {
-  city: 'Amsterdam',
+  city: DEFAULT_CITY,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
