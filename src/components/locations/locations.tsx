@@ -3,16 +3,11 @@ import { LocationsItem } from './locations-item';
 // Import Utils
 import { getArrayAllCities } from '../../utils';
 // Import Types
-import { OffersElementType } from '../../types/offers';
-
-
-// Create Types
-type LocationsProps = {
-  offers: OffersElementType[];
-};
+import { useAppSelector } from '../../hooks/hooks';
 
 // Create Locations
-function Locations({offers}: LocationsProps): JSX.Element {
+function Locations(): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
 
   return (
     <section className="locations container">

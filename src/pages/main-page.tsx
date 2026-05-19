@@ -16,9 +16,7 @@ function MainPage(): JSX.Element {
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
-        <Locations
-          offers={offers}
-        />
+        <Locations/>
       </div>
       <Cities
         offers={filteredOffers}
