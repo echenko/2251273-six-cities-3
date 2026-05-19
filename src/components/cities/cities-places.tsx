@@ -4,7 +4,7 @@ import { Card } from '../card/card';
 // Import Utils
 import { getCounterOffers } from '../../utils';
 // Import Types
-import { OffersElementType } from '../../mocks/offers-mocks';
+import { OffersElementType } from '../../types/offers';
 
 // Create Types
 type CitiesPlacesProps = {

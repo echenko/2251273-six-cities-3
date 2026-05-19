@@ -3,7 +3,7 @@ import { Card } from '../card/card';
 // Import Utils
 import { getTestOffers } from '../../utils';
 // Import Types
-import { OffersElementType } from '../../mocks/offers-mocks';
+import { OffersElementType } from '../../types/offers';
 
 type NearPlacesProps = {
   offers: OffersElementType[];

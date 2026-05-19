@@ -6,7 +6,7 @@ import 'leaflet/dist/leaflet.css';
 // Import Constants
 import { MAP_MARKER_DEFAULT, MAP_MARKER_ACTIVE } from '../../const';
 // Import Types
-import { OffersElementType } from '../../mocks/offers-mocks';
+import { OffersElementType } from '../../types/offers';
 
 
 // Create Types

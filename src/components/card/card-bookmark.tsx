@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { clsx } from 'clsx';
 // Import Types
-import { OffersElementType } from '../../mocks/offers-mocks';
+import { OffersElementType } from '../../types/offers';
 
 // Create Types
 type CardBookmarkProps = {

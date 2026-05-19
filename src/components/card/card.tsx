@@ -6,7 +6,7 @@ import {CardRating} from './card-rating';
 import {CardName} from './card-name';
 import {CardType} from './card-type';
 // Import Types
-import {OffersElementType} from '../../mocks/offers-mocks';
+import {OffersElementType} from '../../types/offers';
 
 // Create Types
 type CardProps = {

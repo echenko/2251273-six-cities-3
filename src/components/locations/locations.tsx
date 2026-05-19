@@ -3,7 +3,7 @@ import { LocationsItem } from './locations-item';
 // Import Utils
 import { getArrayAllCities } from '../../utils';
 // Import Types
-import { OffersElementType } from '../../mocks/offers-mocks';
+import { OffersElementType } from '../../types/offers';
 
 
 // Create Types

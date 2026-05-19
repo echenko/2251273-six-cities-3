@@ -1,7 +1,7 @@
 // Import Components
 import { CardBookmark } from './card-bookmark';
 // Import Types
-import { OffersElementType } from '../../mocks/offers-mocks';
+import { OffersElementType } from '../../types/offers';
 
 // Create Types
 type CardPriceProps = {
