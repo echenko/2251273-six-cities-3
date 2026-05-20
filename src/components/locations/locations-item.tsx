@@ -7,7 +7,7 @@ import { AppRoute } from '../../const';
 // Import Hooks
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 // Import Actions
-import { changeCity } from '../../store/action';
+import { changeCity, resetSorting } from '../../store/action';
 
 // Create Types
 type LocationsItemProps = {
@@ -25,6 +25,7 @@ function LocationsItem({location}: LocationsItemProps): JSX.Element {
   function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void {
     event.preventDefault();
     dispatch(changeCity(location));
+    dispatch(resetSorting());
   }
 
   return (

@@ -7,9 +7,12 @@ const PLACES_OPTIONS = [
   'Top rated first',
 ];
 
+const DEFAULT_SORTING = 'Popular';
+
 const NEAREST_OFFERS_COUNT = 3;
 
 const DEFAULT_CITY = 'Amsterdam';
+
 
 const RATING_OFFER = [
   { value: 5, label: 'perfect' },
@@ -61,6 +64,7 @@ export enum AuthorizationStatus {
 export {
   DEFAULT_CITY,
   PLACES_OPTIONS,
+  DEFAULT_SORTING,
   NEAREST_OFFERS_COUNT,
   RATING_OFFER,
   REVIEW_OFFER,
