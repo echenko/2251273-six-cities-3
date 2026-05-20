@@ -7,7 +7,7 @@ import { useRef } from 'react';
 // Import Hooks
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 // Import Actions
-import { changeSorting } from '../../store/action';
+import { changeSorting, sortOffers, resetOffers } from '../../store/action';
 
 // Create Sorting
 function Sorting(): JSX.Element {
@@ -25,6 +25,15 @@ function Sorting(): JSX.Element {
     event.preventDefault();
     placesOption.current?.classList.remove('places__options--opened');
     dispatch(changeSorting(sorting));
+    if (sorting === PLACES_OPTIONS[0]) {
+      dispatch(resetOffers());
+    } else {
+      dispatch(sortOffers());
+    }
+  }
+
+  function handleMouseLeave(): void {
+    placesOption.current?.classList.remove('places__options--opened');
   }
 
   return (
@@ -32,7 +41,7 @@ function Sorting(): JSX.Element {
       className="places__sorting"
       action="#"
       method="get"
-      onMouseLeave={() => placesOption.current?.classList.remove('places__options--opened')}
+      onMouseLeave={handleMouseLeave}
     >
       <span className="places__sorting-caption">Sort by</span>
       <span
@@ -53,7 +62,8 @@ function Sorting(): JSX.Element {
                 {'places__option--active': option === sortingOffers})
             }
             data-sorting={option}
-            key={option} tabIndex={0}
+            key={option}
+            tabIndex={0}
             onClick={handleClickOption}
           >{option}
           </li>

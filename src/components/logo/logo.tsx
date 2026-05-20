@@ -7,7 +7,7 @@ import { AppRoute } from '../../const';
 // Import Hooks
 import { useAppDispatch } from '../../hooks/hooks';
 // Import Actions
-import { resetCity, resetSorting } from '../../store/action';
+import { resetCity, resetSorting, resetOffers } from '../../store/action';
 
 // Create Types
 type LogoProps = {
@@ -23,6 +23,7 @@ function Logo({logoState}: LogoProps): JSX.Element {
   function handleClick(): void {
     dispatch(resetCity());
     dispatch(resetSorting());
+    dispatch(resetOffers());
   }
 
   return (
