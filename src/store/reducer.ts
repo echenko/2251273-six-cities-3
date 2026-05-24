@@ -2,7 +2,7 @@ import { createReducer } from '@reduxjs/toolkit';
 
 import {
   changeCity, resetCity,
-  loadOffers, clearOffers, sortOffers, resetOffers,
+  loadOffers, sortOffers,
   changeSorting, resetSorting,
   requireAuthorization,
 } from './action';
@@ -38,14 +38,8 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;
     })
-    .addCase(clearOffers, (state) => {
-      state.offers = [];
-    })
     .addCase(sortOffers, (state, action) => {
       state.offers = action.payload;
-    })
-    .addCase(resetOffers, (state) => {
-      state.offers = initialState.offers;
     })
     .addCase(changeSorting, (state, action) => {
       state.sortingOffers = action.payload;

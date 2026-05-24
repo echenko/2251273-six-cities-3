@@ -5,7 +5,6 @@ import { getPlacesOptionsLabel } from '../../utils';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { changeSorting } from '../../store/action';
 
-// Create Sorting
 function Sorting(): JSX.Element {
   const placesOption = useRef<HTMLUListElement>(null);
   const sortingOffers = useAppSelector((state) => state.sortingOffers);

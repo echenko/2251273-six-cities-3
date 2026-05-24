@@ -1,12 +1,8 @@
-// Import Components
 import { Locations } from '../components/locations/locations';
 import { Cities } from '../components/cities/cities';
-// Import Utils
 import { filterOffersByCity, getSortedOffersByType } from '../utils';
-// Import Hooks
 import { useAppSelector } from '../hooks/hooks';
 
-// Create MainPage
 function MainPage(): JSX.Element {
   const city = useAppSelector((state) => state.city);
   const offers = useAppSelector((state) => state.offers);
@@ -27,5 +23,4 @@ function MainPage(): JSX.Element {
   );
 }
 
-// Export MainPage
 export { MainPage };

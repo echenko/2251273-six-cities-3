@@ -1,20 +1,14 @@
-// Import React
 import { useState } from 'react';
-// Import Components
-import {CitiesPlaces} from './cities-places';
-import {Map} from '../map/map';
-// Import Utils
+import { CitiesPlaces } from './cities-places';
+import { Map } from '../map/map';
 import { getLocation } from '../../utils';
-// Import Types
-import {OffersElementType} from '../../types/offers';
+import { OffersElementType } from '../../types/offers';
 
-// Create Types
 type CitiesProps = {
   offers: OffersElementType[];
   city: string;
 }
 
-// Create Cities
 function Cities({offers, city}: CitiesProps): JSX.Element {
   const [currentOffer, setCurrentOffer] = useState<string>('');
 
@@ -43,5 +37,4 @@ function Cities({offers, city}: CitiesProps): JSX.Element {
   );
 }
 
-// Export Cities
 export {Cities};
