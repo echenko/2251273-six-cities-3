@@ -67,6 +67,11 @@ const MAP_MARKER_ACTIVE: leaflet.IconOptions = {
   iconAnchor: [20, 40],
 };
 
+const CONFIGURATION_API = {
+  BASE_URL: 'https://15.design.htmlacademy.pro/six-cities',
+  TIME_OUT: 5000,
+};
+
 export enum AppRoute {
   Main = '/',
   Offer = '/offer',
@@ -92,4 +97,5 @@ export {
   PAGE_NOT_FOUND_MESSAGE,
   MAP_MARKER_DEFAULT,
   MAP_MARKER_ACTIVE,
+  CONFIGURATION_API,
 };

@@ -1,12 +1,10 @@
 import axios, {AxiosInstance} from 'axios';
-
-const BASE_URL = 'https://15.design.htmlacademy.pro/six-cities';
-const TIME_OUT = 5000;
+import { CONFIGURATION_API } from '../const';
 
 export const createAPI = (): AxiosInstance => {
   const api = axios.create({
-    baseURL: BASE_URL,
-    timeout: TIME_OUT,
+    baseURL: CONFIGURATION_API.BASE_URL,
+    timeout: CONFIGURATION_API.TIME_OUT
   });
 
   return api;
