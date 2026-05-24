@@ -4,6 +4,10 @@ import { countFavoritesOffers } from '../../utils';
 import { OffersElementType } from '../../types/offers';
 import { useAppSelector } from '../../hooks/hooks';
 import { AuthorizationStatus } from '../../const';
+import { useNavigate } from 'react-router-dom';
+import { logoutAction } from '../../store/api-actions';
+import { useAppDispatch } from '../../hooks/hooks';
+
 
 // Create Types
 type NavigationProps = {
@@ -12,8 +16,28 @@ type NavigationProps = {
 
 // Create Navigation
 function Navigation({offers}: NavigationProps): JSX.Element {
-
   const statusAuthorization = useAppSelector((state) => state.AuthorizationStatus);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  function handleLinkClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void {
+    event.preventDefault();
+    if (statusAuthorization === AuthorizationStatus.Auth) {
+      try {
+        dispatch(logoutAction());
+        navigate(AppRoute.Main);
+      } catch {
+        throw new Error('Error logout');
+      }
+    } else if (statusAuthorization === AuthorizationStatus.NoAuth) {
+      try {
+        navigate(AppRoute.Login);
+      } catch {
+        throw new Error('Error login');
+      }
+    }
+  }
+
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
@@ -28,7 +52,10 @@ function Navigation({offers}: NavigationProps): JSX.Element {
           </Link>
         </li>
         <li className="header__nav-item">
-          <Link className="header__nav-link" to={AppRoute.Favorites}>
+          <Link
+            className="header__nav-link" to={AppRoute.Login}
+            onClick={handleLinkClick}
+          >
             <span className="header__signout">{statusAuthorization === AuthorizationStatus.Auth ? 'Sign out' : 'Sign in'}</span>
           </Link>
         </li>
