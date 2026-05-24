@@ -6,7 +6,6 @@ export const changeCity = createAction<string>('city/changeCity');
 export const resetCity = createAction<void>('city/resetCity');
 
 export const loadOffers = createAction<OffersElementType[]>('offers/loadOffers');
-export const sortOffers = createAction<OffersElementType[]>('offers/sortOffers');
 
 export const changeSorting = createAction<string>('sorting/changeSorting');
 export const resetSorting = createAction<void>('sorting/resetSorting');

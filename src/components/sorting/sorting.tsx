@@ -7,7 +7,7 @@ import { changeSorting } from '../../store/action';
 
 function Sorting(): JSX.Element {
   const placesOption = useRef<HTMLUListElement>(null);
-  const sortingOffers = useAppSelector((state) => state.sortingOffers);
+  const sortingOffers = useAppSelector((state) => state.typeSorting);
   const dispatch = useAppDispatch();
 
   function handleClickSorting(event: React.MouseEvent<HTMLSpanElement>): void {
@@ -55,7 +55,8 @@ function Sorting(): JSX.Element {
             key={option.value}
             tabIndex={0}
             onClick={handleClickOption}
-          >{option.label}
+          >
+            {option.label}
           </li>
         ))}
       </ul>
@@ -63,5 +64,4 @@ function Sorting(): JSX.Element {
   );
 }
 
-// Export Sorting
 export {Sorting};

@@ -1,28 +1,24 @@
-// Import React
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-// Import Styles
 import { GlobalStyle } from '../styles/styles-global';
-// Import Components Pages
 import { MainPage } from '../../pages/main-page';
 import { OfferPage } from '../../pages/offer-page';
 import { LoginPage } from '../../pages/login-page';
 import { FavoritesPage } from '../../pages/favorites-page';
-// Import Components
 import { Layout } from '../layout/layout';
 import { Private } from '../private/private';
 import { PageNotFound } from '../page-not-found/page-not-found';
-// Import Constants
 import { AppRoute, PAGE_NOT_FOUND_MESSAGE } from '../../const';
-// Import Utils
 import { getFavoriteOffers } from '../../utils';
-// Import Types
 import { COMMENTS } from '../../mocks/comments-mocks';
 import { FAVORITES } from '../../mocks/favorite-mocks';
-// Import Hooks
 import { useAppSelector } from '../../hooks/hooks';
+import { fetchOffersAction, checkAuthAction } from './../../store/api-actions';
+import { store } from '../../store/store';
 
-// Create App
+store.dispatch(fetchOffersAction());
+store.dispatch(checkAuthAction());
+
 function App(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const statusAuthorization = useAppSelector((state) => state.AuthorizationStatus);

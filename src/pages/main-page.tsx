@@ -6,7 +6,7 @@ import { useAppSelector } from '../hooks/hooks';
 function MainPage(): JSX.Element {
   const city = useAppSelector((state) => state.city);
   const offers = useAppSelector((state) => state.offers);
-  const sortingOffers = useAppSelector((state) => state.sortingOffers);
+  const sortingOffers = useAppSelector((state) => state.typeSorting);
   const filteredOffers = filterOffersByCity(offers, city);
 
   return (
