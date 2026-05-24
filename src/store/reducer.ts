@@ -44,7 +44,7 @@ export const reducer = createReducer(initialState, (builder) => {
       state.offers = [];
     })
     .addCase(sortOffers, (state) => {
-      state.offers = getSortedOffersByType(state.offers, state.sortingOffers);
+      state.offers = getSortedOffersByType(state.offers, state.sortingOffers) ;
     })
     .addCase(resetOffers, (state) => {
       state.offers = initialState.offers;
@@ -54,7 +54,6 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(resetSorting, (state) => {
       state.sortingOffers = initialState.sortingOffers;
-      // state.offers = initialState.offers;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.AuthorizationStatus = action.payload;

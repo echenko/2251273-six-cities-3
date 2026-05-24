@@ -13,6 +13,9 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   'data/fetchQuestions',
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<OffersElementType[]>(APIRoute.Offers);
-    dispatch(loadOffers(data));
+    setTimeout(() => {
+      dispatch(loadOffers(data));
+    }, 1000);
+
   },
 );
