@@ -1,9 +1,15 @@
-// Import Configure Store ( Создание конфигурации хранилища )
 import { configureStore } from '@reduxjs/toolkit';
-// Import Reducer ( Импорт редьюсера )
 import { reducer } from './reducer';
+import { createAPI } from '../services/api';
 
-// Create Store
+export const api = createAPI();
+
 export const store = configureStore({
   reducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk: {
+        extraArgument: api,
+      },
+    }),
 });
