@@ -1,13 +1,25 @@
 import leaflet from 'leaflet';
 
 const PLACES_OPTIONS = [
-  'Popular',
-  'Price: low to high',
-  'Price: high to low',
-  'Top rated first',
+  {
+    value: 'popular',
+    label: 'Popular',
+  },
+  {
+    value: 'inexpensive',
+    label: 'Price: low to high',
+  },
+  {
+    value: 'expensive',
+    label: 'Price: high to low',
+  },
+  {
+    value: 'top',
+    label: 'Top rated first',
+  },
 ];
 
-const DEFAULT_SORTING = 'Popular';
+const DEFAULT_SORTING = 'popular';
 
 const NEAREST_OFFERS_COUNT = 3;
 
@@ -55,6 +67,11 @@ const MAP_MARKER_ACTIVE: leaflet.IconOptions = {
   iconAnchor: [20, 40],
 };
 
+const CONFIGURATION_API = {
+  BASE_URL: 'https://15.design.htmlacademy.pro/six-cities',
+  TIME_OUT: 5000,
+};
+
 export enum AppRoute {
   Main = '/',
   Offer = '/offer',
@@ -69,6 +86,12 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum APIRoute {
+  Offers = '/offers',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 export {
   DEFAULT_CITY,
   PLACES_OPTIONS,
@@ -80,4 +103,5 @@ export {
   PAGE_NOT_FOUND_MESSAGE,
   MAP_MARKER_DEFAULT,
   MAP_MARKER_ACTIVE,
+  CONFIGURATION_API,
 };

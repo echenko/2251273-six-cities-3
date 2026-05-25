@@ -3,7 +3,7 @@ import { OfferType } from './mocks/offer-mock';
 import { CommentElementType } from './mocks/comments-mocks';
 import { FavoriteType } from './mocks/favorite-mocks';
 
-import { REVIEW_OFFER, NEAREST_OFFERS_COUNT } from './const';
+import { REVIEW_OFFER, NEAREST_OFFERS_COUNT, PLACES_OPTIONS } from './const';
 import { AuthorizationStatus } from './const';
 
 /**
@@ -109,15 +109,19 @@ function getLocation(offer: OffersElementType): OffersElementType['location'] {
 
 function getSortedOffersByType(offers: OffersElementType[], type: string): OffersElementType[] {
   switch (type) {
-    case 'Price: low to high':
+    case 'inexpensive':
       return offers.sort((a, b) => a.price - b.price);
-    case 'Price: high to low':
+    case 'expensive':
       return offers.sort((a, b) => b.price - a.price);
-    case 'Top rated first':
+    case 'top':
       return offers.sort((a, b) => b.rating - a.rating);
     default:
       return offers;
   }
+}
+
+function getPlacesOptionsLabel(value: string): string {
+  return PLACES_OPTIONS.find((option) => option.value === value)?.label || '';
 }
 
 export {
@@ -136,5 +140,6 @@ export {
   filterOffersByCity,
   getCounterOffers,
   getLocation,
-  getSortedOffersByType
+  getSortedOffersByType,
+  getPlacesOptionsLabel,
 };

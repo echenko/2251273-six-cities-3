@@ -1,18 +1,30 @@
-// Import Create Reducer
 import { createReducer } from '@reduxjs/toolkit';
-// Import Actions
-import { changeCity, resetCity, clearOffers, sortOffers, resetOffers, changeSorting, resetSorting } from './action';
-// Import Constants
-import { DEFAULT_CITY, DEFAULT_SORTING } from '../const';
-// Import Mocks
-import { OFFERS } from '../mocks/offers-mocks';
 
-import { getSortedOffersByType } from '../utils';
+import {
+  changeCity, resetCity,
+  loadOffers,
+  changeSorting, resetSorting,
+  requireAuthorization,
+} from './action';
 
-const initialState = {
+import { DEFAULT_CITY, DEFAULT_SORTING, AuthorizationStatus } from '../const';
+
+import { OffersElementType } from '../types/offers';
+
+type InitialStateType = {
+  city: string;
+  offers: OffersElementType[];
+  typeSorting: string;
+  AuthorizationStatus: AuthorizationStatus;
+  isLoadingDataOffers: boolean;
+};
+
+const initialState: InitialStateType = {
   city: DEFAULT_CITY,
-  offers: OFFERS,
-  sortingOffers: DEFAULT_SORTING,
+  offers: [],
+  typeSorting: DEFAULT_SORTING,
+  AuthorizationStatus: AuthorizationStatus.Unknown,
+  isLoadingDataOffers: false
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -23,21 +35,17 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(resetCity, (state) => {
       state.city = initialState.city;
     })
-    .addCase(clearOffers, (state) => {
-      state.offers = [];
-    })
-    .addCase(sortOffers, (state) => {
-      state.offers = getSortedOffersByType(state.offers, state.sortingOffers);
-    })
-    .addCase(resetOffers, (state) => {
-      state.offers = initialState.offers;
+    .addCase(loadOffers, (state, action) => {
+      state.offers = action.payload;
     })
     .addCase(changeSorting, (state, action) => {
-      state.sortingOffers = action.payload;
+      state.typeSorting = action.payload;
     })
     .addCase(resetSorting, (state) => {
-      state.sortingOffers = initialState.sortingOffers;
-      state.offers = initialState.offers;
+      state.typeSorting = initialState.typeSorting;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.AuthorizationStatus = action.payload;
     });
 });
 

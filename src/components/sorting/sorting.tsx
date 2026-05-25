@@ -1,18 +1,13 @@
-// Import constants
 import { PLACES_OPTIONS } from '../../const';
-// Import Utils
 import { clsx } from 'clsx';
-// Import React
 import { useRef } from 'react';
-// Import Hooks
+import { getPlacesOptionsLabel } from '../../utils';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-// Import Actions
-import { changeSorting, sortOffers, resetOffers } from '../../store/action';
+import { changeSorting } from '../../store/action';
 
-// Create Sorting
 function Sorting(): JSX.Element {
   const placesOption = useRef<HTMLUListElement>(null);
-  const sortingOffers = useAppSelector((state) => state.sortingOffers);
+  const sortingOffers = useAppSelector((state) => state.typeSorting);
   const dispatch = useAppDispatch();
 
   function handleClickSorting(event: React.MouseEvent<HTMLSpanElement>): void {
@@ -25,11 +20,6 @@ function Sorting(): JSX.Element {
     event.preventDefault();
     placesOption.current?.classList.remove('places__options--opened');
     dispatch(changeSorting(sorting));
-    if (sorting === PLACES_OPTIONS[0]) {
-      dispatch(resetOffers());
-      return;
-    }
-    dispatch(sortOffers());
   }
 
   function handleMouseLeave(): void {
@@ -49,7 +39,7 @@ function Sorting(): JSX.Element {
         tabIndex={0}
         onClick={handleClickSorting}
       >
-        {sortingOffers}
+        {getPlacesOptionsLabel(sortingOffers)}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
@@ -59,13 +49,14 @@ function Sorting(): JSX.Element {
           <li
             className={
               clsx('places__option',
-                {'places__option--active': option === sortingOffers})
+                {'places__option--active': option.value === sortingOffers})
             }
-            data-sorting={option}
-            key={option}
+            data-sorting={option.value}
+            key={option.value}
             tabIndex={0}
             onClick={handleClickOption}
-          >{option}
+          >
+            {option.label}
           </li>
         ))}
       </ul>
@@ -73,5 +64,4 @@ function Sorting(): JSX.Element {
   );
 }
 
-// Export Sorting
 export {Sorting};

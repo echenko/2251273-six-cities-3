@@ -1,22 +1,22 @@
-// Import React
-import { useState } from 'react';
-// Import Components
-import {CitiesPlaces} from './cities-places';
-import {Map} from '../map/map';
-// Import Utils
+import { useEffect, useState } from 'react';
+import { CitiesPlaces } from './cities-places';
+import { Map } from '../map/map';
 import { getLocation } from '../../utils';
-// Import Types
-import {OffersElementType} from '../../types/offers';
+import { OffersElementType } from '../../types/offers';
+import { store } from '../../store/store';
+import { fetchOffersAction } from '../../store/api-actions';
 
-// Create Types
 type CitiesProps = {
   offers: OffersElementType[];
   city: string;
 }
 
-// Create Cities
 function Cities({offers, city}: CitiesProps): JSX.Element {
   const [currentOffer, setCurrentOffer] = useState<string>('');
+
+  useEffect(() => {
+    store.dispatch(fetchOffersAction());
+  }, [offers]);
 
   const handleOfferHover = (offerId: string) => {
     setCurrentOffer(offerId);
@@ -43,5 +43,4 @@ function Cities({offers, city}: CitiesProps): JSX.Element {
   );
 }
 
-// Export Cities
 export {Cities};

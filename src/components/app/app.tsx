@@ -1,31 +1,30 @@
-// Import React
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-// Import Styles
 import { GlobalStyle } from '../styles/styles-global';
-// Import Components Pages
 import { MainPage } from '../../pages/main-page';
 import { OfferPage } from '../../pages/offer-page';
 import { LoginPage } from '../../pages/login-page';
 import { FavoritesPage } from '../../pages/favorites-page';
-// Import Components
 import { Layout } from '../layout/layout';
 import { Private } from '../private/private';
 import { PageNotFound } from '../page-not-found/page-not-found';
-// Import Constants
 import { AppRoute, PAGE_NOT_FOUND_MESSAGE } from '../../const';
-// Import Utils
-import { getStatusAuth, getFavoriteOffers } from '../../utils';
-// Import Types
+import { getFavoriteOffers } from '../../utils';
 import { COMMENTS } from '../../mocks/comments-mocks';
 import { FAVORITES } from '../../mocks/favorite-mocks';
-// Import Hooks
 import { useAppSelector } from '../../hooks/hooks';
+import { checkAuthAction } from './../../store/api-actions';
+import { store } from '../../store/store';
+import { useEffect } from 'react';
 
-// Create App
 function App(): JSX.Element {
+
+  useEffect(() => {
+    store.dispatch(checkAuthAction());
+  }, []);
+
   const offers = useAppSelector((state) => state.offers);
-  const statusAuthorization = getStatusAuth();
+  const statusAuthorization = useAppSelector((state) => state.AuthorizationStatus);
   return (
     <HelmetProvider>
       <GlobalStyle />
