@@ -17,7 +17,6 @@ type InitialStateType = {
   offers: OffersElementType[];
   typeSorting: string;
   AuthorizationStatus: AuthorizationStatus;
-  isLoadingDataOffers: boolean;
   userEmail: string;
 };
 
@@ -26,7 +25,6 @@ const initialState: InitialStateType = {
   offers: [],
   typeSorting: DEFAULT_SORTING,
   AuthorizationStatus: AuthorizationStatus.Unknown,
-  isLoadingDataOffers: false,
   userEmail: '',
 };
 
