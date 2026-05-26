@@ -13,7 +13,7 @@ import { getFavoriteOffers } from '../../utils';
 import { COMMENTS } from '../../mocks/comments-mocks';
 import { FAVORITES } from '../../mocks/favorite-mocks';
 import { useAppSelector } from '../../hooks/hooks';
-import { checkAuthAction } from './../../store/api-actions';
+import { checkAuthAction, fetchOffersAction } from './../../store/api-actions';
 import { store } from '../../store/store';
 import { useEffect } from 'react';
 
@@ -21,6 +21,7 @@ function App(): JSX.Element {
 
   useEffect(() => {
     store.dispatch(checkAuthAction());
+    store.dispatch(fetchOffersAction());
   }, []);
 
   const offers = useAppSelector((state) => state.offers);
