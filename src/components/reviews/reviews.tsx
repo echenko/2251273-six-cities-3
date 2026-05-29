@@ -1,25 +1,20 @@
 // Import Components
-import { ReviewsList } from './reviews-list';
-import { ReviewsForm } from './reviews-form';
+// import { ReviewsList } from './reviews-list';
+// import { ReviewsForm } from './reviews-form';
 // Import Constants
-import { AuthorizationStatus } from '../../const';
+// import { AuthorizationStatus } from '../../const';
 //Import Utils
-import { getCommentLength } from '../../utils';
+// import { getCommentLength } from '../../utils';
 //Import Types
-import { CommentElementType } from '../../mocks/comments-mocks';
 
-// Create Types
-type ReviewsProps = {
-  comments: CommentElementType[];
-  statusAuthorization: AuthorizationStatus;
-}
 // Export Reviews
-function Reviews({comments, statusAuthorization}: ReviewsProps): JSX.Element {
+function Reviews(): JSX.Element {
+
   return (
     <section className='offer__reviews reviews'>
-      <h2 className='reviews__title'>Reviews &middot; <span className='reviews__amount'>{getCommentLength(comments)}</span></h2>
+      {/* <h2 className='reviews__title'>Reviews &middot; <span className='reviews__amount'>{getCommentLength(comments)}</span></h2>
       <ReviewsList comments={comments} />
-      {statusAuthorization === AuthorizationStatus.Auth && <ReviewsForm />}
+      {statusAuthorization === AuthorizationStatus.Auth && <ReviewsForm />} */}
     </section>
   );
 }

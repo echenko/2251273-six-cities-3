@@ -1,6 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 import { AuthorizationStatus } from '../const';
 import { OffersElementType } from '../types/offers';
+import { OfferType } from '../types/offer';
 
 export const changeCity = createAction<string>('city/changeCity');
 export const resetCity = createAction<void>('city/resetCity');
@@ -11,3 +12,6 @@ export const changeSorting = createAction<string>('sorting/changeSorting');
 export const resetSorting = createAction<void>('sorting/resetSorting');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
+
+export const saveOffer = createAction<OfferType>('data/saveOffer');
+export const resetOffer = createAction<void>('data/resetOffer');

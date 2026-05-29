@@ -10,7 +10,6 @@ import { Private } from '../private/private';
 import { PageNotFound } from '../page-not-found/page-not-found';
 import { AppRoute, PAGE_NOT_FOUND_MESSAGE } from '../../const';
 import { getFavoriteOffers } from '../../utils';
-import { COMMENTS } from '../../mocks/comments-mocks';
 import { FAVORITES } from '../../mocks/favorite-mocks';
 import { useAppSelector } from '../../hooks/hooks';
 import { checkAuthAction } from './../../store/api-actions';
@@ -24,7 +23,6 @@ function App(): JSX.Element {
     dispatch(checkAuthAction());
   }, [dispatch]);
 
-  const offers = useAppSelector((state) => state.offers);
   const statusAuthorization = useAppSelector((state) => state.AuthorizationStatus);
   return (
     <HelmetProvider>
@@ -46,11 +44,7 @@ function App(): JSX.Element {
             <Route
               path={`${AppRoute.Offer}/:offerId`}
               element={
-                <OfferPage
-                  offers={offers}
-                  comments={COMMENTS}
-                  statusAuthorization={statusAuthorization}
-                >
+                <OfferPage>
                   <PageNotFound message={PAGE_NOT_FOUND_MESSAGE.OFFER} />
                 </OfferPage>
               }
