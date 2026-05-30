@@ -1,12 +1,13 @@
-// Import React
 import { useState, Fragment } from 'react';
-// Import Constants
 import { REVIEW_OFFER, RATING_OFFER } from '../../const';
 import { postReviewAction } from '../../store/api-actions';
+import { useAppDispatch } from '../../hooks/hooks';
+import { useParams } from 'react-router-dom';
 
 // Create ReviewsForm
 function ReviewsForm(): JSX.Element {
-  // Create state
+  const dispatch = useAppDispatch();
+  const offerId: string = useParams().offerId || '';
   const [reviewsOffer, setReviewsOffer] = useState({
     rating: 0,
     comment: '',
@@ -23,11 +24,15 @@ function ReviewsForm(): JSX.Element {
   // Create handleFormSubmit
   function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const comment = {
-      rating: reviewsOffer.rating,
+    dispatch(postReviewAction({
+      offerId: offerId,
       comment: reviewsOffer.comment,
-    };
-    postReviewAction(comment);
+      rating: reviewsOffer.rating,
+    }));
+    setReviewsOffer({
+      rating: 0,
+      comment: '',
+    });
   }
 
   return (

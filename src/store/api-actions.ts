@@ -142,11 +142,7 @@ export const postReviewAction = createAsyncThunk<void, ReviewType, {
   extra: AxiosInstance;
 }>(
   'data/postComment',
-  async (review, {dispatch, extra: api}) => {
-    try {
-      await api.post<ReviewType>(APIRoute.Comments, review);
-    } catch {
-      throw new Error();
-    }
+  async ({offerId, comment, rating}, {extra: api}) => {
+    await api.post<ReviewType>(`${APIRoute.Comments}/${offerId}`, {comment, rating});
   },
 );
