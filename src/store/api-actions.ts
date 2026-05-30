@@ -4,9 +4,9 @@ import { AppDispatch, State } from '../types/state';
 import { APIRoute, AuthorizationStatus } from '../const';
 import { OffersElementType } from '../types/offers';
 import { OfferType } from '../types/offer';
-import { loadOffers, requireAuthorization, saveOffer, resetOffer } from './action';
-import { saveToken, dropToken } from '../services/token';
-import { saveUserEmail, dropUserEmail } from '../services/user-email';
+import { loadOffers, loadNearOffers, requireAuthorization, selectOffer, unselectOffer} from './action';
+import { getToken, saveToken, dropToken } from '../services/token';
+import { getUserEmail, saveUserEmail, dropUserEmail } from '../services/user-email';
 
 type AuthData = {
   login: string;
@@ -34,6 +34,22 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   },
 );
 
+export const fetchNearOffersAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchNearOffers',
+  async (id, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.get<OffersElementType[]>(`${APIRoute.Offer}/${id}/nearby`);
+      dispatch(loadNearOffers(data));
+    } catch {
+      dispatch(loadNearOffers([]));
+    }
+  },
+);
+
 export const fetchOfferAction = createAsyncThunk<void, string, {
   dispatch: AppDispatch;
   state: State;
@@ -43,9 +59,9 @@ export const fetchOfferAction = createAsyncThunk<void, string, {
   async (id, {dispatch, extra: api}) => {
     try {
       const {data} = await api.get<OfferType>(`${APIRoute.Offer}/${id}`);
-      dispatch(saveOffer(data));
+      dispatch(selectOffer(data));
     } catch {
-      dispatch(resetOffer());
+      dispatch(unselectOffer());
     }
   },
 );
@@ -58,6 +74,9 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   'user/checkAuth',
   async (_arg, {dispatch, extra: api}) => {
     try {
+      if (!getToken() && !getUserEmail()) {
+        return;
+      }
       await api.get(APIRoute.Login);
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch {

@@ -1,20 +1,14 @@
 // Import React
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-// Import Components
 import { OfferGallery } from '../components/offer/offer-gallery';
 import { Offer } from '../components/offer/offer';
 import { NearPlaces } from '../components/offer/offer-places';
 import { Map } from '../components/map/map';
-// Import Constants
-// import { AuthorizationStatus } from '../const';
-// Import Utils
 import { getLocation } from '../utils';
-// Import Types
-import { OffersElementType } from '../types/offers';
 import { useAppSelector } from '../hooks/hooks';
 import { useAppDispatch } from '../hooks/hooks';
-import { fetchOfferAction } from '../store/api-actions';
+import { fetchOfferAction, fetchNearOffersAction } from '../store/api-actions';
 
 // Create Types
 type OfferPageProps = {
@@ -25,22 +19,21 @@ type OfferPageProps = {
 function OfferPage({
   children,
 }: OfferPageProps): JSX.Element {
+
   const dispatch = useAppDispatch();
   const offerId: string = useParams().offerId || '';
-  const offer = useAppSelector((state) => state.currentOffer);
-  const offers = useAppSelector((state) => state.offers);
-
-  // const comments = useAppSelector((state) => state.comments);
-  // const statusAuthorization = useAppSelector((state) => state.AuthorizationStatus);
+  const selectedOffer = useAppSelector((state) => state.selectedOffer);
+  const nearOffers = useAppSelector((state) => state.nearOffers);
+  const [currentOffer, setCurrentOffer] = useState<string>('');
 
   useEffect(() => {
     dispatch(fetchOfferAction(offerId));
+    dispatch(fetchNearOffersAction(offerId));
   }, [dispatch, offerId]);
 
-  const [currentOffer, setCurrentOffer] = useState<string>('');
-
-  const activeOffer: OffersElementType = offers.find((item) => item.id === offerId)!;
-  // const NEAREST_OFFERS: OffersElementType[] = getNearestOffers(offers, activeOffer);
+  if (!selectedOffer) {
+    return children;
+  }
 
   const handleOfferHover = (idOffer: string) => {
     setCurrentOffer(idOffer);
@@ -49,18 +42,18 @@ function OfferPage({
   return (
     <main className='page__main page__main--offer'>
       <section className='offer'>
-        {offer && <OfferGallery offer={offer} />}
-        {offer && <Offer offer={offer}/>}
+        <OfferGallery offer={selectedOffer} />
+        <Offer offer={selectedOffer}/>
         <Map
           className="offer__map"
-          offers={offers}
-          location={getLocation(activeOffer)}
+          offers={nearOffers}
+          location={getLocation(selectedOffer)}
           currentOffer={currentOffer}
         />
       </section>
       <div className='container'>
         <NearPlaces
-          offers={offers}
+          offers={nearOffers}
           onOfferHover={handleOfferHover}
         />
       </div>

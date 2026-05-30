@@ -2,9 +2,10 @@ import { createReducer } from '@reduxjs/toolkit';
 import {
   changeCity, resetCity,
   loadOffers,
+  loadNearOffers,
   changeSorting, resetSorting,
   requireAuthorization,
-  saveOffer, resetOffer
+  selectOffer, unselectOffer
 } from './action';
 import { DEFAULT_CITY, DEFAULT_SORTING, AuthorizationStatus } from '../const';
 import { OffersElementType } from '../types/offers';
@@ -15,7 +16,8 @@ type InitialStateType = {
   offers: OffersElementType[];
   typeSorting: string;
   AuthorizationStatus: AuthorizationStatus;
-  currentOffer: OfferType | null;
+  selectedOffer: OfferType | null;
+  nearOffers: OffersElementType[];
 };
 
 const initialState: InitialStateType = {
@@ -23,7 +25,8 @@ const initialState: InitialStateType = {
   offers: [],
   typeSorting: DEFAULT_SORTING,
   AuthorizationStatus: AuthorizationStatus.Unknown,
-  currentOffer: null
+  selectedOffer: null,
+  nearOffers: [],
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -37,6 +40,9 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;
     })
+    .addCase(loadNearOffers, (state, action) => {
+      state.nearOffers = action.payload;
+    })
     .addCase(changeSorting, (state, action) => {
       state.typeSorting = action.payload;
     })
@@ -46,11 +52,11 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(requireAuthorization, (state, action) => {
       state.AuthorizationStatus = action.payload;
     })
-    .addCase(saveOffer, (state, action) => {
-      state.currentOffer = action.payload;
+    .addCase(selectOffer, (state, action) => {
+      state.selectedOffer = action.payload;
     })
-    .addCase(resetOffer, (state) => {
-      state.offers = initialState.offers;
+    .addCase(unselectOffer, (state) => {
+      state.selectedOffer = null;
     });
 });
 

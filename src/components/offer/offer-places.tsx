@@ -1,7 +1,5 @@
 // Import Components
 import { Card } from '../card/card';
-// Import Utils
-import { getTestOffers } from '../../utils';
 // Import Types
 import { OffersElementType } from '../../types/offers';
 
@@ -16,7 +14,7 @@ function NearPlaces({offers, onOfferHover}: NearPlacesProps): JSX.Element {
     <section className='near-places places'>
       <h2 className='near-places__title'>Other places in the neighbourhood</h2>
       <div className='near-places__list places__list'>
-        {getTestOffers(offers).map((offer: OffersElementType) => (
+        {offers.map((offer: OffersElementType) => (
           // TODO: Доработать!
           <Card
             key={offer.id}
