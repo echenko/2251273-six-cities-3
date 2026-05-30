@@ -21,7 +21,7 @@ const PLACES_OPTIONS = [
 
 const DEFAULT_SORTING = 'popular';
 
-const NEAREST_OFFERS_COUNT = 5;
+const NEAREST_OFFERS_COUNT = 3;
 
 const DEFAULT_CITY = 'Amsterdam';
 

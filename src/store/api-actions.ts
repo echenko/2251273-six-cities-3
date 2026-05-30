@@ -7,6 +7,7 @@ import { OfferType } from '../types/offer';
 import { loadOffers, loadNearOffers, requireAuthorization, selectOffer, unselectOffer} from './action';
 import { getToken, saveToken, dropToken } from '../services/token';
 import { getUserEmail, saveUserEmail, dropUserEmail } from '../services/user-email';
+import { getRandomNearsOffers } from '../utils';
 
 type AuthData = {
   login: string;
@@ -43,7 +44,7 @@ export const fetchNearOffersAction = createAsyncThunk<void, string, {
   async (id, {dispatch, extra: api}) => {
     try {
       const {data} = await api.get<OffersElementType[]>(`${APIRoute.Offer}/${id}/nearby`);
-      dispatch(loadNearOffers(data));
+      dispatch(loadNearOffers(getRandomNearsOffers(data)));
     } catch {
       dispatch(loadNearOffers([]));
     }
@@ -75,7 +76,8 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     try {
       if (!getToken() && !getUserEmail()) {
-        return;
+        dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+        throw new Error();
       }
       await api.get(APIRoute.Login);
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
