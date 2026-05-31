@@ -34,8 +34,7 @@ function Cities({ offers, city }: CitiesProps): JSX.Element {
         {!offersLoadingStatus &&
           <Message
             message={
-              offersLoadingStatus === false ?
-                SYSTEM_MESSAGE.ERROR_LOADING_OFFERS : SYSTEM_MESSAGE.UPLOADING_OFFERS
+              offersLoadingStatus === false ? SYSTEM_MESSAGE.ERROR_LOADING_OFFERS : SYSTEM_MESSAGE.UPLOADING_OFFERS
             }
           />}
         {offersLoadingStatus &&

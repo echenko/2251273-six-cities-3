@@ -44,7 +44,7 @@ function App(): JSX.Element {
             <Route
               path={`${AppRoute.Offer}/:offerId`}
               element={
-                <OfferPage></OfferPage>
+                <OfferPage/>
               }
             />
             <Route
