@@ -79,6 +79,11 @@ const CONFIGURATION_API = {
   TIME_OUT: 5000,
 };
 
+const FORMATTED_DATE = {
+  MONTH_YEAR: 'MMMM YYYY',
+  YEAR_MONTH_DAY: 'YYYY-M-D',
+};
+
 export enum AppRoute {
   Main = '/',
   Offer = '/offer',
@@ -114,4 +119,5 @@ export {
   MAP_MARKER_DEFAULT,
   MAP_MARKER_ACTIVE,
   CONFIGURATION_API,
+  FORMATTED_DATE
 };

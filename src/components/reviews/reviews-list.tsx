@@ -1,14 +1,12 @@
-// Import Utils
 import { convertRatingToStars } from '../../utils';
-// Import Types
 import { CommentElementType } from '../../types/comments';
+import { getFormattedDate } from '../../utils';
+import { FORMATTED_DATE } from '../../const';
 
-// Create Types
 type ReviewsListProps = {
   comments: CommentElementType[];
 };
 
-// Create ReviewsList
 function ReviewsList({ comments }: ReviewsListProps): JSX.Element {
   return (
     <ul className='reviews__list'>
@@ -33,8 +31,12 @@ function ReviewsList({ comments }: ReviewsListProps): JSX.Element {
             <p className='reviews__text'>
               {comment.comment}
             </p>
-            {/* TODO: Доработать дату!*/}
-            <time className='reviews__time' dateTime='2019-04-24'>April 2019</time>
+            <time
+              className='reviews__time'
+              dateTime={getFormattedDate(comment.date, FORMATTED_DATE.YEAR_MONTH_DAY)}
+            >
+              {getFormattedDate(comment.date, FORMATTED_DATE.MONTH_YEAR)}
+            </time>
           </div>
         </li>
       ))}
@@ -42,5 +44,4 @@ function ReviewsList({ comments }: ReviewsListProps): JSX.Element {
   );
 }
 
-// Export ReviewsList
 export {ReviewsList};
