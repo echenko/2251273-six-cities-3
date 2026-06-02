@@ -14,13 +14,10 @@ import {
   loadSelectedOffer,
   setSelectedOfferLoadingStatus,
   loadCommentsOffer,
-  redirectToRoute
 } from './action';
 import { getToken, saveToken, dropToken } from '../services/token';
 import { getUserEmail, saveUserEmail, dropUserEmail } from '../services/user-email';
 import { getRandomNearsOffers } from '../utils';
-import { AppRoute } from '../const';
-
 
 type AuthData = {
   login: string;
@@ -115,7 +112,6 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     saveToken(token);
     saveUserEmail(email);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
-    dispatch(redirectToRoute(AppRoute.Favorites));
   },
 );
 

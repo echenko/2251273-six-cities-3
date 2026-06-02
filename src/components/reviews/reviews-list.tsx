@@ -1,7 +1,6 @@
 import { convertRatingToStars } from '../../utils';
 import { CommentElementType } from '../../types/comments';
-import { getFormattedDate } from '../../utils';
-import { FORMATTED_DATE } from '../../const';
+import dayjs from 'dayjs';
 
 type ReviewsListProps = {
   comments: CommentElementType[];
@@ -33,9 +32,9 @@ function ReviewsList({ comments }: ReviewsListProps): JSX.Element {
             </p>
             <time
               className='reviews__time'
-              dateTime={getFormattedDate(comment.date, FORMATTED_DATE.YEAR_MONTH_DAY)}
+              dateTime={dayjs(comment.date).format('YYYY-MM-DD')}
             >
-              {getFormattedDate(comment.date, FORMATTED_DATE.MONTH_YEAR)}
+              {dayjs(comment.date).format('MMMM YYYY')}
             </time>
           </div>
         </li>

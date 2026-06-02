@@ -1,11 +1,14 @@
 import { loginAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks/hooks';
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 function LoginForm(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   async function onSubmit(): Promise<void> {
     if (loginRef.current !== null && passwordRef.current !== null) {
@@ -14,7 +17,9 @@ function LoginForm(): JSX.Element {
           login: loginRef.current.value,
           password: passwordRef.current.value
         })).unwrap();
+        navigate(AppRoute.Favorites);
       } catch {
+        navigate(AppRoute.Main);
         throw new Error('Error login');
       }
     }

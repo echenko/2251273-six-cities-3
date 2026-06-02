@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { GlobalStyle } from '../styles/styles-global';
 import { MainPage } from '../../pages/main-page';
@@ -15,8 +15,6 @@ import { useAppSelector } from '../../hooks/hooks';
 import { checkAuthAction } from './../../store/api-actions';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../../hooks/hooks';
-import HistoryRouter from '../history-route/history-route';
-import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -29,7 +27,7 @@ function App(): JSX.Element {
   return (
     <HelmetProvider>
       <GlobalStyle />
-      <HistoryRouter history={browserHistory}>
+      < BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
@@ -74,7 +72,7 @@ function App(): JSX.Element {
           </Route>
           {/* TODO: Add 404! */}
         </Routes>
-      </ HistoryRouter>
+      </ BrowserRouter>
     </HelmetProvider>
 
   );

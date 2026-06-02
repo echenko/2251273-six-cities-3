@@ -4,7 +4,6 @@ import { CommentElementType } from './types/comments';
 import { FavoriteType } from './mocks/favorite-mocks';
 import { REVIEW_OFFER, NEAREST_OFFERS_COUNT, PLACES_OPTIONS } from './const';
 import { AuthorizationStatus } from './const';
-import dayjs from 'dayjs';
 
 /**
  * Returns the number of favorite offers in the given array of offers.
@@ -121,10 +120,6 @@ function getRandomNearsOffers(offers: OffersElementType[]): OffersElementType[] 
   return offers.sort(() => Math.random() - 0.5).slice(0, NEAREST_OFFERS_COUNT);
 }
 
-function getFormattedDate(date: string, format: string): string {
-  return dayjs(date).format(format);
-}
-
 export {
   countFavoritesOffers,
   getArrayAllCities,
@@ -142,5 +137,4 @@ export {
   getSortedOffersByType,
   getPlacesOptionsLabel,
   getRandomNearsOffers,
-  getFormattedDate
 };
