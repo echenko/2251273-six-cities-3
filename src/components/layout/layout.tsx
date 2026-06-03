@@ -4,7 +4,6 @@ import { Logo } from '../logo/logo';
 import { Navigation } from '../navigation/navigation';
 import { Footer } from '../footer/footer';
 import { AppRoute } from '../../const';
-import { useAppSelector } from '../../hooks/hooks';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../../hooks/hooks';
@@ -71,7 +70,6 @@ function Layout(): JSX.Element {
   const { pathname } = useLocation();
   const { offerId } = useParams<{ offerId: string }>();
   const { classNamePage, navigationState, logoState, footerState, titlePage } = getLayoutState(pathname as AppRoute);
-  const offers = useAppSelector((state) => state.offers);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -91,7 +89,7 @@ function Layout(): JSX.Element {
             <div className="header__left">
               <Logo logoState={logoState} />
             </div>
-            {navigationState && <Navigation offers={offers} />}
+            {navigationState && <Navigation />}
           </div>
         </div>
       </header>
