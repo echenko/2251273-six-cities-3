@@ -8,11 +8,6 @@ import { FavoriteType } from '../types/favorite';
 import { CommentElementType } from '../types/comments';
 import { ReviewType } from '../types/review';
 import {
-  loadOffers,
-  setOffersLoadingStatus,
-  loadNearOffers,
-  loadFavoriteOffers,
-  setFavoriteOffersLoadingStatus,
   requireAuthorization,
   loadSelectedOffer,
   setSelectedOfferLoadingStatus,
@@ -20,45 +15,45 @@ import {
 } from './action';
 import { getToken, saveToken, dropToken } from '../services/token';
 import { getUserEmail, saveUserEmail, dropUserEmail } from '../services/user-email';
-import { getRandomNearsOffers } from '../utils';
 
 type AuthData = {
   login: string;
   password: string;
 };
 
-export const fetchOffersAction = createAsyncThunk<void, undefined, {
+export const fetchOffersAction = createAsyncThunk<OffersElementType[], undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchOffers',
-  async (_arg, { dispatch, extra: api }) => {
-    setOffersLoadingStatus(null);
-    try {
-      const { data } = await api.get<OffersElementType[]>(APIRoute.Offers);
-      dispatch(setOffersLoadingStatus(true));
-      dispatch(loadOffers(data));
-    } catch {
-      dispatch(setOffersLoadingStatus(false));
-      dispatch(loadOffers([]));
-    }
+  'offers/fetchOffers',
+  async (_arg, { extra: api }) => {
+    const { data } = await api.get<OffersElementType[]>(APIRoute.Offers);
+    return data;
   },
 );
 
-export const fetchNearOffersAction = createAsyncThunk<void, string | undefined, {
+export const fetchNearOffersAction = createAsyncThunk<OffersElementType[], string | undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchNearOffers',
-  async (id, { dispatch, extra: api }) => {
-    try {
-      const { data } = await api.get<OffersElementType[]>(`${APIRoute.Offer}/${id}/nearby`);
-      dispatch(loadNearOffers(getRandomNearsOffers(data)));
-    } catch {
-      dispatch(loadNearOffers([]));
-    }
+  'offers/fetchNearOffers',
+  async (id, { extra: api }) => {
+    const { data } = await api.get<OffersElementType[]>(`${APIRoute.Offer}/${id}/nearby`);
+    return data;
+  },
+);
+
+export const fetchFavoriteOffersAction = createAsyncThunk<OffersElementType[], undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'offers/fetchFavoriteOffers',
+  async (_arg, { extra: api }) => {
+    const { data } = await api.get<FavoriteType[]>(APIRoute.Favorite);
+    return data;
   },
 );
 
@@ -157,25 +152,6 @@ export const postReviewAction = createAsyncThunk<void, ReviewType, {
   async ({ offerId, comment, rating }, { dispatch, extra: api }) => {
     await api.post<ReviewType>(`${APIRoute.Comments}/${offerId}`, { comment, rating });
     dispatch(fetchCommentsOfferAction(offerId));
-  },
-);
-
-export const fetchFavoriteOffersAction = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
-  'data/fetchFavoriteOffers',
-  async (_arg, { dispatch, extra: api }) => {
-    dispatch(setFavoriteOffersLoadingStatus(null));
-    try {
-      const { data } = await api.get<FavoriteType[]>(APIRoute.Favorite);
-      dispatch(setFavoriteOffersLoadingStatus(true));
-      dispatch(loadFavoriteOffers(data));
-    } catch {
-      dispatch(setFavoriteOffersLoadingStatus(false));
-      dispatch(loadFavoriteOffers([]));
-    }
   },
 );
 

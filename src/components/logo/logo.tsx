@@ -1,28 +1,19 @@
-// Import React
 import { Link} from 'react-router-dom';
-// Import Utils
 import { clsx } from 'clsx';
-// Import Constants
-import { AppRoute } from '../../const';
-// Import Hooks
+import { AppRoute, DEFAULT_CITY, DEFAULT_SORTING } from '../../const';
 import { useAppDispatch } from '../../hooks/hooks';
-// Import Actions
-import { resetCity, resetSorting } from '../../store/action';
+import { changeCity, changeSorting } from '../../store/action';
 
-// Create Types
 type LogoProps = {
   logoState: boolean;
 }
 
-// Create Logo
 function Logo({logoState}: LogoProps): JSX.Element {
-  // Create Dispatch
   const dispatch = useAppDispatch();
 
-  // Create handleClick
   function handleClick(): void {
-    dispatch(resetCity());
-    dispatch(resetSorting());
+    dispatch(changeCity(DEFAULT_CITY));
+    dispatch(changeSorting(DEFAULT_SORTING));
   }
 
   return (
@@ -35,5 +26,4 @@ function Logo({logoState}: LogoProps): JSX.Element {
   );
 }
 
-// Export Logo
 export {Logo};

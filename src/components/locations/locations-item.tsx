@@ -14,14 +14,10 @@ type LocationsItemProps = {
   location: string;
 };
 
-// Create LocationsItem
 function LocationsItem({location}: LocationsItemProps): JSX.Element {
-  // Create Dispatch
   const dispatch = useAppDispatch();
-  // Create Selector
-  const city = useAppSelector((state) => state.city);
+  const city = useAppSelector((state) => state.CITY.SelectedCity);
 
-  // Create handleClick
   function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void {
     event.preventDefault();
     dispatch(changeCity(location));
@@ -31,7 +27,6 @@ function LocationsItem({location}: LocationsItemProps): JSX.Element {
   return (
     <li className="locations__item">
       <Link
-        // TODO: Correct path ()
         to={AppRoute.Main}
         className={clsx(
           'locations__item-link tabs__item',

@@ -1,9 +1,6 @@
-// Import Components
 import { LocationsItem } from './locations-item';
-// Import Constants
 import { CITIES } from '../../const';
 
-// Create Locations
 function Locations(): JSX.Element {
 
   return (

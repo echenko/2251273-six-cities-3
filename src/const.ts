@@ -102,6 +102,12 @@ export enum APIRoute {
   Favorite = '/favorite',
 }
 
+export enum NameSpace {
+  Offers = 'OFFERS',
+  City = 'CITY',
+  Sorting = 'SORTING',
+}
+
 export {
   DEFAULT_CITY,
   PLACES_OPTIONS,

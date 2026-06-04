@@ -17,7 +17,7 @@ type CitiesProps = {
 
 function Cities({ offers, city }: CitiesProps): JSX.Element {
   const [currentOffer, setCurrentOffer] = useState<string>('');
-  const offersLoadingStatus = useAppSelector((state) => state.offersLoadingStatus);
+  const offersLoadingStatus = useAppSelector((state) => state.OFFERS.offersLoadingStatus);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

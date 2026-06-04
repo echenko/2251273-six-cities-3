@@ -2,11 +2,20 @@ import { Locations } from '../components/locations/locations';
 import { Cities } from '../components/cities/cities';
 import { filterOffersByCity, getSortedOffersByType } from '../utils';
 import { useAppSelector } from '../hooks/hooks';
+import { useEffect } from 'react';
+import { useAppDispatch } from '../hooks/hooks';
+import { fetchOffersAction } from '../store/api-actions';
 
 function MainPage(): JSX.Element {
-  const city = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.offers);
-  const sortingOffers = useAppSelector((state) => state.typeSorting);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOffersAction());
+  }, [dispatch]);
+
+  const city = useAppSelector((state) => state.CITY.SelectedCity);
+  const offers = useAppSelector((state) => state.OFFERS.offers);
+  const sortingOffers = useAppSelector((state) => state.SORTING.SelectedSorting);
   const filteredOffers = filterOffersByCity(offers, city);
 
   return (
