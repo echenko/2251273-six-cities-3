@@ -1,11 +1,9 @@
+import { UserType } from './user';
+
 export type CommentElementType = {
   id: string;
   date: string;
-  user: {
-    name: string;
-    avatarUrl: string;
-    isPro: boolean;
-  };
+  user: UserType;
   comment: string;
   rating: number;
 };
