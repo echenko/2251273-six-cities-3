@@ -3,7 +3,7 @@ import { getFavoriteOffersCities } from '../../utils';
 import { useAppSelector } from '../../hooks/hooks';
 
 function Favorites(): JSX.Element {
-  const favoritesOffers = useAppSelector((state) => state.favoriteOffers);
+  const favoritesOffers = useAppSelector((state) => state.OFFERS.favoriteOffers);
   const favoriteOffersCities = getFavoriteOffersCities(favoritesOffers);
   const favoriteCities = Object.keys(favoriteOffersCities);
 

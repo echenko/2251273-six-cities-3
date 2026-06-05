@@ -1,15 +1,10 @@
-// Import React
 import { Link } from 'react-router-dom';
-// Import Utils
 import { clsx } from 'clsx';
-// Import Constants
 import { AppRoute } from '../../const';
-// Import Hooks
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-// Import Actions
-import { changeCity, resetSorting } from '../../store/action';
+import { changeCity, changeSorting } from '../../store/action';
+import { DEFAULT_SORTING } from '../../const';
 
-// Create Types
 type LocationsItemProps = {
   location: string;
 };
@@ -21,7 +16,7 @@ function LocationsItem({location}: LocationsItemProps): JSX.Element {
   function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void {
     event.preventDefault();
     dispatch(changeCity(location));
-    dispatch(resetSorting());
+    dispatch(changeSorting(DEFAULT_SORTING));
   }
 
   return (
@@ -40,5 +35,4 @@ function LocationsItem({location}: LocationsItemProps): JSX.Element {
   );
 }
 
-// Export LocationsItem
 export { LocationsItem };

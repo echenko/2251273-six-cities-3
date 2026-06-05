@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom';
 import { AuthorizationStatus } from '../../const';
 
 function Login(): JSX.Element {
-  const statusAuthorization = useAppSelector((state) => state.AuthorizationStatus);
+  const statusAuthorization = useAppSelector((state) => state.USER.authorizationStatus);
   if (statusAuthorization === AuthorizationStatus.Auth) {
     return <Navigate to={AppRoute.Favorites} />;
   }
@@ -17,5 +17,4 @@ function Login(): JSX.Element {
   );
 }
 
-// Export Login
 export { Login };

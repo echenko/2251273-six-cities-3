@@ -1,18 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { AppDispatch, State } from '../types/state';
-import { APIRoute, AuthorizationStatus } from '../const';
+import { APIRoute } from '../const';
 import { OffersElementType } from '../types/offers';
 import { OfferType } from '../types/offer';
 import { FavoriteType } from '../types/favorite';
 import { CommentElementType } from '../types/comments';
 import { ReviewType } from '../types/review';
-import {
-  requireAuthorization,
-  loadSelectedOffer,
-  setSelectedOfferLoadingStatus,
-  loadCommentsOffer,
-} from './action';
 import { getToken, saveToken, dropToken } from '../services/token';
 import { getUserEmail, saveUserEmail, dropUserEmail } from '../services/user-email';
 
@@ -57,23 +51,15 @@ export const fetchFavoriteOffersAction = createAsyncThunk<OffersElementType[], u
   },
 );
 
-export const fetchOfferAction = createAsyncThunk<void, string | undefined, {
+export const fetchOfferAction = createAsyncThunk<OfferType, string | undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchOffer',
-  async (id, { dispatch, extra: api }) => {
-    dispatch(setSelectedOfferLoadingStatus(null));
-    dispatch(loadSelectedOffer(null));
-    try {
-      const { data } = await api.get<OfferType>(`${APIRoute.Offer}/${id}`);
-      dispatch(setSelectedOfferLoadingStatus(true));
-      dispatch(loadSelectedOffer(data));
-    } catch {
-      dispatch(setSelectedOfferLoadingStatus(false));
-      dispatch(loadSelectedOffer(null));
-    }
+  async (id, { extra: api }) => {
+    const { data } = await api.get<OfferType>(`${APIRoute.Offer}/${id}`);
+    return data;
   },
 );
 
@@ -83,18 +69,9 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'user/checkAuth',
-  async (_arg, { dispatch, extra: api }) => {
-    try {
-      if (!getToken() && !getUserEmail()) {
-        dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
-        throw new Error();
-      }
+  async (_arg, { extra: api }) => {
+    if (!getToken() && !getUserEmail()) {
       await api.get(APIRoute.Login);
-      dispatch(requireAuthorization(AuthorizationStatus.Auth));
-    } catch {
-      dropToken();
-      dropUserEmail();
-      dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     }
   },
 );
@@ -105,11 +82,10 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   extra: AxiosInstance;
 }>(
   'user/login',
-  async ({ login: email, password }, { dispatch, extra: api }) => {
+  async ({ login: email, password }, { extra: api }) => {
     const { data: { token } } = await api.post<{ token: string }>(APIRoute.Login, { email, password });
     saveToken(token);
     saveUserEmail(email);
-    dispatch(requireAuthorization(AuthorizationStatus.Auth));
   },
 );
 
@@ -119,27 +95,22 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'user/logout',
-  async (_arg, { dispatch, extra: api }) => {
+  async (_arg, { extra: api }) => {
     await api.delete(APIRoute.Logout);
     dropToken();
     dropUserEmail();
-    dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   },
 );
 
-export const fetchCommentsOfferAction = createAsyncThunk<void, string, {
+export const fetchCommentsOfferAction = createAsyncThunk<CommentElementType[], string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchCommentsOffer',
-  async (id, { dispatch, extra: api }) => {
-    try {
-      const { data } = await api.get<CommentElementType[]>(`${APIRoute.Comments}/${id}`);
-      dispatch(loadCommentsOffer(data));
-    } catch {
-      dispatch(loadCommentsOffer([]));
-    }
+  async (id, { extra: api }) => {
+    const { data } = await api.get<CommentElementType[]>(`${APIRoute.Comments}/${id}`);
+    return data;
   },
 );
 

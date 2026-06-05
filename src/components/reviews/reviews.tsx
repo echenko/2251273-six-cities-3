@@ -9,8 +9,8 @@ import { AuthorizationStatus } from '../../const';
 // Export Reviews
 function Reviews(): JSX.Element {
   const dispatch = useAppDispatch();
-  const statusAuthorization = useAppSelector((state) => state.AuthorizationStatus);
-  const comments = useAppSelector((state) => state.comments);
+  const statusAuthorization = useAppSelector((state) => state.USER.authorizationStatus);
+  const comments = useAppSelector((state) => state.OFFER.selectedOfferComments);
   const offerId: string = useParams().offerId || '';
 
 

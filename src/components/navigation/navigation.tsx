@@ -10,15 +10,15 @@ import { fetchFavoriteOffersAction } from '../../store/api-actions';
 import { useEffect } from 'react';
 
 function Navigation(): JSX.Element {
-  const statusAuthorization = useAppSelector((state) => state.AuthorizationStatus);
+  const statusAuthorization: AuthorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
   const userEmail = getUserEmail();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const favoritesOffers = useAppSelector((state) => state.OFFERS.favoriteOffers);
 
-  const favoritesOffers = useAppSelector((state) => state.favoriteOffers);
   useEffect(() => {
     if (statusAuthorization === AuthorizationStatus.Auth) {
-      dispatch(fetchFavoriteOffersAction());
+      fetchFavoriteOffersAction();
     }
   }, [statusAuthorization, dispatch]);
 

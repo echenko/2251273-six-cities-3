@@ -15,9 +15,9 @@ function OfferPage(): JSX.Element {
 
   const dispatch = useAppDispatch();
   const { offerId } = useParams<{ offerId: string }>();
-  const selectedOffer = useAppSelector((state) => state.selectedOffer);
-  const nearOffers = useAppSelector((state) => state.nearOffers);
-  const selectedOfferLoadingStatus = useAppSelector((state) => state.selectedOfferLoadingStatus);
+  const selectedOffer = useAppSelector((state) => state.OFFER.selectedOffer);
+  const nearOffers = useAppSelector((state) => state.OFFERS.nearOffers);
+  const selectedOfferLoadingStatus = useAppSelector((state) => state.OFFER.selectedOfferLoadingStatus);
   const [currentOffer, setCurrentOffer] = useState<string>('');
 
   useEffect(() => {

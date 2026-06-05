@@ -4,9 +4,6 @@ import { Map } from '../map/map';
 import { Message } from '../message/message';
 import { getLocation } from '../../utils';
 import { OffersElementType } from '../../types/offers';
-import { useEffect } from 'react';
-import { useAppDispatch } from '../../hooks/hooks';
-import { fetchOffersAction } from '../../store/api-actions';
 import { useAppSelector } from '../../hooks/hooks';
 import { SYSTEM_MESSAGE } from '../../const';
 
@@ -18,11 +15,6 @@ type CitiesProps = {
 function Cities({ offers, city }: CitiesProps): JSX.Element {
   const [currentOffer, setCurrentOffer] = useState<string>('');
   const offersLoadingStatus = useAppSelector((state) => state.OFFERS.offersLoadingStatus);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchOffersAction());
-  }, [dispatch]);
 
   const handleOfferHover = (offerId: string) => {
     setCurrentOffer(offerId);

@@ -9,7 +9,7 @@ type PrivateProps = {
 const checkAuth = (statusAuthorization: AuthorizationStatus): boolean => statusAuthorization === AuthorizationStatus.NoAuth;
 
 function Private({children}: PrivateProps): JSX.Element {
-  const statusAuthorization = useAppSelector((state) => state.AuthorizationStatus);
+  const statusAuthorization = useAppSelector((state) => state.USER.authorizationStatus);
   return (
     checkAuth(statusAuthorization) ? <Navigate to={AppRoute.Login}/> : children
   );
