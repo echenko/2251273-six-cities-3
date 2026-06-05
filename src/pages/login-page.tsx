@@ -1,11 +1,7 @@
-// Import React
 import { Link } from 'react-router-dom';
-// Import Components
 import { Login } from '../components/login/login';
-// Import Constants
 import { AppRoute } from '../const';
 
-// Create LoginPage
 function LoginPage(): JSX.Element {
   return (
     <main className="page__main page__main--login">
@@ -13,7 +9,6 @@ function LoginPage(): JSX.Element {
         <Login />
         <section className="locations locations--login locations--current">
           <div className="locations__item">
-            {/* TODO: Correct path! */}
             <Link className="locations__item-link" to={`${AppRoute.Main}`}>
               <span>Amsterdam</span>
             </Link>

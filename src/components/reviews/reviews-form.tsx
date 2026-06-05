@@ -1,6 +1,6 @@
 import { useState, Fragment } from 'react';
 import { REVIEW_OFFER, RATING_OFFER } from '../../const';
-import { postReviewAction } from '../../store/api-actions';
+import { postCommentsOfferAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks/hooks';
 import { useParams } from 'react-router-dom';
 
@@ -21,7 +21,7 @@ function ReviewsForm(): JSX.Element {
 
   async function onFormSubmit(): Promise<void> {
     try {
-      await dispatch(postReviewAction({
+      await dispatch(postCommentsOfferAction({
         offerId,
         comment: reviewsOffer.comment,
         rating: reviewsOffer.rating,

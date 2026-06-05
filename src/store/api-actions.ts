@@ -56,7 +56,7 @@ export const fetchOfferAction = createAsyncThunk<OfferType, string | undefined, 
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchOffer',
+  'offer/fetchOffer',
   async (id, { extra: api }) => {
     const { data } = await api.get<OfferType>(`${APIRoute.Offer}/${id}`);
     return data;
@@ -114,7 +114,7 @@ export const fetchCommentsOfferAction = createAsyncThunk<CommentElementType[], s
   },
 );
 
-export const postReviewAction = createAsyncThunk<void, ReviewType, {
+export const postCommentsOfferAction = createAsyncThunk<void, ReviewType, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;

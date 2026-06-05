@@ -3,6 +3,7 @@ import { NameSpace, AuthorizationStatus } from '../../const';
 import { UserSlice } from '../../types/slice/user-slice';
 import { checkAuthAction, logoutAction, loginAction } from '../api-actions';
 
+
 const initialState: UserSlice = {
   authorizationStatus: AuthorizationStatus.Unknown,
 };

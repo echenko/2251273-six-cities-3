@@ -18,7 +18,7 @@ function Navigation(): JSX.Element {
 
   useEffect(() => {
     if (statusAuthorization === AuthorizationStatus.Auth) {
-      fetchFavoriteOffersAction();
+      dispatch(fetchFavoriteOffersAction());
     }
   }, [statusAuthorization, dispatch]);
 

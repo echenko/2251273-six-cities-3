@@ -4,10 +4,6 @@ import { Logo } from '../logo/logo';
 import { Navigation } from '../navigation/navigation';
 import { Footer } from '../footer/footer';
 import { AppRoute } from '../../const';
-import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useAppDispatch } from '../../hooks/hooks';
-import { loadSelectedOffer, setSelectedOfferLoadingStatus } from '../../store/action';
 
 type LayoutState = {
   classNamePage: string;
@@ -65,17 +61,9 @@ const getLayoutState = (pathname: AppRoute): LayoutState => {
   }
 };
 
-// Create Layout
 function Layout(): JSX.Element {
   const { pathname } = useLocation();
-  const { offerId } = useParams<{ offerId: string }>();
   const { classNamePage, navigationState, logoState, footerState, titlePage } = getLayoutState(pathname as AppRoute);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(setSelectedOfferLoadingStatus(null));
-    dispatch(loadSelectedOffer(null));
-  }, [offerId, dispatch]);
 
   return (
     <div className={classNamePage}>
