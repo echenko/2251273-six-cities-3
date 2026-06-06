@@ -23,7 +23,7 @@ const DEFAULT_SORTING = 'popular';
 
 const NEAREST_OFFERS_COUNT = 3;
 
-const DEFAULT_CITY = 'Amsterdam';
+const DEFAULT_CITY = 'Paris';
 
 const CITIES = [
   'Paris',
@@ -93,14 +93,14 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export enum APIRoute {
-  Offers = '/offers',
-  Login = '/login',
-  Logout = '/logout',
-  Offer = '/offers/',
-  Comments = '/comments/',
-  Favorite = '/favorite',
-}
+export const APIRoute = {
+  'Offers': '/offers',
+  'Login': '/login',
+  'Logout': '/logout',
+  'Offer': '/offers/',
+  'Comments': '/comments/',
+  'Favorite': '/favorite',
+};
 
 export enum NameSpace {
   Offers = 'OFFERS',

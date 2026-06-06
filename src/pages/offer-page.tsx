@@ -61,5 +61,4 @@ function OfferPage(): JSX.Element {
 
 }
 
-// Export OffersPage
 export { OfferPage };

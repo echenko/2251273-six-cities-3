@@ -17,10 +17,10 @@ function LoginForm(): JSX.Element {
           login: loginRef.current.value,
           password: passwordRef.current.value
         })).unwrap();
-        navigate(AppRoute.Favorites);
       } catch {
-        navigate(AppRoute.Main);
         throw new Error('Error login');
+      } finally {
+        navigate(AppRoute.Main);
       }
     }
   }
