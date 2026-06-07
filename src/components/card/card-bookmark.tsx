@@ -5,6 +5,11 @@ import { postFavoriteOfferAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks/hooks';
 import { switchButton } from '../../utils';
 import { useRef } from 'react';
+import { useAppSelector } from '../../hooks/hooks';
+import { getAuthCheckedStatus } from '../../store/selectors/user-selector';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
+
 
 type CardBookmarkProps = {
   offer: OffersElementType;
@@ -14,6 +19,8 @@ function CardBookmark({ offer }: CardBookmarkProps): JSX.Element {
   const [isFavoriteState, setIsFavoriteState] = useState(offer.isFavorite);
   const dispatch = useAppDispatch();
   const addFavoriteButton = useRef<HTMLButtonElement | null>(null);
+  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
+  const navigation = useNavigate();
 
   async function handleClick(): Promise<void> {
     switchButton(addFavoriteButton.current, true);
@@ -29,6 +36,10 @@ function CardBookmark({ offer }: CardBookmarkProps): JSX.Element {
 
   function onClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
     event.preventDefault();
+    if(!isAuthChecked) {
+      navigation(AppRoute.Login);
+      return;
+    }
     handleClick();
   }
 
