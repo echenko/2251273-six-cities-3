@@ -1,20 +1,17 @@
-// Import Components
 import {CardMark} from './card-mark';
 import {CardImage} from './card-image';
 import {CardPrice} from './card-price';
 import {CardRating} from './card-rating';
 import {CardName} from './card-name';
 import {CardType} from './card-type';
-// Import Types
 import {OffersElementType} from '../../types/offers';
+import { memo } from 'react';
 
-// Create Types
 type CardProps = {
   offer: OffersElementType;
   onOfferHover: (offerId: string) => void;
 }
 
-// Create Card
 function Card({offer, onOfferHover}: CardProps): JSX.Element {
   return (
     <article
@@ -34,5 +31,6 @@ function Card({offer, onOfferHover}: CardProps): JSX.Element {
   );
 }
 
-// Export Card
-export {Card};
+const CardMemo = memo(Card);
+
+export {CardMemo};

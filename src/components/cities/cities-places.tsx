@@ -1,19 +1,14 @@
-// Import Components
 import { Sorting } from '../sorting/sorting';
-import { Card } from '../card/card';
-// Import Utils
+import { CardMemo } from '../card/card';
 import { getCounterOffers } from '../../utils';
-// Import Types
 import { OffersElementType } from '../../types/offers';
 
-// Create Types
 type CitiesPlacesProps = {
   offers: OffersElementType[];
   city: string;
   onOfferHover: (offerId: string) => void;
 }
 
-// Create CitiesPlaces
 function CitiesPlaces({offers, city, onOfferHover}: CitiesPlacesProps): JSX.Element {
   const countOffers: number = getCounterOffers(offers);
   return (
@@ -23,7 +18,7 @@ function CitiesPlaces({offers, city, onOfferHover}: CitiesPlacesProps): JSX.Elem
       <Sorting />
       <div className="cities__places-list places__list tabs__content">
         {offers.map((offer: OffersElementType) => (
-          <Card
+          <CardMemo
             key={offer.id}
             offer={offer}
             onOfferHover={onOfferHover}
