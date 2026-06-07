@@ -8,6 +8,7 @@ import { useAppDispatch } from '../../hooks/hooks';
 import { getUserEmail } from '../../services/user-email';
 import { fetchFavoriteOffersAction, checkAuthAction } from '../../store/api-actions';
 import { useEffect } from 'react';
+import { memo } from 'react';
 
 function Navigation(): JSX.Element {
   const statusAuthorization: AuthorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
@@ -71,4 +72,6 @@ function Navigation(): JSX.Element {
   );
 }
 
-export {Navigation};
+const NavigationMemo = memo(Navigation);
+
+export { NavigationMemo as Navigation };

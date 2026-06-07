@@ -5,6 +5,7 @@ import { useAppDispatch } from '../../hooks/hooks';
 import { changeCity, changeSorting } from '../../store/action';
 import { checkAuthAction } from '../../store/api-actions';
 import { useCallback } from 'react';
+import { memo } from 'react';
 
 type LogoProps = {
   logoState: boolean;
@@ -30,4 +31,6 @@ function Logo({logoState}: LogoProps): JSX.Element {
   );
 }
 
-export {Logo};
+const LogoMemo = memo(Logo);
+
+export { LogoMemo as Logo };

@@ -1,8 +1,7 @@
-// Import React
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { memo } from 'react';
 
-// Create Footer
 function Footer(): JSX.Element {
   return (
     <footer className="footer container">
@@ -13,5 +12,6 @@ function Footer(): JSX.Element {
   );
 }
 
-// Export Footer
-export {Footer};
+const MemoFooter = memo(Footer);
+
+export { MemoFooter as Footer };

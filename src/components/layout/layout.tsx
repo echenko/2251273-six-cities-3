@@ -87,5 +87,4 @@ function Layout(): JSX.Element {
   );
 }
 
-// Export Layout
 export { Layout };

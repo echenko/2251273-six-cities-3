@@ -5,6 +5,7 @@ import { CardRating } from './card-rating';
 import { CardName } from './card-name';
 import { CardType } from './card-type';
 import { OffersElementType } from '../../types/offers';
+import { memo } from 'react';
 
 type CardProps = {
   offer: OffersElementType;
@@ -30,4 +31,6 @@ function Card({offer, onOfferHover}: CardProps): JSX.Element {
   );
 }
 
-export {Card};
+const CardMemo = memo(Card);
+
+export {CardMemo as Card};

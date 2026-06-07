@@ -1,5 +1,6 @@
 import { LocationsItem } from './locations-item';
 import { CITIES } from '../../const';
+import { memo } from 'react';
 
 function Locations(): JSX.Element {
 
@@ -17,5 +18,6 @@ function Locations(): JSX.Element {
   );
 }
 
-// Export Locations
-export {Locations};
+const LocationsMemo = memo(Locations);
+
+export { LocationsMemo as Locations };

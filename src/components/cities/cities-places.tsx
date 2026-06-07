@@ -29,5 +29,4 @@ function CitiesPlaces({offers, city, onOfferHover}: CitiesPlacesProps): JSX.Elem
   );
 }
 
-// Export CitiesPlaces
 export {CitiesPlaces};
