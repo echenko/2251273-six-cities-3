@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { logoutAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks/hooks';
 import { getUserEmail } from '../../services/user-email';
-import { fetchFavoriteOffersAction } from '../../store/api-actions';
+import { fetchFavoriteOffersAction, checkAuthAction } from '../../store/api-actions';
 import { useEffect } from 'react';
 
 function Navigation(): JSX.Element {
@@ -22,13 +22,13 @@ function Navigation(): JSX.Element {
     }
   }, [statusAuthorization, dispatch]);
 
-  function handleLinkClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void {
-    event.preventDefault();
+  async function handleLinkClick(): Promise<void> {
     if (statusAuthorization === AuthorizationStatus.Auth) {
       try {
-        dispatch(logoutAction());
+        await dispatch(logoutAction()).unwrap();
         navigate(AppRoute.Main);
       } catch {
+        dispatch(checkAuthAction());
         throw new Error('Error logout');
       }
     } else if (statusAuthorization === AuthorizationStatus.NoAuth) {
@@ -38,6 +38,11 @@ function Navigation(): JSX.Element {
         throw new Error('Error login');
       }
     }
+  }
+
+  function onLinkClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void {
+    event.preventDefault();
+    handleLinkClick();
   }
 
   return (
@@ -56,7 +61,7 @@ function Navigation(): JSX.Element {
         <li className="header__nav-item">
           <Link
             className="header__nav-link" to={AppRoute.Login}
-            onClick={handleLinkClick}
+            onClick={onLinkClick}
           >
             <span className="header__signout">{statusAuthorization === AuthorizationStatus.Auth ? 'Sign out' : 'Sign in'}</span>
           </Link>

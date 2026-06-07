@@ -3,6 +3,7 @@ import { clsx } from 'clsx';
 import { AppRoute, DEFAULT_CITY, DEFAULT_SORTING } from '../../const';
 import { useAppDispatch } from '../../hooks/hooks';
 import { changeCity, changeSorting } from '../../store/action';
+import { checkAuthAction } from '../../store/api-actions';
 
 type LogoProps = {
   logoState: boolean;
@@ -14,6 +15,7 @@ function Logo({logoState}: LogoProps): JSX.Element {
   function handleClick(): void {
     dispatch(changeCity(DEFAULT_CITY));
     dispatch(changeSorting(DEFAULT_SORTING));
+    dispatch(checkAuthAction());
   }
 
   return (

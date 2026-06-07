@@ -7,8 +7,8 @@ import { OfferType } from '../types/offer';
 import { FavoriteType } from '../types/favorite';
 import { CommentElementType } from '../types/comments';
 import { ReviewType } from '../types/review';
-import { getToken, saveToken, dropToken } from '../services/token';
-import { getUserEmail, saveUserEmail, dropUserEmail } from '../services/user-email';
+import { saveToken, dropToken } from '../services/token';
+import { saveUserEmail, dropUserEmail } from '../services/user-email';
 
 type AuthData = {
   login: string;
@@ -70,8 +70,12 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
 }>(
   'user/checkAuth',
   async (_arg, { extra: api }) => {
-    if (!getToken() && !getUserEmail()) {
+    try {
       await api.get(APIRoute.Login);
+    } catch {
+      dropToken();
+      dropUserEmail();
+      throw new Error('Error login');
     }
   },
 );

@@ -9,16 +9,21 @@ import { Layout } from '../layout/layout';
 import { Private } from '../private/private';
 import { PageNotFound } from '../page-not-found/page-not-found';
 import { AppRoute, PAGE_NOT_FOUND_MESSAGE } from '../../const';
-import { checkAuthAction } from './../../store/api-actions';
+import { getAuthCheckedStatus } from '../../store/selectors/user-selector';
+import { useAppSelector } from '../../hooks/hooks';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../../hooks/hooks';
+import { checkAuthAction } from '../../store/api-actions';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
+  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
 
   useEffect(() => {
-    dispatch(checkAuthAction());
-  }, [dispatch]);
+    if (!isAuthChecked) {
+      dispatch(checkAuthAction());
+    }
+  }, [dispatch, isAuthChecked]);
 
   return (
     <HelmetProvider>
@@ -34,13 +39,13 @@ function App(): JSX.Element {
             <Route
               index
               element={
-                <MainPage/>
+                <MainPage />
               }
             />
             <Route
               path={`${AppRoute.Offer}/:offerId`}
               element={
-                <OfferPage/>
+                <OfferPage />
               }
             />
             <Route
