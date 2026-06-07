@@ -1,11 +1,10 @@
-import {CardMark} from './card-mark';
-import {CardImage} from './card-image';
-import {CardPrice} from './card-price';
-import {CardRating} from './card-rating';
-import {CardName} from './card-name';
-import {CardType} from './card-type';
-import {OffersElementType} from '../../types/offers';
-import { memo } from 'react';
+import { CardMark } from './card-mark';
+import { CardImage } from './card-image';
+import { CardPrice } from './card-price';
+import { CardRating } from './card-rating';
+import { CardName } from './card-name';
+import { CardType } from './card-type';
+import { OffersElementType } from '../../types/offers';
 
 type CardProps = {
   offer: OffersElementType;
@@ -31,6 +30,4 @@ function Card({offer, onOfferHover}: CardProps): JSX.Element {
   );
 }
 
-const CardMemo = memo(Card);
-
-export {CardMemo};
+export {Card};

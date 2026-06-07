@@ -4,6 +4,7 @@ import { AppRoute, DEFAULT_CITY, DEFAULT_SORTING } from '../../const';
 import { useAppDispatch } from '../../hooks/hooks';
 import { changeCity, changeSorting } from '../../store/action';
 import { checkAuthAction } from '../../store/api-actions';
+import { useCallback } from 'react';
 
 type LogoProps = {
   logoState: boolean;
@@ -12,11 +13,12 @@ type LogoProps = {
 function Logo({logoState}: LogoProps): JSX.Element {
   const dispatch = useAppDispatch();
 
-  function handleClick(): void {
+  const handleClick = useCallback(() => {
     dispatch(changeCity(DEFAULT_CITY));
     dispatch(changeSorting(DEFAULT_SORTING));
     dispatch(checkAuthAction());
-  }
+  }, [dispatch]);
+
 
   return (
     <Link to={AppRoute.Main}

@@ -1,4 +1,4 @@
-import { CardMemo } from '../card/card';
+import { Card } from '../card/card';
 import { OffersElementType } from '../../types/offers';
 
 type NearPlacesProps = {
@@ -12,7 +12,7 @@ function NearPlaces({offers, onOfferHover}: NearPlacesProps): JSX.Element {
       <h2 className='near-places__title'>Other places in the neighbourhood</h2>
       <div className='near-places__list places__list'>
         {offers.map((offer: OffersElementType) => (
-          <CardMemo
+          <Card
             key={offer.id}
             offer={offer}
             onOfferHover={onOfferHover}

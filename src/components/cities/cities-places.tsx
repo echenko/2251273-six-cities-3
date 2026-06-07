@@ -1,5 +1,5 @@
 import { Sorting } from '../sorting/sorting';
-import { CardMemo } from '../card/card';
+import { Card } from '../card/card';
 import { getCounterOffers } from '../../utils';
 import { OffersElementType } from '../../types/offers';
 
@@ -18,7 +18,7 @@ function CitiesPlaces({offers, city, onOfferHover}: CitiesPlacesProps): JSX.Elem
       <Sorting />
       <div className="cities__places-list places__list tabs__content">
         {offers.map((offer: OffersElementType) => (
-          <CardMemo
+          <Card
             key={offer.id}
             offer={offer}
             onOfferHover={onOfferHover}

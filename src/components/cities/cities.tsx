@@ -6,6 +6,7 @@ import { getLocation } from '../../utils';
 import { OffersElementType } from '../../types/offers';
 import { useAppSelector } from '../../hooks/hooks';
 import { SYSTEM_MESSAGE } from '../../const';
+import { useCallback } from 'react';
 
 type CitiesProps = {
   offers: OffersElementType[];
@@ -16,9 +17,9 @@ function Cities({ offers, city }: CitiesProps): JSX.Element {
   const [currentOffer, setCurrentOffer] = useState<string>('');
   const offersLoadingStatus = useAppSelector((state) => state.OFFERS.offersLoadingStatus);
 
-  const handleOfferHover = (offerId: string) => {
+  const handleOfferHover = useCallback((offerId: string) => {
     setCurrentOffer(offerId);
-  };
+  }, []);
 
   return (
     <div className="cities">
