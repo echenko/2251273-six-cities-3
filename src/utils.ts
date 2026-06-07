@@ -68,6 +68,12 @@ function getRandomNearsOffers(offers: OffersElementType[]): OffersElementType[] 
   return offers.sort(() => Math.random() - 0.5).slice(0, NEAREST_OFFERS_COUNT);
 }
 
+function switchButton(button: HTMLButtonElement | null, isDisabled: boolean): void {
+  if (button !== null) {
+    button.disabled = isDisabled;
+  }
+}
+
 export {
   convertRatingToStars,
   checkGoodOffer,
@@ -79,4 +85,5 @@ export {
   getSortedOffersByType,
   getPlacesOptionsLabel,
   getRandomNearsOffers,
+  switchButton,
 };

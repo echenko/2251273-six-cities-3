@@ -125,7 +125,7 @@ export const postCommentsOfferAction = createAsyncThunk<void, ReviewType, {
 }>(
   'data/postComment',
   async ({ offerId, comment, rating }, { dispatch, extra: api }) => {
-    await api.post<ReviewType>(`${APIRoute.Comments}/${offerId}`, { comment, rating });
+    await api.post<ReviewType>(`${APIRoute.Comments}0/${offerId}`, { comment, rating });
     dispatch(fetchCommentsOfferAction(offerId));
   },
 );
@@ -137,7 +137,7 @@ export const postFavoriteOfferAction = createAsyncThunk<void, { id: string; stat
 }>(
   'data/postFavoriteOffer',
   async ({id, status}, { dispatch, extra: api }) => {
-    await api.post<FavoriteType>(`${APIRoute.Favorite}/${id}/${status ? '1' : '0'}`);
+    await api.post<FavoriteType>(`${APIRoute.Favorite}/${id}/${Number(status)}`);
     dispatch(fetchFavoriteOffersAction());
   },
 );

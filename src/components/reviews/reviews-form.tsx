@@ -1,12 +1,14 @@
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useRef } from 'react';
 import { REVIEW_OFFER, RATING_OFFER } from '../../const';
 import { postCommentsOfferAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks/hooks';
 import { useParams } from 'react-router-dom';
+import { switchButton } from '../../utils';
 
 function ReviewsForm(): JSX.Element {
   const dispatch = useAppDispatch();
   const offerId: string = useParams().offerId || '';
+  const formSubmitButtonRef = useRef<HTMLButtonElement | null>(null);
   const [reviewsOffer, setReviewsOffer] = useState({
     rating: 0,
     comment: '',
@@ -19,35 +21,32 @@ function ReviewsForm(): JSX.Element {
     });
   }
 
-  async function onFormSubmit(): Promise<void> {
+  async function handleFormSubmit(): Promise<void> {
+    switchButton(formSubmitButtonRef.current, true);
     try {
       await dispatch(postCommentsOfferAction({
         offerId,
         comment: reviewsOffer.comment,
         rating: reviewsOffer.rating,
-      }));
-
+      })).unwrap();
       setReviewsOffer({
         rating: 0,
         comment: '',
       });
-
     } catch {
-      setReviewsOffer({
-        rating: 0,
-        comment: '',
-      });
       throw new Error('Error postReviewAction');
+    } finally {
+      switchButton(formSubmitButtonRef.current, false);
     }
   }
 
-  function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
+  function onFormSubmit (event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    onFormSubmit();
+    handleFormSubmit();
   }
 
   return (
-    <form className='reviews__form form' action='#' method='post' onSubmit={handleFormSubmit}>
+    <form className='reviews__form form' action='#' method='post' onSubmit={onFormSubmit}>
       <label className='reviews__label form__label' htmlFor='review'>Your review</label>
       <div className='reviews__rating-form form__rating'>
         {RATING_OFFER.map(({ value, label }) => (
@@ -93,6 +92,7 @@ function ReviewsForm(): JSX.Element {
           <b className='reviews__text-amount'>{REVIEW_OFFER.MIN_COMMENT_LENGTH} characters</b>.
         </p>
         <button
+          ref={formSubmitButtonRef}
           className='reviews__submit form__submit button'
           type='submit'
           disabled={reviewsOffer.rating < REVIEW_OFFER.MIN_RATING_OFFER || reviewsOffer.comment.length <= REVIEW_OFFER.MIN_COMMENT_LENGTH}

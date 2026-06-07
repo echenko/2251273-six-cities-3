@@ -19,7 +19,6 @@ function LoginForm(): JSX.Element {
         })).unwrap();
         navigate(AppRoute.Main);
       } catch {
-        // TODO: Добавить обработку ошибок!
         navigate(AppRoute.Login);
         throw new Error('Error login');
       }

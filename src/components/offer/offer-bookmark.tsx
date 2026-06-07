@@ -3,6 +3,8 @@ import { clsx } from 'clsx';
 import { OfferType } from '../../types/offer';
 import { postFavoriteOfferAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks/hooks';
+import { switchButton } from '../../utils';
+import { useRef } from 'react';
 
 type OfferBookmarkProps = {
   offer: OfferType;
@@ -11,19 +13,35 @@ type OfferBookmarkProps = {
 function OfferBookmark({ offer }: OfferBookmarkProps): JSX.Element {
   const [isFavoriteState, setIsFavoriteState] = useState(offer.isFavorite);
   const dispatch = useAppDispatch();
+  const addFavoriteButton = useRef<HTMLButtonElement | null>(null);
 
-  function handleClick(): void {
-    setIsFavoriteState(!isFavoriteState);
-    dispatch(postFavoriteOfferAction({ id: offer.id, status: !isFavoriteState }));
+  async function handleClick(): Promise<void> {
+    switchButton(addFavoriteButton.current, true);
+    try {
+      await dispatch(postFavoriteOfferAction({ id: offer.id, status: !isFavoriteState })).unwrap();
+      setIsFavoriteState(!isFavoriteState);
+    } catch {
+      throw new Error('Error postFavoriteOfferAction2');
+    } finally {
+      switchButton(addFavoriteButton.current, false);
+    }
+  }
+
+  function onClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+    event.preventDefault();
+    handleClick();
   }
 
   return (
-    <button className={
-      clsx(
-        'offer__bookmark-button button',
-        { 'offer__bookmark-button--active': isFavoriteState })
-    }
-    type='button' onClick={handleClick}
+    <button
+      ref={addFavoriteButton}
+      className={
+        clsx(
+          'offer__bookmark-button button',
+          { 'offer__bookmark-button--active': isFavoriteState })
+      }
+      type='button'
+      onClick={onClick}
     >
       <svg className='offer__bookmark-icon' width='31' height='33'>
         <use xlinkHref='#icon-bookmark'></use>
