@@ -12,6 +12,7 @@ import { clsx } from 'clsx';
 import { useAppDispatch } from '../../hooks/hooks';
 import { setErrorType } from '../../store/action';
 import { TYPE_OF_ERROR } from '../../const';
+import { checkErrorEmptyOffers } from '../../store/selectors/error-slice';
 
 type CitiesProps = {
   offers: OffersElementType[];
@@ -22,19 +23,25 @@ function Cities({ offers, city }: CitiesProps): JSX.Element {
   const dispatch = useAppDispatch();
   const [currentOffer, setCurrentOffer] = useState<string>('');
   const offersLoadingStatus = useAppSelector((state) => state.OFFERS.offersLoadingStatus);
+  const checkEmptyOffers = useAppSelector(checkErrorEmptyOffers);
+
   const handleOfferHover = useCallback((offerId: string) => {
     setCurrentOffer(offerId);
   }, []);
 
   useEffect(() => {
-    dispatch(setErrorType(TYPE_OF_ERROR.EMPTY_OFFERS));
+    if(offers.length === 0) {
+      dispatch(setErrorType(TYPE_OF_ERROR.EMPTY_OFFERS));
+    } else {
+      dispatch(setErrorType(null));
+    }
+
   }, [offers, dispatch]);
 
   return (
     <div className="cities">
       <div
-        // TODO: Add empty state!!!
-        className={clsx('cities__places-container container', {'cities__places-container--empty': !offers.length})}
+        className={clsx('cities__places-container container', {'cities__places-container--empty': checkEmptyOffers})}
       >
         {!offersLoadingStatus &&
           <Message
@@ -42,15 +49,15 @@ function Cities({ offers, city }: CitiesProps): JSX.Element {
               offersLoadingStatus === false ? SYSTEM_MESSAGE.ERROR_LOADING_OFFERS : SYSTEM_MESSAGE.UPLOADING_OFFERS
             }
           />}
-        { !offers.length && <MainEmpty />}
-        {offersLoadingStatus &&
+        {checkEmptyOffers && <MainEmpty />}
+        {offersLoadingStatus && !checkEmptyOffers &&
           <CitiesPlaces
             offers={offers}
             city={city}
             onOfferHover={handleOfferHover}
           />}
         <div className="cities__right-section">
-          {offersLoadingStatus &&
+          {offersLoadingStatus && !checkEmptyOffers &&
           <Map
             className="cities__map"
             offers={offers}
