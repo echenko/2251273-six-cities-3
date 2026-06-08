@@ -70,17 +70,18 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
 }>(
   'user/checkAuth',
   async (_arg, { extra: api }) => {
-    const token = getToken();
-    const email = getUserEmail();
-    if (!token || !email) {
+    if (getToken() && getUserEmail()) {
+      try {
+        await api.get(APIRoute.Login);
+      } catch {
+        dropToken();
+        dropUserEmail();
+        throw new Error('Error check authorization user');
+      }
+    } else {
       dropToken();
       dropUserEmail();
-      throw new Error('Error token or email');
-    }
-    try {
-      await api.get(APIRoute.Login);
-    } catch {
-      throw new Error('Error login');
+      throw new Error('Error check authorization user');
     }
   },
 );

@@ -4,7 +4,7 @@ import { CitySlice } from '../../types/slice/city-slice';
 import { changeCity } from '../action';
 
 const initialState: CitySlice = {
-  SelectedCity: DEFAULT_CITY,
+  selectedCity: DEFAULT_CITY,
 };
 
 export const citySlice = createSlice({
@@ -14,7 +14,7 @@ export const citySlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(changeCity, (state, action) => {
-        state.SelectedCity = action.payload;
+        state.selectedCity = action.payload;
       });
   },
 });

@@ -21,7 +21,7 @@ export const offerSlice = createSlice({
         state.selectedOfferLoadingStatus = true;
       })
       .addCase(fetchOfferAction.pending, (state) => {
-        state.selectedOfferLoadingStatus = null;
+        state.selectedOfferLoadingStatus = true;
       })
       .addCase(fetchOfferAction.rejected, (state) => {
         state.selectedOfferLoadingStatus = false;
@@ -31,7 +31,7 @@ export const offerSlice = createSlice({
         state.selectedOfferCommentsLoadingStatus = true;
       })
       .addCase(fetchCommentsOfferAction.pending, (state) => {
-        state.selectedOfferCommentsLoadingStatus = null;
+        state.selectedOfferCommentsLoadingStatus = true;
       })
       .addCase(fetchCommentsOfferAction.rejected, (state) => {
         state.selectedOfferCommentsLoadingStatus = false;

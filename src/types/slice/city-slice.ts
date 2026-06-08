@@ -1,3 +1,3 @@
 export type CitySlice = {
-  SelectedCity: string;
+  selectedCity: string;
 };

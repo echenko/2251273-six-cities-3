@@ -1,11 +1,9 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { clsx } from 'clsx';
 import { OfferType } from '../../types/offer';
 import { postFavoriteOfferAction } from '../../store/api-actions';
-import { useAppDispatch } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { switchButton } from '../../utils';
-import { useRef } from 'react';
-import { useAppSelector } from '../../hooks/hooks';
 import { getAuthCheckedStatus } from '../../store/selectors/user-selector';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';

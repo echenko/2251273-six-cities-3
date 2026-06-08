@@ -4,6 +4,7 @@ import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { changeCity, changeSorting } from '../../store/action';
 import { DEFAULT_SORTING } from '../../const';
+import { getSelectedCity } from '../../store/selectors/city-slice';
 
 type LocationsItemProps = {
   location: string;
@@ -11,7 +12,7 @@ type LocationsItemProps = {
 
 function LocationsItem({location}: LocationsItemProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const city = useAppSelector((state) => state.CITY.SelectedCity);
+  const city = useAppSelector(getSelectedCity);
 
   function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void {
     event.preventDefault();

@@ -1,15 +1,12 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { clsx } from 'clsx';
 import { OffersElementType } from '../../types/offers';
 import { postFavoriteOfferAction } from '../../store/api-actions';
-import { useAppDispatch } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { switchButton } from '../../utils';
-import { useRef } from 'react';
-import { useAppSelector } from '../../hooks/hooks';
 import { getAuthCheckedStatus } from '../../store/selectors/user-selector';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
-
 
 type CardBookmarkProps = {
   offer: OffersElementType;
@@ -63,5 +60,4 @@ function CardBookmark({ offer }: CardBookmarkProps): JSX.Element {
   );
 }
 
-// Export CardBookmark
 export { CardBookmark };
