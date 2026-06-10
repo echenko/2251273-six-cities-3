@@ -32,7 +32,6 @@ function MainPage(): JSX.Element {
       </div>
       <Cities
         offers={getSortedOffersByType(filteredOffers, sortingOffers)}
-        // offers={[]}
         city={city}
       />
     </main>
