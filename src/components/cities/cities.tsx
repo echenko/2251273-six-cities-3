@@ -12,7 +12,7 @@ import { clsx } from 'clsx';
 import { useAppDispatch } from '../../hooks/hooks';
 import { setErrorType } from '../../store/action';
 import { TYPE_OF_ERROR } from '../../const';
-import { checkErrorEmptyAllOffers } from '../../store/selectors/error-slice';
+import { checkErrorEmptyOffers } from '../../store/selectors/error-slice';
 import { getOffersLoadingStatus } from '../../store/selectors/offers-slice';
 
 type CitiesProps = {
@@ -23,7 +23,7 @@ type CitiesProps = {
 function Cities({ offers, city }: CitiesProps): JSX.Element {
   const dispatch = useAppDispatch();
   const [currentOffer, setCurrentOffer] = useState<string>('');
-  const checkEmptyOffers = useAppSelector(checkErrorEmptyAllOffers);
+  const checkEmptyOffers = useAppSelector(checkErrorEmptyOffers);
   const offersLoadingStatus = useAppSelector(getOffersLoadingStatus);
 
   const handleOfferHover = useCallback((offerId: string) => {
@@ -49,15 +49,15 @@ function Cities({ offers, city }: CitiesProps): JSX.Element {
               offersLoadingStatus === false ? SYSTEM_MESSAGE.ERROR_LOADING_OFFERS : SYSTEM_MESSAGE.UPLOADING_OFFERS
             }
           />}
-        {checkEmptyOffers && <MainEmpty />}
-        {offersLoadingStatus && !checkEmptyOffers &&
+        {offers.length === 0 && <MainEmpty />}
+        {offers.length > 0 &&
           <CitiesPlaces
             offers={offers}
             city={city}
             onOfferHover={handleOfferHover}
           />}
         <div className="cities__right-section">
-          {offersLoadingStatus && !checkEmptyOffers &&
+          {offers.length > 0 &&
           <Map
             className="cities__map"
             offers={offers}

@@ -69,21 +69,18 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'user/checkAuth',
-  async (_arg, { extra: api }) => {
+  async (_arg, { extra: api, rejectWithValue }) => {
     const token = getToken();
-    if (token) {
-      try {
-        const response = await api.get<{ email: string }>(APIRoute.Login, { headers: { 'x-token': token } });
-        saveUserEmail(response.data.email);
-      } catch {
-        dropToken();
-        dropUserEmail();
-        throw new Error('Error check authorization user');
-      }
-    } else {
+    if (!token) {
+      return rejectWithValue(null);
+    }
+    try {
+      const response = await api.get<{ email: string }>(APIRoute.Login, { headers: { 'x-token': token } });
+      saveUserEmail(response.data.email);
+    } catch {
       dropToken();
       dropUserEmail();
-      throw new Error('Error check authorization user');
+      return rejectWithValue(null);
     }
   },
 );
@@ -94,10 +91,10 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   extra: AxiosInstance;
 }>(
   'user/login',
-  async ({ login: email, password }, { extra: api }) => {
+  async ({ login: email, password }, { dispatch, extra: api }) => {
     const { data: { token } } = await api.post<{ token: string }>(APIRoute.Login, { email, password });
     saveToken(token);
-    saveUserEmail(email);
+    await dispatch(checkAuthAction()).unwrap();
   },
 );
 

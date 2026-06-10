@@ -8,7 +8,7 @@ import { clsx } from 'clsx';
 import { getSelectedCity } from '../store/selectors/city-slice';
 import { getOffers } from '../store/selectors/offers-slice';
 import { getSelectedSorting } from '../store/selectors/sorting-slice';
-import { checkErrorEmptyAllOffers } from '../store/selectors/error-slice';
+import { checkErrorEmptyOffers } from '../store/selectors/error-slice';
 
 function MainPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -16,7 +16,7 @@ function MainPage(): JSX.Element {
   const offers = useAppSelector(getOffers);
   const sortingOffers = useAppSelector(getSelectedSorting);
   const filteredOffers = filterOffersByCity(offers, city);
-  const checkEmptyOffers = useAppSelector(checkErrorEmptyAllOffers);
+  const checkEmptyOffers = useAppSelector(checkErrorEmptyOffers);
 
   useEffect(() => {
     dispatch(fetchOffersAction());
@@ -32,6 +32,7 @@ function MainPage(): JSX.Element {
       </div>
       <Cities
         offers={getSortedOffersByType(filteredOffers, sortingOffers)}
+        // offers={[]}
         city={city}
       />
     </main>
