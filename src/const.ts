@@ -103,6 +103,10 @@ const TYPE_OF_ERROR = {
   ERROR_LOADING_COMMENTS: 'ERROR_LOADING_COMMENT',
 };
 
+const EMAIL_REGEXP = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+const PASSWORD_REGEXP = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+
 export enum AppRoute {
   Main = '/',
   Offer = '/offer',
@@ -140,5 +144,7 @@ export {
   CONFIGURATION_API,
   APIRoute,
   TYPE_OF_ERROR,
+  EMAIL_REGEXP,
+  PASSWORD_REGEXP
 };
 
