@@ -5,7 +5,7 @@ import { Message } from '../message/message';
 import { getLocation } from '../../utils';
 import { OffersElementType } from '../../types/offers';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
-import { SYSTEM_MESSAGE, TYPE_OF_ERROR } from '../../const';
+import { TYPE_OF_ERROR } from '../../const';
 import { MainEmpty } from '../main-empty/main-empty';
 import { clsx } from 'clsx';
 import { setErrorType } from '../../store/action';
@@ -28,21 +28,15 @@ function Cities({ offers, city }: CitiesProps): JSX.Element {
   }, []);
 
   useEffect(() => {
-    if (offers.length === 0 && offersLoadingStatus !== null) {
+    if (offers.length === 0 && offersLoadingStatus === true) {
       dispatch(setErrorType(TYPE_OF_ERROR.ERROR_EMPTY_OFFERS));
-    } else {
-      dispatch(setErrorType(null));
     }
   }, [offers, dispatch, offersLoadingStatus]);
 
   return (
     <div className="cities">
       {!offersLoadingStatus &&
-        <Message
-          message={
-            offersLoadingStatus === false ? SYSTEM_MESSAGE.ERROR_LOADING_OFFERS : SYSTEM_MESSAGE.UPLOADING_OFFERS
-          }
-        />}
+        <Message />}
 
       {offersLoadingStatus &&
       <div

@@ -1,10 +1,12 @@
 import { loginAction } from '../../store/api-actions';
-import { useAppDispatch } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, TYPE_OF_ERROR, EMAIL_REGEXP, PASSWORD_REGEXP } from '../../const';
 import { switchButton } from '../../utils';
-import { EMAIL_REGEXP, PASSWORD_REGEXP } from '../../const';
+import { Message } from '../message/message';
+import { setErrorType } from '../../store/action';
+import { getErrorType } from '../../store/selectors/error-slice';
 
 function LoginForm(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -12,6 +14,7 @@ function LoginForm(): JSX.Element {
   const formButtonSubmit = useRef<HTMLButtonElement | null>(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const errorType = useAppSelector(getErrorType);
 
   async function onSubmit(): Promise<void> {
     if (loginRef.current !== null && passwordRef.current !== null) {
@@ -39,9 +42,11 @@ function LoginForm(): JSX.Element {
   function checkEmail(): boolean {
     const loginEmail = loginRef.current?.value;
     if (loginEmail && EMAIL_REGEXP.test(loginEmail)) {
+      dispatch(setErrorType(null));
       loginRef.current?.setAttribute('style', 'border: 2px solid #000000; outline: none;');
       return true;
     } else {
+      dispatch(setErrorType(TYPE_OF_ERROR.ERROR_LOGIN_EMAIL));
       loginRef.current?.setAttribute('style', 'border: 2px solid #FF9000; outline: none;');
       return false;
     }
@@ -50,9 +55,11 @@ function LoginForm(): JSX.Element {
   function checkPassword (): boolean {
     const loginPassword = passwordRef.current?.value;
     if (loginPassword && PASSWORD_REGEXP.test(loginPassword)) {
+      dispatch(setErrorType(null));
       passwordRef.current?.setAttribute('style', 'border: 2px solid #000000; outline: none;');
       return true;
     } else {
+      dispatch(setErrorType(TYPE_OF_ERROR.ERROR_LOGIN_PASSWORD));
       passwordRef.current?.setAttribute('style', 'border: 2px solid #FF9000; outline: none;');
       return false;
     }
@@ -97,9 +104,9 @@ function LoginForm(): JSX.Element {
       >
           Sign in
       </button>
+      {errorType && <Message />}
     </form>
   );
 }
 
-// Export LoginForm
 export {LoginForm};

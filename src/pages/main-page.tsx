@@ -9,6 +9,8 @@ import { getSelectedCity } from '../store/selectors/city-slice';
 import { getOffers } from '../store/selectors/offers-slice';
 import { getSelectedSorting } from '../store/selectors/sorting-slice';
 import { checkErrorEmptyOffers } from '../store/selectors/error-slice';
+import { TYPE_OF_ERROR } from '../const';
+import { setErrorType } from '../store/action';
 
 function MainPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -19,7 +21,9 @@ function MainPage(): JSX.Element {
   const checkEmptyOffers = useAppSelector(checkErrorEmptyOffers);
 
   useEffect(() => {
-    dispatch(fetchOffersAction());
+    dispatch(fetchOffersAction()).unwrap().catch(() => {
+      dispatch(setErrorType(TYPE_OF_ERROR.ERROR_LOADING_OFFERS));
+    });
   }, [dispatch]);
 
   return (
@@ -32,6 +36,8 @@ function MainPage(): JSX.Element {
       </div>
       <Cities
         offers={getSortedOffersByType(filteredOffers, sortingOffers)}
+        // TODO: remove!!!
+        // offers={[]}
         city={city}
       />
     </main>

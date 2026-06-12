@@ -8,7 +8,7 @@ import { Message } from '../components/message/message';
 import { getLocation, getRandomNearsOffers } from '../utils';
 import { useAppSelector, useAppDispatch } from '../hooks/hooks';
 import { fetchOfferAction, fetchNearOffersAction } from '../store/api-actions';
-import { SYSTEM_MESSAGE, TYPE_OF_ERROR } from '../const';
+import { TYPE_OF_ERROR } from '../const';
 import { getSelectedOfferLoadingStatus, getSelectedOffer } from '../store/selectors/offer-slice';
 import { getNearOffers } from '../store/selectors/offers-slice';
 import { OffersElementType } from '../types/offers';
@@ -39,9 +39,7 @@ function OfferPage(): JSX.Element {
 
   useEffect(() => {
     if (selectedOfferLoadingStatus === false) {
-      dispatch(setErrorType(TYPE_OF_ERROR.ERROR_LOADING_OFFERS));
-    } else {
-      dispatch(setErrorType(null));
+      dispatch(setErrorType(TYPE_OF_ERROR.ERROR_LOADING_OFFER));
     }
   }, [selectedOfferLoadingStatus, dispatch]);
 
@@ -49,13 +47,7 @@ function OfferPage(): JSX.Element {
   return (
     <main className='page__main page__main--offer'>
       <section className='offer'>
-        {!selectedOfferLoadingStatus &&
-          <Message
-            message={
-              selectedOfferLoadingStatus === false ?
-                SYSTEM_MESSAGE.ERROR_LOADING_OFFER : SYSTEM_MESSAGE.UPLOADING_OFFER
-            }
-          />}
+        {!selectedOfferLoadingStatus && <Message />}
         {selectedOffer && <OfferGallery offer={selectedOffer}/>}
         {selectedOffer && <Offer offer={selectedOffer}/>}
         {selectedOffer &&

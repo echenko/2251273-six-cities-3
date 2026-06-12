@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { useEffect } from 'react';
 import { fetchCommentsOfferAction } from '../../store/api-actions';
 import { useParams } from 'react-router-dom';
-import { AuthorizationStatus, SYSTEM_MESSAGE, TYPE_OF_ERROR} from '../../const';
+import { AuthorizationStatus, TYPE_OF_ERROR} from '../../const';
 import { getSelectedOfferCommentsLoadingStatus } from '../../store/selectors/offer-slice';
 import { Message } from '../message/message';
 import { setErrorType } from '../../store/action';
@@ -36,7 +36,7 @@ function Reviews(): JSX.Element {
         <span className='reviews__amount'>{comments.length}</span>
       </h2>
       {!selectedOfferCommentsLoadingStatus &&
-        <Message message={selectedOfferCommentsLoadingStatus === false ? SYSTEM_MESSAGE.ERROR_LOADING_COMMENTS : SYSTEM_MESSAGE.UPLOADING_COMMENTS}/>}
+        <Message />}
       <ReviewsList comments={comments}/>
       {statusAuthorization === AuthorizationStatus.Auth && <ReviewsForm />}
     </section>

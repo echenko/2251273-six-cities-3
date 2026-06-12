@@ -50,26 +50,6 @@ const REVIEW_OFFER = {
   MAX_RATING_OFFER: 5,
 };
 
-const SYSTEM_MESSAGE = {
-  UPLOADING_OFFERS: 'Loading offers, please wait...',
-  ERROR_LOADING_OFFERS: 'Error loading offers',
-  UPLOADING_OFFER: 'Loading offer, please wait...',
-  ERROR_LOADING_OFFER: 'Error loading offer',
-  UPLOADING_NEAR_OFFERS: 'Loading similar offers, please wait...',
-  ERROR_LOADING_NEAR_OFFERS: 'Error loading similar offers',
-  // UPLOADING_NEAR_OFFER: 'Loading similar offer, please wait...',
-  // ERROR_LOADING_NEAR_OFFER: 'Error loading similar offer',
-  // UPLOADING_COMMENT: 'Loading comment, please wait...',
-  // ERROR_LOADING_COMMENT: 'Error loading comment',
-  UPLOADING_COMMENTS: 'Loading comments, please wait...',
-  ERROR_LOADING_COMMENTS: 'Error loading comments',
-  // UPLOADING_FAVORITE: 'Loading favorite, please wait...',
-  // ERROR_LOADING_FAVORITE: 'Error loading favorite',
-  // UPLOADING_FAVORITES: 'Loading favorites, please wait...',
-  // ERROR_LOADING_FAVORITES: 'Error loading favorites',
-  // UPLOADING_FAVORITE_OFFER: 'Loading favorite offer, please wait...',
-};
-
 const MAP_MARKER_DEFAULT: leaflet.IconOptions = {
   iconUrl: 'img/pin.svg',
   iconSize: [40, 40],
@@ -89,7 +69,7 @@ const CONFIGURATION_API = {
 
 const APIRoute = {
   'Offers': '/offers',
-  'Login': '/login',
+  'Login': '/login0',
   'Logout': '/logout',
   'Offer': '/offers/',
   'Comments': '/comments/',
@@ -97,10 +77,24 @@ const APIRoute = {
 };
 
 const TYPE_OF_ERROR = {
-  ERROR_EMPTY_OFFERS: 'EMPTY_OFFERS',
+  ERROR_EMPTY_OFFERS: 'ERROR_EMPTY_OFFERS',
   ERROR_LOADING_OFFERS: 'ERROR_LOADING_OFFERS',
   ERROR_LOADING_OFFER: 'ERROR_LOADING_OFFER',
   ERROR_LOADING_COMMENTS: 'ERROR_LOADING_COMMENT',
+  ERROR_LOADING_NEAR_OFFERS: 'ERROR_LOADING_NEAR_OFFERS',
+  ERROR_LOGIN: 'ERROR_LOGIN_EMAIL',
+  ERROR_LOGIN_EMAIL: 'ERROR_LOGIN_EMAIL',
+  ERROR_LOGIN_PASSWORD: 'ERROR_LOGIN_PASSWORD',
+};
+
+const SYSTEM_MESSAGE = {
+  ERROR_LOADING_OFFERS: 'Error loading offers',
+  ERROR_LOADING_OFFER: 'Error loading offer',
+  ERROR_LOADING_COMMENTS: 'Error loading comments',
+  ERROR_LOADING_NEAR_OFFERS: 'Error loading similar offers',
+  ERROR_LOGIN: 'Error authorization, please try again',
+  ERROR_LOGIN_EMAIL: 'Enter a valid email address, please try again; example: 0u7YI@example.com',
+  ERROR_LOGIN_PASSWORD: 'Enter a valid password, please try again; example: Password123456',
 };
 
 const EMAIL_REGEXP = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
