@@ -1,4 +1,3 @@
-// Create CardMark
 function CardMark(): JSX.Element {
   return (
     <div className="place-card__mark">
@@ -7,5 +6,4 @@ function CardMark(): JSX.Element {
   );
 }
 
-// Export CardMark
 export {CardMark};

@@ -3,7 +3,6 @@ type OfferImageProps = {
   imgAlt: string;
 }
 
-// Create OfferImage
 function OfferImage({imgSrc, imgAlt}: OfferImageProps): JSX.Element {
   return (
     <div className='offer__image-wrapper'>
@@ -12,5 +11,4 @@ function OfferImage({imgSrc, imgAlt}: OfferImageProps): JSX.Element {
   );
 }
 
-// Export OfferImage
 export {OfferImage};

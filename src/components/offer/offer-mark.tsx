@@ -1,4 +1,3 @@
-// Create OfferMark
 function OfferMark(): JSX.Element {
   return (
     <div className='offer__mark'>
@@ -7,5 +6,4 @@ function OfferMark(): JSX.Element {
   );
 }
 
-// Export OfferMark
 export {OfferMark};

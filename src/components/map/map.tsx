@@ -1,15 +1,9 @@
-// Import React
 import { useEffect, useRef, useState } from 'react';
-// Import Leaflet
 import leaflet from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-// Import Constants
 import { MAP_MARKER_DEFAULT, MAP_MARKER_ACTIVE } from '../../const';
-// Import Types
 import { OffersElementType } from '../../types/offers';
+import 'leaflet/dist/leaflet.css';
 
-
-// Create Types
 type MapProps = {
   className: string;
   offers: OffersElementType[];
@@ -17,15 +11,11 @@ type MapProps = {
   currentOffer: string | null;
 }
 
-// Create Map
 function Map({ className, offers, location, currentOffer }: MapProps): JSX.Element {
-  // Ref
   const mapRef = useRef(null);
   const isRendered = useRef(false);
-  // State
   const [map, setMap] = useState<leaflet.Map | null>(null);
 
-  // Create Map
   useEffect(() => {
     if (mapRef.current !== null && !isRendered.current && location !== null) {
       // Create Map (Создание карты)
@@ -53,7 +43,6 @@ function Map({ className, offers, location, currentOffer }: MapProps): JSX.Eleme
     }
   }, [location]);
 
-  // Update Map
   useEffect(() => {
     if (isRendered.current && location !== null) {
       map?.setView({
@@ -68,19 +57,14 @@ function Map({ className, offers, location, currentOffer }: MapProps): JSX.Eleme
     if (!map) {
       return;
     }
-    // Create Markers Layer (Создание слоя маркеров)
     const markersLayer = leaflet.layerGroup().addTo(map);
 
-    // Add Markers (Добавление маркеров)
     offers.forEach((offer) => {
-      // Create Marker (Создание маркера)
       const marker = leaflet.marker({
         lat: offer.location.latitude,
         lng: offer.location.longitude,
       });
-      // Add Popup (Добавление попапа)
       marker.bindPopup(offer.title);
-      // Add Mouse Events (Добавление событий мыши)
       marker.on('mouseover', () => {
         marker.setIcon(leaflet.icon(MAP_MARKER_ACTIVE));
         marker.setZIndexOffset(1000);
@@ -95,16 +79,12 @@ function Map({ className, offers, location, currentOffer }: MapProps): JSX.Eleme
           lng: offer.location.longitude,
         });
       });
-      // Add Icon (Добавление иконки)
       marker.setIcon(leaflet.icon(currentOffer === offer.id ? MAP_MARKER_ACTIVE : MAP_MARKER_DEFAULT));
-      // Add ZIndex (Добавление индекса)
       marker.setZIndexOffset(currentOffer === offer.id ? 1000 : 0);
-      // Add Marker to Layer (Добавление маркера в слой)
       marker.addTo(markersLayer);
     });
 
     return () => {
-      // Remove Markers Layer (Удаление слоя маркеров)
       map?.removeLayer(markersLayer);
     };
   }, [map, offers, currentOffer]);
@@ -118,5 +98,4 @@ function Map({ className, offers, location, currentOffer }: MapProps): JSX.Eleme
   );
 }
 
-// Export Map
 export { Map };

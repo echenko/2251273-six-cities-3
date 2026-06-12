@@ -1,7 +1,5 @@
-// Import Styles
 import { createGlobalStyle } from 'styled-components';
 
-// Create GlobalStyle
 const GlobalStyle = createGlobalStyle`
   body,
   html {
@@ -14,5 +12,4 @@ const GlobalStyle = createGlobalStyle`
   }
   `;
 
-// Export GlobalStyle
 export {GlobalStyle};

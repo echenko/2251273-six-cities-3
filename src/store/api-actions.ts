@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { AppDispatch, State } from '../types/state';
 import { APIRoute } from '../const';
+import { AppDispatch, State } from '../types/state';
 import { OffersElementType } from '../types/offers';
 import { OfferType } from '../types/offer';
 import { FavoriteType } from '../types/favorite';

@@ -1,13 +1,12 @@
-import { loginAction } from '../../store/api-actions';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppRoute, TYPE_OF_ERROR, EMAIL_REGEXP, PASSWORD_REGEXP } from '../../const';
+import { loginAction } from '../../store/api-actions';
+import { setErrorType } from '../../store/action';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { AppRoute, TYPE_OF_ERROR, EMAIL_REGEXP, PASSWORD_REGEXP, TIME_OUT_ERROR } from '../../const';
 import { switchButton } from '../../utils';
 import { Message } from '../message/message';
-import { setErrorType } from '../../store/action';
 import { getErrorType } from '../../store/selectors/error-slice';
-import { TIME_OUT_ERROR } from '../../const';
 
 function LoginForm(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);

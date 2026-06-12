@@ -1,14 +1,10 @@
-// Import Components
 import { OfferBookmark } from './offer-bookmark';
-// Import Types
 import { OfferType } from '../../types/offer';
 
-// Create Types
 type OfferNameProps = {
   offer: OfferType;
 }
 
-// Create OfferName
 function OfferName({offer}: OfferNameProps): JSX.Element {
   return (
     <div className='offer__name-wrapper'>
@@ -20,5 +16,4 @@ function OfferName({offer}: OfferNameProps): JSX.Element {
   );
 }
 
-// Export OfferName
 export {OfferName};

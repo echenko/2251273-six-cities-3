@@ -1,8 +1,7 @@
 import { LoginForm } from './login-form';
 import { useAppSelector } from '../../hooks/hooks';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import { Navigate } from 'react-router-dom';
-import { AuthorizationStatus } from '../../const';
 
 function Login(): JSX.Element {
   const statusAuthorization = useAppSelector((state) => state.USER.authorizationStatus);

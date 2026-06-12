@@ -1,14 +1,10 @@
-// Import Utils
 import {convertRatingToStars} from '../../utils';
-// Import Types
 import {OfferType} from '../../types/offer';
 
-// Create Types
 type OfferRatingProps = {
   offer: OfferType;
 }
 
-// Create OfferRating
 function OfferRating({offer}: OfferRatingProps): JSX.Element {
   return (
     <div className='offer__rating rating'>
@@ -21,5 +17,4 @@ function OfferRating({offer}: OfferRatingProps): JSX.Element {
   );
 }
 
-// Export OfferRating
 export {OfferRating};

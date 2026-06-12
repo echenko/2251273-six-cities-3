@@ -1,12 +1,9 @@
-// Import Types
 import { OfferType } from '../../types/offer';
 
-// Create Types
 type OfferInsideProps = {
   offer: OfferType;
 }
 
-// Create OfferInside
 function OfferInside({offer}: OfferInsideProps): JSX.Element {
   return (
     <div className='offer__inside'>
@@ -23,5 +20,4 @@ function OfferInside({offer}: OfferInsideProps): JSX.Element {
   );
 }
 
-// Export OfferInside
 export {OfferInside};

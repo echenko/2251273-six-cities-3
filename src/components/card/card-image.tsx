@@ -1,16 +1,12 @@
-// Import React
 import {Link} from 'react-router-dom';
-// Import Constants
 import {AppRoute} from '../../const';
 
-// Create Types
 type CardImageProps = {
   cardImgSrc: string;
   cardImgAlt: string;
   offerId: string;
 };
 
-// Create CardImage
 function CardImage({cardImgSrc, cardImgAlt, offerId}: CardImageProps): JSX.Element {
   return (
     <div className="cities__image-wrapper place-card__image-wrapper">
@@ -21,5 +17,4 @@ function CardImage({cardImgSrc, cardImgAlt, offerId}: CardImageProps): JSX.Eleme
   );
 }
 
-// Export CardImage
 export {CardImage};

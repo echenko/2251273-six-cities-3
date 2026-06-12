@@ -1,14 +1,10 @@
-// Import Components
 import { CardBookmark } from './card-bookmark';
-// Import Types
 import { OffersElementType } from '../../types/offers';
 
-// Create Types
 type CardPriceProps = {
   offer: OffersElementType;
 };
 
-// Create CardPrice
 function CardPrice({offer}: CardPriceProps): JSX.Element {
   return (
     <div className="place-card__price-wrapper">
@@ -21,5 +17,4 @@ function CardPrice({offer}: CardPriceProps): JSX.Element {
   );
 }
 
-// Export CardPrice
 export {CardPrice};

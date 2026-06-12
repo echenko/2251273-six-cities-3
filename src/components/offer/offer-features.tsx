@@ -1,12 +1,9 @@
-// Import Types
 import { OfferType } from '../../types/offer';
 
-// Create Types
 type OfferFeaturesProps = {
   offer: OfferType;
 }
 
-// Create OfferFeatures
 function OfferFeatures({offer}: OfferFeaturesProps): JSX.Element {
   return (
     <ul className='offer__features'>
@@ -23,5 +20,4 @@ function OfferFeatures({offer}: OfferFeaturesProps): JSX.Element {
   );
 }
 
-// Export OfferFeatures
 export {OfferFeatures};

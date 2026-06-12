@@ -10,9 +10,8 @@ import { Private } from '../private/private';
 import { PageNotFound } from '../page-not-found/page-not-found';
 import { AppRoute } from '../../const';
 import { getAuthCheckedStatus } from '../../store/selectors/user-selector';
-import { useAppSelector } from '../../hooks/hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { useEffect } from 'react';
-import { useAppDispatch } from '../../hooks/hooks';
 import { checkAuthAction } from '../../store/api-actions';
 
 function App(): JSX.Element {

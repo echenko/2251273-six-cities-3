@@ -9,12 +9,10 @@ import { Reviews } from '../reviews/reviews';
 import { checkGoodOffer } from '../../utils';
 import { OfferType } from '../../types/offer';
 
-// Create Types
 type OfferProps = {
   offer: OfferType;
 }
 
-// Create Offer
 function Offer({offer}: OfferProps): JSX.Element {
 
   return (
@@ -33,5 +31,4 @@ function Offer({offer}: OfferProps): JSX.Element {
   );
 }
 
-// Export Offer
 export {Offer};

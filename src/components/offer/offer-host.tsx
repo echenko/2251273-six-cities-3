@@ -1,14 +1,10 @@
-// Import Utils
 import { getFirstName } from '../../utils';
-// Import Types
 import { OfferType } from '../../types/offer';
 
-// Create Types
 type OfferHostProps = {
   offer: OfferType;
 }
 
-// Create OfferHost
 function OfferHost({offer}: OfferHostProps): JSX.Element {
   return (
     <div className='offer__host'>
@@ -29,5 +25,4 @@ function OfferHost({offer}: OfferHostProps): JSX.Element {
   );
 }
 
-// Export OfferHost
 export {OfferHost};

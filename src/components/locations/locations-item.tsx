@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom';
 import { clsx } from 'clsx';
-import { AppRoute } from '../../const';
+import { AppRoute, DEFAULT_SORTING } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { changeCity, changeSorting } from '../../store/action';
-import { DEFAULT_SORTING } from '../../const';
 import { getSelectedCity } from '../../store/selectors/city-slice';
 
 type LocationsItemProps = {

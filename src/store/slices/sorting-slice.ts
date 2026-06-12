@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
+import { NameSpace, DEFAULT_SORTING } from '../../const';
 import { SortingSlice } from '../../types/slice/sorting-slice';
 import { changeSorting } from '../action';
-import { DEFAULT_SORTING } from '../../const';
 
 const initialState: SortingSlice = {
   selectedSorting: DEFAULT_SORTING,
