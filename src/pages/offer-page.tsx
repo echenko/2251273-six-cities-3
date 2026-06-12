@@ -5,16 +5,14 @@ import { Offer } from '../components/offer/offer';
 import { NearPlaces } from '../components/offer/offer-places';
 import { Map } from '../components/map/map';
 import { Message } from '../components/message/message';
-import { getLocation } from '../utils';
-import { useAppSelector } from '../hooks/hooks';
-import { useAppDispatch } from '../hooks/hooks';
+import { getLocation, getRandomNearsOffers } from '../utils';
+import { useAppSelector, useAppDispatch } from '../hooks/hooks';
 import { fetchOfferAction, fetchNearOffersAction } from '../store/api-actions';
-import { SYSTEM_MESSAGE } from '../const';
-import { getSelectedOfferLoadingStatus } from '../store/selectors/offer-slice';
-import { getSelectedOffer } from '../store/selectors/offer-slice';
+import { SYSTEM_MESSAGE, TYPE_OF_ERROR } from '../const';
+import { getSelectedOfferLoadingStatus, getSelectedOffer } from '../store/selectors/offer-slice';
 import { getNearOffers } from '../store/selectors/offers-slice';
-import { getRandomNearsOffers } from '../utils';
 import { OffersElementType } from '../types/offers';
+import { setErrorType } from '../store/action';
 
 function OfferPage(): JSX.Element {
 
@@ -26,6 +24,10 @@ function OfferPage(): JSX.Element {
   const [currentOffer, setCurrentOffer] = useState<string>('');
   const [randomNearsOffers, setRandomNearsOffers] = useState<OffersElementType[]>([]);
 
+  const handleOfferHover = (idOffer: string) => {
+    setCurrentOffer(idOffer);
+  };
+
   useEffect(() => {
     dispatch(fetchOfferAction(offerId));
     dispatch(fetchNearOffersAction(offerId));
@@ -35,9 +37,14 @@ function OfferPage(): JSX.Element {
     setRandomNearsOffers(getRandomNearsOffers(nearOffers));
   }, [nearOffers]);
 
-  const handleOfferHover = (idOffer: string) => {
-    setCurrentOffer(idOffer);
-  };
+  useEffect(() => {
+    if (selectedOfferLoadingStatus === false) {
+      dispatch(setErrorType(TYPE_OF_ERROR.ERROR_LOADING_OFFERS));
+    } else {
+      dispatch(setErrorType(null));
+    }
+  }, [selectedOfferLoadingStatus, dispatch]);
+
 
   return (
     <main className='page__main page__main--offer'>
@@ -68,7 +75,6 @@ function OfferPage(): JSX.Element {
       </div>
     </main>
   );
-
 }
 
 export { OfferPage };

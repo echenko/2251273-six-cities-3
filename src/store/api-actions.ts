@@ -8,7 +8,6 @@ import { FavoriteType } from '../types/favorite';
 import { CommentElementType } from '../types/comments';
 import { ReviewType } from '../types/review';
 import { saveToken, dropToken, getToken } from '../services/token';
-import { saveUserEmail, dropUserEmail } from '../services/user-email';
 
 type AuthData = {
   login: string;
@@ -63,7 +62,7 @@ export const fetchOfferAction = createAsyncThunk<OfferType, string | undefined, 
   },
 );
 
-export const checkAuthAction = createAsyncThunk<void, undefined, {
+export const checkAuthAction = createAsyncThunk<{ email: string; avatarUrl: string }, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -75,11 +74,10 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
       return rejectWithValue(null);
     }
     try {
-      const response = await api.get<{ email: string }>(APIRoute.Login, { headers: { 'x-token': token } });
-      saveUserEmail(response.data.email);
+      const response = await api.get<{ email: string; avatarUrl: string }>(APIRoute.Login, { headers: { 'x-token': token } });
+      return response.data;
     } catch {
       dropToken();
-      dropUserEmail();
       return rejectWithValue(null);
     }
   },
@@ -107,7 +105,6 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   async (_arg, { extra: api }) => {
     await api.delete(APIRoute.Logout);
     dropToken();
-    dropUserEmail();
   },
 );
 
@@ -130,7 +127,7 @@ export const postCommentsOfferAction = createAsyncThunk<void, ReviewType, {
 }>(
   'data/postComment',
   async ({ offerId, comment, rating }, { dispatch, extra: api }) => {
-    await api.post<ReviewType>(`${APIRoute.Comments}/${offerId}`, { comment, rating });
+    await api.post<ReviewType>(`${APIRoute.Comments}0/${offerId}`, { comment, rating });
     dispatch(fetchCommentsOfferAction(offerId));
   },
 );

@@ -1,0 +1,28 @@
+.custom-loader {
+  width: 240px;
+  height: 44px;
+  border-radius: 80px;
+  color: #4481C3;
+  border: 4px solid;
+  position: relative;
+  overflow: hidden;
+}
+
+.custom-loader::before {
+  content: "";
+  position: absolute;
+  margin: 4px;
+  width: 28px;
+  top: 0;
+  bottom: 0;
+  left: -40px;
+  border-radius: inherit;
+  background: #FF9000;
+  box-shadow: -20px 0 24px 6px #FF9000;
+  clip-path: polygon(0 5%, 100% 0,100% 100%,0 95%,-60px 50%);
+  animation: ct4 0.5s infinite linear;
+}
+
+@keyframes ct4 {
+  100% {left: calc(100% + 40px)}
+}

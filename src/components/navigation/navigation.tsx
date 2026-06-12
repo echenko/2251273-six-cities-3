@@ -1,21 +1,19 @@
-import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
-import { useAppSelector } from '../../hooks/hooks';
-import { AuthorizationStatus } from '../../const';
-import { useNavigate } from 'react-router-dom';
-import { logoutAction } from '../../store/api-actions';
-import { useAppDispatch } from '../../hooks/hooks';
-import { getUserEmail } from '../../services/user-email';
-import { fetchFavoriteOffersAction, checkAuthAction } from '../../store/api-actions';
-import { useEffect } from 'react';
-import { memo } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
+import { logoutAction, fetchFavoriteOffersAction, checkAuthAction } from '../../store/api-actions';
+import { useEffect, memo, useRef } from 'react';
+import { getUserEmail, getUserAvatar, getAuthorizationStatus } from '../../store/selectors/user-selector';
+import { getFavoriteOffers } from '../../store/selectors/offers-slice';
 
 function Navigation(): JSX.Element {
-  const statusAuthorization: AuthorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
-  const userEmail = getUserEmail();
+  const statusAuthorization = useAppSelector(getAuthorizationStatus);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const favoritesOffers = useAppSelector((state) => state.OFFERS.favoriteOffers);
+  const userEmail = useAppSelector(getUserEmail);
+  const userAvatar = useAppSelector(getUserAvatar);
+  const userAvatarRef = useRef<HTMLDivElement | null>(null);
+  const favoritesOffers = useAppSelector(getFavoriteOffers);
 
   useEffect(() => {
     if (statusAuthorization === AuthorizationStatus.Auth) {
@@ -51,7 +49,8 @@ function Navigation(): JSX.Element {
       <ul className="header__nav-list">
         <li className="header__nav-item user">
           <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
-            <div className="header__avatar-wrapper user__avatar-wrapper">
+            <div className="header__avatar-wrapper user__avatar-wrapper" ref={userAvatarRef}>
+              {userAvatar && <img className="header__avatar user__avatar" src={userAvatar} width="31" height="31" alt="User avatar" />}
             </div>
             { statusAuthorization === AuthorizationStatus.Auth &&
               <span className="header__user-name user__name">{userEmail}</span>}
