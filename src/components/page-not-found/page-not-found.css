@@ -24,3 +24,8 @@
   color: #4481C3;
   text-shadow: #FF9000 1px 0 10px;
 }
+
+.not-found.page-link:hover {
+  color: #FF9000;
+  text-shadow: #4481C3 1px 0 10px;
+}

@@ -40,7 +40,9 @@ function LoginForm(): JSX.Element {
 
   function handleSubmit(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
     event.preventDefault();
-    onSubmit();
+    if(loginRef.current?.value && passwordRef.current?.value) {
+      onSubmit();
+    }
   }
 
   function checkEmail(): boolean {
