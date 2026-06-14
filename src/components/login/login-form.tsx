@@ -26,8 +26,8 @@ function LoginForm(): JSX.Element {
         })).unwrap();
         navigate(AppRoute.Main);
       } catch {
-        navigate(AppRoute.Login);
         dispatch(setErrorType(TYPE_OF_ERROR.ERROR_LOGIN));
+        navigate(AppRoute.Login);
         throw new Error('Error login');
       } finally {
         setTimeout(() => {

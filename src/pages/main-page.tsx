@@ -36,8 +36,6 @@ function MainPage(): JSX.Element {
       </div>
       <Cities
         offers={getSortedOffersByType(filteredOffers, sortingOffers)}
-        // TODO: remove!!!
-        // offers={[]}
         city={city}
       />
     </main>

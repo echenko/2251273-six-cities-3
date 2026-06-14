@@ -6,21 +6,26 @@ import './message.css';
 
 function Message(): JSX.Element {
   const errorType = useAppSelector(getErrorType);
+
+
   function getMessageError() {
-    if (errorType === TYPE_OF_ERROR.ERROR_LOADING_OFFERS) {
-      return SYSTEM_MESSAGE.ERROR_LOADING_OFFERS;
-    } else if (errorType === TYPE_OF_ERROR.ERROR_LOADING_OFFER) {
-      return SYSTEM_MESSAGE.ERROR_LOADING_OFFER;
-    } else if (errorType === TYPE_OF_ERROR.ERROR_LOADING_COMMENTS) {
-      return SYSTEM_MESSAGE.ERROR_LOADING_COMMENTS;
-    } else if (errorType === TYPE_OF_ERROR.ERROR_LOADING_NEAR_OFFERS) {
-      return SYSTEM_MESSAGE.ERROR_LOADING_NEAR_OFFERS;
-    } else if (errorType === TYPE_OF_ERROR.ERROR_LOGIN) {
-      return SYSTEM_MESSAGE.ERROR_LOGIN;
-    } else if (errorType === TYPE_OF_ERROR.ERROR_LOGIN_EMAIL) {
-      return SYSTEM_MESSAGE.ERROR_LOGIN_EMAIL;
-    } else if (errorType === TYPE_OF_ERROR.ERROR_LOGIN_PASSWORD) {
-      return SYSTEM_MESSAGE.ERROR_LOGIN_PASSWORD;
+    switch (errorType) {
+      case TYPE_OF_ERROR.ERROR_LOADING_OFFERS:
+        return SYSTEM_MESSAGE.ERROR_LOADING_OFFERS;
+      case TYPE_OF_ERROR.ERROR_LOADING_OFFER:
+        return SYSTEM_MESSAGE.ERROR_LOADING_OFFER;
+      case TYPE_OF_ERROR.ERROR_LOADING_COMMENTS:
+        return SYSTEM_MESSAGE.ERROR_LOADING_COMMENTS;
+      case TYPE_OF_ERROR.ERROR_LOADING_NEAR_OFFERS:
+        return SYSTEM_MESSAGE.ERROR_LOADING_NEAR_OFFERS;
+      case TYPE_OF_ERROR.ERROR_LOGIN:
+        return SYSTEM_MESSAGE.ERROR_LOGIN;
+      case TYPE_OF_ERROR.ERROR_LOGIN_EMAIL:
+        return SYSTEM_MESSAGE.ERROR_LOGIN_EMAIL;
+      case TYPE_OF_ERROR.ERROR_LOGIN_PASSWORD:
+        return SYSTEM_MESSAGE.ERROR_LOGIN_PASSWORD;
+      default:
+        return '';
     }
   }
 

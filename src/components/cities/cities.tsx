@@ -28,7 +28,7 @@ function Cities({ offers, city }: CitiesProps): JSX.Element {
   }, []);
 
   useEffect(() => {
-    if (offers.length === 0 && offersLoadingStatus === true) {
+    if (offers.length === 0 && offersLoadingStatus) {
       dispatch(setErrorType(TYPE_OF_ERROR.ERROR_EMPTY_OFFERS));
     }
   }, [offers, dispatch, offersLoadingStatus]);

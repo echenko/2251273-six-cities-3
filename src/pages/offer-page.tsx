@@ -38,7 +38,7 @@ function OfferPage(): JSX.Element {
   }, [nearOffers]);
 
   useEffect(() => {
-    if (selectedOfferLoadingStatus === false) {
+    if (!selectedOfferLoadingStatus) {
       dispatch(setErrorType(TYPE_OF_ERROR.ERROR_LOADING_OFFER));
     }
   }, [selectedOfferLoadingStatus, dispatch]);

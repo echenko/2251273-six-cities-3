@@ -17,7 +17,7 @@ function LoginPage(): JSX.Element {
 
   useEffect(() => {
     dispatch(changeCity(city));
-  });
+  }, [city, dispatch]);
 
 
   return (
