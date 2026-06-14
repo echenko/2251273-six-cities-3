@@ -3,7 +3,7 @@ import { State } from '../../types/state';
 import { OfferType } from '../../types/offer';
 import { CommentElementType } from '../../types/comments';
 
-export const getSelectedOffer = (state: State): OfferType | null => state[NameSpace.Offer].selectedOffer;
-export const getSelectedOfferLoadingStatus = (state: State): boolean | null => state[NameSpace.Offer].selectedOfferLoadingStatus;
-export const getSelectedOfferComments = (state: State): CommentElementType[] => state[NameSpace.Offer].selectedOfferComments;
-export const getSelectedOfferCommentsLoadingStatus = (state: State): boolean | null => state[NameSpace.Offer].selectedOfferCommentsLoadingStatus;
+export const getSelectedOffer = (state: Pick<State, NameSpace.Offer>): OfferType | null => state[NameSpace.Offer].selectedOffer;
+export const getSelectedOfferLoadingStatus = (state: Pick<State, NameSpace.Offer>): boolean | null => state[NameSpace.Offer].selectedOfferLoadingStatus;
+export const getSelectedOfferComments = (state: Pick<State, NameSpace.Offer>): CommentElementType[] => state[NameSpace.Offer].selectedOfferComments;
+export const getSelectedOfferCommentsLoadingStatus = (state: Pick<State, NameSpace.Offer>): boolean | null => state[NameSpace.Offer].selectedOfferCommentsLoadingStatus;

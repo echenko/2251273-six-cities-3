@@ -13,5 +13,17 @@ describe('get selected city', () => {
 
     expect(result).toBe('Amsterdam');
   });
+
+  it('should return default city', () => {
+    const state = {
+      [NameSpace.City]: {
+        selectedCity: '',
+      },
+    };
+
+    const result = getSelectedCity(state);
+
+    expect(result).toBe('');
+  });
 }
 );
