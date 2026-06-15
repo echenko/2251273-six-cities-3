@@ -69,7 +69,7 @@ const CONFIGURATION_API = {
 
 const APIRoute = {
   'Offers': '/offers',
-  'Login': '/login',
+  'Login': '/login0',
   'Logout': '/logout',
   'Offer': '/offers/',
   'Comments': '/comments/',
@@ -96,8 +96,6 @@ const SYSTEM_MESSAGE = {
   ERROR_LOGIN_EMAIL: 'Enter a valid email address, please try again;  example: 0u7YI@example.com',
   ERROR_LOGIN_PASSWORD: 'Enter a valid password, please try again; example: Password123456',
 };
-
-const TIME_OUT_ERROR = 5000;
 
 const EMAIL_REGEXP = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -140,7 +138,6 @@ export {
   CONFIGURATION_API,
   APIRoute,
   TYPE_OF_ERROR,
-  TIME_OUT_ERROR,
   EMAIL_REGEXP,
   PASSWORD_REGEXP
 };

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { loginAction } from '../../store/api-actions';
 import { setErrorType } from '../../store/action';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { AppRoute, TYPE_OF_ERROR, EMAIL_REGEXP, PASSWORD_REGEXP, TIME_OUT_ERROR } from '../../const';
+import { AppRoute, TYPE_OF_ERROR, EMAIL_REGEXP, PASSWORD_REGEXP } from '../../const';
 import { switchButton } from '../../utils';
 import { Message } from '../message/message';
 import { getErrorType } from '../../store/selectors/error-slice';
@@ -30,9 +30,6 @@ function LoginForm(): JSX.Element {
         navigate(AppRoute.Login);
         throw new Error('Error login');
       } finally {
-        setTimeout(() => {
-          dispatch(setErrorType(null));
-        }, TIME_OUT_ERROR);
         switchButton(formButtonSubmit.current, false);
       }
     }
