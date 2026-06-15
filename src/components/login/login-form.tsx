@@ -49,11 +49,9 @@ function LoginForm(): JSX.Element {
     const loginEmail = loginRef.current?.value;
     if (loginEmail && EMAIL_REGEXP.test(loginEmail)) {
       dispatch(setErrorType(null));
-      loginRef.current?.setAttribute('style', 'border: 2px solid #000000; outline: none;');
       return true;
     } else {
       dispatch(setErrorType(TYPE_OF_ERROR.ERROR_LOGIN_EMAIL));
-      loginRef.current?.setAttribute('style', 'border: 2px solid #FF9000; outline: none;');
       return false;
     }
   }
@@ -62,11 +60,9 @@ function LoginForm(): JSX.Element {
     const loginPassword = passwordRef.current?.value;
     if (loginPassword && PASSWORD_REGEXP.test(loginPassword)) {
       dispatch(setErrorType(null));
-      passwordRef.current?.setAttribute('style', 'border: 2px solid #000000; outline: none;');
       return true;
     } else {
       dispatch(setErrorType(TYPE_OF_ERROR.ERROR_LOGIN_PASSWORD));
-      passwordRef.current?.setAttribute('style', 'border: 2px solid #FF9000; outline: none;');
       return false;
     }
   }
