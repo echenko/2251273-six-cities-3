@@ -1,5 +1,5 @@
 export interface AuthDataType {
-email: string;
-avatarUrl: string;
+  email: string;
+  avatarUrl: string;
 }
 
