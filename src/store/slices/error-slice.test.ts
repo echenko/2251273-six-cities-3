@@ -26,4 +26,12 @@ describe('error slice', () => {
       errorType: null,
     });
   });
+
+  it('should return initial state / unknown action', () => {
+    const state = errorSlice.getInitialState();
+
+    const result = errorSlice.reducer(state, { type: 'unknown' });
+
+    expect(result).toEqual(state);
+  });
 });

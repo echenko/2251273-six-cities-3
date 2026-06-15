@@ -20,10 +20,10 @@ describe('city slice', () => {
   });
 
   it('should update city', () => {
-    const result = citySlice.reducer({ selectedCity: 'Amsterdam' }, changeCity('Paris'));
+    const result = citySlice.reducer({ selectedCity: 'Amsterdam' }, changeCity(DEFAULT_CITY));
 
     expect(result).toEqual({
-      selectedCity: 'Paris',
+      selectedCity: DEFAULT_CITY,
     });
   });
 
@@ -32,6 +32,14 @@ describe('city slice', () => {
 
     expect(result).toEqual({
       selectedCity: '',
+    });
+  });
+
+  it('should return initial state / unknown action', () => {
+    const result = citySlice.reducer({ selectedCity: DEFAULT_CITY}, { type: 'unknown' });
+
+    expect(result).toEqual({
+      selectedCity: DEFAULT_CITY,
     });
   });
 });
