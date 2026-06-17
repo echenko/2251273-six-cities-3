@@ -1,4 +1,4 @@
-import { checkAuthAction, fetchOffersAction, fetchNearOffersAction, fetchFavoriteOffersAction } from './api-actions';
+import { checkAuthAction, fetchOffersAction } from './api-actions';
 import { AuthorizationStatus, APIRoute } from '../const';
 import { State } from '../types/state';
 import { createAPI } from '../services/api';
@@ -38,8 +38,8 @@ describe('Async actions', () => {
     });
   });
 
-  describe('checkAuthAction action', () => {
-    it('should be fulfilled with 200', async () => {
+  describe(' action', () => {
+    it('should checkAuthAction be fulfilled with 200', async () => {
 
       mockAxiosAdapter
         .onGet(APIRoute.Login)
@@ -55,7 +55,7 @@ describe('Async actions', () => {
       ]);
     });
 
-    it('should be rejected with 400', async () => {
+    it('should checkAuthAction be rejected with 400', async () => {
 
       mockAxiosAdapter
         .onGet(APIRoute.Login)
@@ -71,7 +71,7 @@ describe('Async actions', () => {
       ]);
     });
 
-    it('should be rejected with 500', async () => {
+    it('should checkAuthAction be rejected with 500', async () => {
 
       mockAxiosAdapter
         .onGet(APIRoute.Login)
@@ -87,7 +87,7 @@ describe('Async actions', () => {
       ]);
     });
 
-    it('should be fulfilled with 200', async () => {
+    it('should checkAuthAction be fulfilled with 200', async () => {
       const mockOffers = OFFERS;
       mockAxiosAdapter
         .onGet(APIRoute.Offers)
@@ -97,10 +97,9 @@ describe('Async actions', () => {
 
 
       const emittedActions = store.getActions();
-      const extractedActionsTypes = extractActionsTypes(emittedActions);
-      const fetchQuestionsActionFulfilled = emittedActions.at(1) as ReturnType<typeof fetchQuestionAction.fulfilled>;
-
       const actions = extractActionsTypes(store.getActions());
+      const fetchQuestionsActionFulfilled = emittedActions.at(1) as ReturnType<typeof fetchOffersAction.fulfilled>;
+
 
       expect(actions).toEqual([
         fetchOffersAction.pending.type,
