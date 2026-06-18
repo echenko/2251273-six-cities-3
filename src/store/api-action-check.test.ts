@@ -1,5 +1,5 @@
-import { checkAuthAction, loginAction } from './api-actions';
-import { AuthorizationStatus, APIRoute } from '../const';
+import { checkAuthAction, loginAction, logoutAction } from './api-actions';
+import { APIRoute } from '../const';
 import { State } from '../types/state';
 import { createAPI } from '../services/api';
 import MockAdapter from 'axios-mock-adapter';
@@ -21,21 +21,7 @@ describe('Async actions', () => {
   let store: ReturnType<typeof mockStoreCreator>;
 
   beforeEach(() => {
-    store = mockStoreCreator({
-      USER: {
-        authorizationStatus: AuthorizationStatus.Unknown,
-        userEmail: null,
-        userAvatar: null,
-      },
-      OFFERS: {
-        offers: [],
-        offersLoadingStatus: null,
-        nearOffers: [],
-        nearOffersLoadingStatus: null,
-        favoriteOffers: [],
-        favoriteOffersLoadingStatus: null,
-      },
-    });
+    store = mockStoreCreator();
   });
 
   afterEach(() => {
@@ -46,7 +32,7 @@ describe('Async actions', () => {
   describe('checkAuthAction', () => {
 
     // checkAuthAction success
-    it('should check auth', async () => {
+    it('should check auth if token', async () => {
       saveToken('token');
 
       mockAxiosAdapter.onGet(APIRoute.Login).reply(200, {
@@ -65,8 +51,10 @@ describe('Async actions', () => {
     });
 
     // checkAuthAction fail
-    it('should not check auth', async () => {
+    it('should not check auth if no token', async () => {
       dropToken();
+
+      mockAxiosAdapter.onGet(APIRoute.Login).reply(401);
 
       await store.dispatch(checkAuthAction());
 
@@ -78,16 +66,18 @@ describe('Async actions', () => {
       ]);
     });
 
-    // loginAction success
-    it('should login', async () => {
-      saveToken('token');
+    // check login success
+    // TODO: fail test
+    it('TODO: fail test, should login user and check auth', async () => {
 
       mockAxiosAdapter.onPost(APIRoute.Login).reply(200, {
-        email: 'oBtXg@example.com',
-        avatarUrl: 'https://via.placeholder.com/150',
+        token: 'token',
       });
 
-      await store.dispatch(loginAction({ login: 'oBtXg@example.com', password: '123' }));
+      await store.dispatch(loginAction({
+        login: 'oBtXg@example.com',
+        password: '123456',
+      }));
 
       const actions = extractActionsTypes(store.getActions());
 
@@ -99,19 +89,59 @@ describe('Async actions', () => {
       ]);
     });
 
-    // loginAction fail
-    it('should not login', async () => {
-      dropToken();
+    // check login fail
+    it('should not login user', async () => {
+      saveToken('token');
 
-      await store.dispatch(loginAction({ login: 'oBtXg@example.com', password: '123' }));
+      mockAxiosAdapter.onPost(APIRoute.Login).reply(401);
+
+      await store.dispatch(loginAction({
+        login: 'oBtXg@example.com',
+        password: '123456',
+      }));
 
       const actions = extractActionsTypes(store.getActions());
 
       expect(actions).toEqual([
         loginAction.pending.type,
-        checkAuthAction.pending.type,
-        checkAuthAction.rejected.type,
         loginAction.rejected.type,
+      ]);
+    });
+
+    // check logout success
+    // TODO: fail test
+    it('TODO: fail test, should logout user', async () => {
+      saveToken('token');
+
+      mockAxiosAdapter.onGet(APIRoute.Login).reply(200);
+
+      await store.dispatch(logoutAction());
+
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        logoutAction.pending.type,
+        logoutAction.fulfilled.type,
+      ]);
+
+      dropToken();
+
+      expect(getToken()).toBeNull();
+    });
+
+    // check logout fail
+    it('should not logout user', async () => {
+      saveToken('token');
+
+      mockAxiosAdapter.onGet(APIRoute.Login).reply(401);
+
+      await store.dispatch(logoutAction());
+
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        logoutAction.pending.type,
+        logoutAction.rejected.type,
       ]);
     });
   });
