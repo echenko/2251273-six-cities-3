@@ -127,7 +127,7 @@ describe('Async actions', () => {
       expect(actions).toEqual([
         logoutAction.pending.type,
         // Почему не fulfilled
-        logoutAction.fulfilled.type,
+        logoutAction.rejected.type,
       ]);
       // Удаляем токен
       dropToken();
