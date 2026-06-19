@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Action } from 'redux';
 import { ThunkDispatch } from '@reduxjs/toolkit';
-import { OFFER } from './slices/offer-slice-mock';
+import { OFFER } from '../mocks/mock-offer';
 
 type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
 
@@ -19,29 +19,27 @@ describe('Async actions: offers', () => {
   const middleware = [thunk.withExtraArgument(axios)];
   const mockStoreCreator = configureMockStore<State, Action<string>, AppThunkDispatch>(middleware);
   let store: ReturnType<typeof mockStoreCreator> = mockStoreCreator({
-    OFFERS: {
-      offers: [],
-      offersLoadingStatus: null,
-      nearOffers: [],
-      nearOffersLoadingStatus: null,
-      favoriteOffers: [],
-      favoriteOffersLoadingStatus: null,
+    OFFER: {
+      selectedOffer: null,
+      selectedOfferLoadingStatus: null,
+      selectedOfferComments: [],
+      selectedOfferCommentsLoadingStatus: null,
     },
   });
 
+  // reset store
   beforeEach(() => {
     store = mockStoreCreator({
-      OFFERS: {
-        offers: [],
-        offersLoadingStatus: null,
-        nearOffers: [],
-        nearOffersLoadingStatus: null,
-        favoriteOffers: [],
-        favoriteOffersLoadingStatus: null,
+      OFFER: {
+        selectedOffer: null,
+        selectedOfferLoadingStatus: null,
+        selectedOfferComments: [],
+        selectedOfferCommentsLoadingStatus: null,
       },
     });
   });
 
+  // reset mocks
   afterEach(() => {
     mockAxiosAdapter.reset();
     store.clearActions();

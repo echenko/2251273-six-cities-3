@@ -120,7 +120,7 @@ export const fetchCommentsOfferAction = createAsyncThunk<CommentElementType[], s
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchCommentsOffer',
+  'comments/fetchCommentsOffer',
   async (id, { extra: api }) => {
     const { data } = await api.get<CommentElementType[]>(`${APIRoute.Comments}/${id}`);
     return data;
@@ -132,7 +132,7 @@ export const postCommentsOfferAction = createAsyncThunk<void, ReviewType, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/postComment',
+  'comments/postComment',
   async ({ offerId, comment, rating }, { dispatch, extra: api }) => {
     await api.post<ReviewType>(`${APIRoute.Comments}/${offerId}`, { comment, rating });
     dispatch(fetchCommentsOfferAction(offerId));
@@ -144,7 +144,7 @@ export const postFavoriteOfferAction = createAsyncThunk<FavoriteType, { id: stri
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/postFavoriteOffer',
+  'favorite/postFavoriteOffer',
   async ({id, status}, { dispatch, extra: api }) => {
     const { data } = await api.post<FavoriteType>(`${APIRoute.Favorite}/${id}/${Number(status)}`);
     dispatch(fetchFavoriteOffersAction());

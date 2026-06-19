@@ -2,7 +2,7 @@ import { fetchOffersAction, fetchNearOffersAction, fetchFavoriteOffersAction} fr
 import { updateFavoriteOffers } from '../action';
 import { offersSlice } from './offers-slice';
 import { OffersSlice } from '../../types/slice/offers-slice';
-import { OFFERS } from './offers-slice-mock';
+import { OFFERS } from '../../mocks/mock-offers';
 
 describe('Reducer: offersSlice', () => {
   it('should return initial state', () => {

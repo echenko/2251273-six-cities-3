@@ -1,7 +1,7 @@
 import { fetchOfferAction, fetchCommentsOfferAction } from '../api-actions';
 import { offerSlice } from './offer-slice';
 import { OfferSlice } from '../../types/slice/offer-slice';
-import { OFFER, COMMENTS } from './offer-slice-mock';
+import { OFFER, COMMENTS } from '../../mocks/mock-offer';
 
 describe('Reducer: offerSlice', () => {
   it('should return initial state', () => {

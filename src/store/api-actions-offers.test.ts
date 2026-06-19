@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Action } from 'redux';
 import { ThunkDispatch } from '@reduxjs/toolkit';
-import { OFFERS } from './slices/offers-slice-mock';
+import { OFFERS } from '../mocks/mock-offers';
 
 type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
 
@@ -83,7 +83,7 @@ describe('Async actions: offers', () => {
     // Проверяем экшены по порядку
     expect(extractActionsTypes(actions)).toEqual([
       fetchOffersAction.pending.type,
-      'error/setErrorType',
+      setErrorAction.type,
       fetchOffersAction.rejected.type
     ]);
     // Проверяем что не был вызван экшен fetchOffersAction.fulfilled
