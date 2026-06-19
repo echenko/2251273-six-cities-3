@@ -33,6 +33,8 @@ export const userSlice = createSlice({
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
+        state.userEmail = null;
+        state.userAvatar = null;
       });
   },
 });
