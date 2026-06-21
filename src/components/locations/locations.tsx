@@ -1,15 +1,13 @@
 import { LocationsItem } from './locations-item';
 import { CITIES } from '../../const';
-import { memo } from 'react';
 
 function Locations(): JSX.Element {
-
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        {CITIES.map((location, index) => (
+        {CITIES.map((location) => (
           <LocationsItem
-            key={`${location + index}`}
+            key={location}
             location={location}
           />
         ))}
@@ -18,6 +16,4 @@ function Locations(): JSX.Element {
   );
 }
 
-const LocationsMemo = memo(Locations);
-
-export { LocationsMemo as Locations };
+export { Locations };
