@@ -11,6 +11,7 @@ import { clsx } from 'clsx';
 import { setErrorType } from '../../store/action';
 import { checkErrorEmptyOffers } from '../../store/selectors/error-slice';
 import { getOffersLoadingStatus } from '../../store/selectors/offers-slice';
+import { getErrorType } from '../../store/selectors/error-slice';
 
 type CitiesProps = {
   offers: OffersElementType[];
@@ -27,11 +28,13 @@ function Cities({ offers, city }: CitiesProps): JSX.Element {
     setCurrentOffer(offerId);
   }, []);
 
+  const currentError = useAppSelector(getErrorType);
+
   useEffect(() => {
-    if (offers.length === 0 && offersLoadingStatus) {
+    if (offers.length === 0 && offersLoadingStatus && currentError !== TYPE_OF_ERROR.ERROR_EMPTY_OFFERS) {
       dispatch(setErrorType(TYPE_OF_ERROR.ERROR_EMPTY_OFFERS));
     }
-  }, [offers, dispatch, offersLoadingStatus]);
+  }, [offers, dispatch, offersLoadingStatus, currentError]);
 
   return (
     <div className="cities">
@@ -39,26 +42,26 @@ function Cities({ offers, city }: CitiesProps): JSX.Element {
         <Message />}
 
       {offersLoadingStatus &&
-      <div
-        className={clsx('cities__places-container container', { 'cities__places-container--empty': checkEmptyOffers })}
-      >
-        {checkEmptyOffers && <MainEmpty />}
-        {!!offers.length &&
-          <CitiesPlaces
-            offers={offers}
-            city={city}
-            onOfferHover={handleOfferHover}
-          />}
-        <div className="cities__right-section">
+        <div
+          className={clsx('cities__places-container container', { 'cities__places-container--empty': checkEmptyOffers })}
+        >
+          {checkEmptyOffers && <MainEmpty />}
           {!!offers.length &&
-            <Map
-              className="cities__map"
+            <CitiesPlaces
               offers={offers}
-              location={getLocation(offers[0])}
-              currentOffer={currentOffer}
+              city={city}
+              onOfferHover={handleOfferHover}
             />}
-        </div>
-      </div>}
+          <div className="cities__right-section">
+            {!!offers.length &&
+              <Map
+                className="cities__map"
+                offers={offers}
+                location={getLocation(offers[0])}
+                currentOffer={currentOffer}
+              />}
+          </div>
+        </div>}
     </div>
   );
 }
