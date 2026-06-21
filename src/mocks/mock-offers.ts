@@ -2736,55 +2736,8 @@ const OFFERS = [
     'isPremium': false,
     'rating': 1.5
   },
-  // {
-  //   'id': '04614087-6ffe-43be-bd03-4117145e6083',
-  //   'title': 'The Joshua Tree House',
-  //   'type': 'house',
-  //   'price': 929,
-  //   'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/15.jpg',
-  //   'city': {
-  //     'name': 'Dusseldorf',
-  //     'location': {
-  //       'latitude': 51.225402,
-  //       'longitude': 6.776314,
-  //       'zoom': 13
-  //     }
-  //   },
-  //   'location': {
-  //     'latitude': 51.225402,
-  //     'longitude': 6.784314,
-  //     'zoom': 16
-  //   },
-  //   'isFavorite': false,
-  //   'isPremium': true,
-  //   'rating': 1.3
-  // }
 ];
 
-// Types Props
-export type OffersElementType = {
-  id: string;
-  title: string;
-  type: string;
-  price: number;
-  city: {
-    name: string;
-    location: {
-      latitude: number;
-      longitude: number;
-      zoom: number;
-    };
-  };
-  location: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
-  };
-  isFavorite: boolean;
-  isPremium: boolean;
-  rating: number;
-  previewImage: string;
-}
 
 export {
   OFFERS,
