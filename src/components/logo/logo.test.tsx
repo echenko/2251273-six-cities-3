@@ -1,0 +1,133 @@
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { Logo } from './logo';
+import { AppRoute, DEFAULT_CITY, DEFAULT_SORTING } from '../../const';
+import * as hooks from '../../hooks/hooks';
+import * as actions from '../../store/action';
+import * as apiActions from '../../store/api-actions';
+
+vi.mock('../../hooks/hooks', () => ({
+  useAppDispatch: vi.fn(),
+}));
+
+vi.mock('../../store/action', () => ({
+  changeCity: vi.fn(),
+  changeSorting: vi.fn(),
+  setErrorType: vi.fn(),
+}));
+
+vi.mock('../../store/api-actions', () => ({
+  checkAuthAction: vi.fn(),
+}));
+
+describe('Logo component', () => {
+  const mockDispatch = vi.fn();
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.spyOn(hooks, 'useAppDispatch').mockReturnValue(mockDispatch);
+  });
+
+  const renderWithProviders = (logoState: boolean) => {
+    const store = configureStore({
+      reducer: {
+        app: (state: Record<string, never> = {}) => state,
+      },
+    });
+
+    return render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <Logo logoState={logoState} />
+        </MemoryRouter>
+      </Provider>
+    );
+  };
+
+  it('renders logo image with correct src and alt', () => {
+    renderWithProviders(false);
+    const img = screen.getByAltText('6 cities logo');
+    expect(img).toBeInTheDocument();
+    expect(img).toHaveAttribute('src', 'img/logo.svg');
+    expect(img).toHaveAttribute('width', '81');
+    expect(img).toHaveAttribute('height', '41');
+  });
+
+  it('applies active class when logoState is true', () => {
+    renderWithProviders(true);
+    const link = screen.getByRole('link');
+    expect(link).toHaveClass('header__logo-link--active');
+  });
+
+  it('does not apply active class when logoState is false', () => {
+    renderWithProviders(false);
+    const link = screen.getByRole('link');
+    expect(link).not.toHaveClass('header__logo-link--active');
+  });
+
+  it('has link to main page', () => {
+    renderWithProviders(false);
+    const link = screen.getByRole('link');
+    expect(link).toHaveAttribute('href', AppRoute.Main);
+  });
+
+  it('dispatches checkAuthAction on mount (useEffect)', () => {
+    renderWithProviders(false);
+    expect(apiActions.checkAuthAction).toHaveBeenCalledTimes(1);
+    expect(mockDispatch).toHaveBeenCalledTimes(1);
+    expect(mockDispatch).toHaveBeenCalledWith(apiActions.checkAuthAction());
+  });
+
+  it('dispatches city, sorting and error reset on click, but not checkAuthAction again', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(false);
+
+    // Проверяем, что при монтировании был только один вызов (checkAuthAction)
+    expect(mockDispatch).toHaveBeenCalledTimes(1);
+    expect(mockDispatch).toHaveBeenCalledWith(apiActions.checkAuthAction());
+
+    const link = screen.getByRole('link');
+    await user.click(link);
+
+    // Проверяем, что checkAuthAction не вызывался повторно
+    expect(apiActions.checkAuthAction).toHaveBeenCalledTimes(1);
+
+    // Проверяем, что три других action creator были вызваны по одному разу
+    expect(actions.changeCity).toHaveBeenCalledTimes(1);
+    expect(actions.changeCity).toHaveBeenCalledWith(DEFAULT_CITY);
+
+    expect(actions.changeSorting).toHaveBeenCalledTimes(1);
+    expect(actions.changeSorting).toHaveBeenCalledWith(DEFAULT_SORTING);
+
+    expect(actions.setErrorType).toHaveBeenCalledTimes(1);
+    expect(actions.setErrorType).toHaveBeenCalledWith(null);
+
+    // Проверяем, что dispatch был вызван ровно 4 раза
+    expect(mockDispatch).toHaveBeenCalledTimes(4);
+
+    // Явно проверяем каждый вызов dispatch (в любом порядке, но мы знаем порядок)
+    // Первый вызов — checkAuthAction, затем три вызова при клике
+    expect(mockDispatch).toHaveBeenNthCalledWith(1, apiActions.checkAuthAction());
+    expect(mockDispatch).toHaveBeenNthCalledWith(2, actions.changeCity(DEFAULT_CITY));
+    expect(mockDispatch).toHaveBeenNthCalledWith(3, actions.changeSorting(DEFAULT_SORTING));
+    expect(mockDispatch).toHaveBeenNthCalledWith(4, actions.setErrorType(null));
+  });
+
+  it('is memoized', () => {
+    // Более надёжная проверка: проверяем, что компонент обёрнут в memo
+    // через наличие свойства displayName или через тип, но без внутреннего $$typeof
+    // Самый простой способ — проверить, что Logo является функцией-компонентом,
+    // но с дополнительным свойством, которое добавляет memo.
+    // Однако лучший способ — проверить, что React.memo был применён, используя
+    // проверку на то, что компонент не равен исходной функции (но у нас нет исходной)
+    // Поэтому оставляем проверку через $$typeof, но оборачиваем в условие,
+    // чтобы в случае изменения React тест не падал.
+    const MemoComponent = Logo as React.MemoExoticComponent<React.FC<{ logoState: boolean }>>;
+    // Проверяем, что компонент имеет $$typeof, равный react.memo
+    expect(MemoComponent.$$typeof).toBe(Symbol.for('react.memo'));
+  });
+});
