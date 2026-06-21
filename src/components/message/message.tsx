@@ -37,7 +37,7 @@ function Message(): JSX.Element {
   }
 
   return (
-    <div className="message-container">
+    <div className="message-container" data-testid="message">
       <h2 className="message message--error">{getMessageError()}</h2>
       {!errorType && <CustomLoader />}
     </div>
