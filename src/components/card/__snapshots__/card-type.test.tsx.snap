@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Компонент CardType > соответствует снепшоту 1`] = `
+<p
+  class="place-card__type"
+>
+  Apartment
+</p>
+`;
