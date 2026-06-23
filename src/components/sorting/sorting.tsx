@@ -36,6 +36,7 @@ function Sorting(): JSX.Element {
     >
       <span className="places__sorting-caption">Sort by</span>
       <span
+        data-testid="sorting-type"
         className="places__sorting-type"
         tabIndex={0}
         onClick={handleClickSorting}
