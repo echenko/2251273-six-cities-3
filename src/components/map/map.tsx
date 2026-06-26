@@ -107,13 +107,9 @@ function Map({ className, offers, location, currentOffer }: MapProps): JSX.Eleme
         return;
       }
 
-      if (currentOffer === offer.id) {
-        marker.setIcon(leaflet.icon(MAP_MARKER_ACTIVE));
-        marker.setZIndexOffset(1000);
-      } else {
-        marker.setIcon(leaflet.icon(MAP_MARKER_DEFAULT));
-        marker.setZIndexOffset(0);
-      }
+      marker.setZIndexOffset(currentOffer === offer.id ? 1000 : 0);
+      marker.setIcon(currentOffer === offer.id ? leaflet.icon(MAP_MARKER_ACTIVE) : leaflet.icon(MAP_MARKER_DEFAULT));
+
     });
   }, [currentOffer, offers]);
 
