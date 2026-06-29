@@ -4,7 +4,7 @@ import { AppRoute } from '../const';
 import { CITIES } from '../const';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../hooks/hooks';
-import { changeCity } from '../store/action';
+import { changeCity, setErrorType } from '../store/action';
 
 function getRandomCity(): string {
   return CITIES[Math.floor(Math.random() * CITIES.length)];
@@ -15,6 +15,7 @@ function LoginPage(): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    dispatch(setErrorType(null));
     dispatch(changeCity(city));
   }, [city, dispatch]);
 
