@@ -8,6 +8,7 @@ import { AuthorizationStatus, TYPE_OF_ERROR, REVIEW_OFFER } from '../../const';
 import { getSelectedOfferCommentsLoadingStatus } from '../../store/selectors/offer-slice';
 import { Message } from '../message/message';
 import { setErrorType } from '../../store/action';
+import { CommentElementType } from '../../types/comments';
 
 function Reviews(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -26,6 +27,18 @@ function Reviews(): JSX.Element {
     }
   }, [selectedOfferCommentsLoadingStatus, dispatch]);
 
+  function sortCommentsByDate(commentsSorting: CommentElementType[]): CommentElementType[] {
+    if (!commentsSorting) {
+      return [];
+    }
+
+    return commentsSorting
+      .toSorted((a, b) => {
+        const dateA = new Date(a.date).getTime() || 0;
+        const dateB = new Date(b.date).getTime() || 0;
+        return dateA - dateB;
+      });
+  }
 
   return (
     <section className='offer__reviews reviews'>
@@ -34,10 +47,10 @@ function Reviews(): JSX.Element {
       </h2>
       {!selectedOfferCommentsLoadingStatus &&
         <Message />}
-      <ReviewsList comments={comments.slice(0, REVIEW_OFFER.MAX_COMMENTS_COUNT)}/>
+      <ReviewsList comments={sortCommentsByDate(comments).slice(comments.length - REVIEW_OFFER.MAX_COMMENTS_COUNT)} />
       {statusAuthorization === AuthorizationStatus.Auth && <ReviewsForm />}
     </section>
   );
 }
 
-export {Reviews};
+export { Reviews };

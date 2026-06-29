@@ -22,7 +22,7 @@ function ReviewsForm(): JSX.Element {
   }
 
   function checkButtonDisabled() {
-    if (reviewsOffer.comment.length >= REVIEW_OFFER.MIN_COMMENT_LENGTH && reviewsOffer.rating !== 0) {
+    if (reviewsOffer.comment.length >= REVIEW_OFFER.MIN_COMMENT_LENGTH && reviewsOffer.comment.length <= REVIEW_OFFER.MAX_COMMENT_LENGTH && reviewsOffer.rating !== 0) {
       return false;
     }
     return true;
