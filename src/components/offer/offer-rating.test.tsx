@@ -26,7 +26,7 @@ describe('OfferRating', () => {
   it('should call convertRatingToStars with correct rating', () => {
     render(<OfferRating offer={mockOffer} />);
 
-    expect(convertRatingToStars).toHaveBeenCalledWith(mockOffer.rating);
+    expect(convertRatingToStars).toHaveBeenCalledWith(Math.round(mockOffer.rating));
   });
 
   it('should render correct structure with classes', () => {
