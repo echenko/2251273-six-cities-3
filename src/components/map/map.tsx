@@ -102,7 +102,7 @@ function Map({ className, offers, location, currentOffer }: MapProps): JSX.Eleme
       map?.removeLayer(markersLayer);
       markersRef.current = [];
     };
-  }, [map, offers]);
+  }, [map, offers, currentOffer]);
 
   useEffect(() => {
     markersRef.current.forEach((marker, index) => {

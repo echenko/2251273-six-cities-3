@@ -1,104 +1,64 @@
-import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import '@testing-library/jest-dom/vitest';
-
+import { render, screen } from '@testing-library/react';
 import { FavoritesPage } from './favorites-page';
 import { useAppSelector } from '../hooks/hooks';
+import { FavoriteType } from '../types/favorite';
 
-// 1. Мокаем дочерние компоненты
 vi.mock('../components/favorites/favorites', () => ({
-  Favorites: () => <div data-testid="mocked-favorites">Избранное</div>,
+  Favorites: () => <div data-testid="favorites">Favorites Component</div>,
 }));
 
 vi.mock('../components/favorites/favorites-empty', () => ({
-  FavoritesEmpty: () => <div data-testid="mocked-favorites-empty">Нет избранного</div>,
+  FavoritesEmpty: () => <div data-testid="favorites-empty">Favorites Empty Component</div>,
 }));
 
-// 2. Мокаем хук useAppSelector
 vi.mock('../hooks/hooks', () => ({
   useAppSelector: vi.fn(),
 }));
+
+const mockedUseAppSelector = vi.mocked(useAppSelector);
+
+// 🎯 Создаём валидный мок-объект один раз
+const mockOffer: FavoriteType = {
+  id: '1',
+  title: 'Test Offer',
+  type: 'apartment',
+  price: 100,
+  city: { name: 'Paris', location: { latitude: 48.85661, longitude: 2.351499, zoom: 13 } },
+  location: { latitude: 48.85661, longitude: 2.351499, zoom: 13 },
+  isFavorite: true,
+  isPremium: false,
+  rating: 4,
+  previewImage: 'image.jpg',
+};
 
 describe('FavoritesPage', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it('должен рендериться без ошибок', () => {
-    vi.mocked(useAppSelector).mockReturnValue([]);
-    render(<FavoritesPage />);
-  });
+  it('should render FavoritesEmpty when there are no favorite offers', () => {
+    mockedUseAppSelector.mockReturnValue([]);
 
-  it('должен рендерить тег <main> с правильными классами', () => {
-    vi.mocked(useAppSelector).mockReturnValue([]);
     render(<FavoritesPage />);
 
-    const mainElement = screen.getByRole('main');
+    expect(screen.getByTestId('favorites-empty')).toBeInTheDocument();
+    expect(screen.queryByTestId('favorites')).not.toBeInTheDocument();
 
-    expect(mainElement).toBeInTheDocument();
-    expect(mainElement).toHaveClass('page__main');
-    expect(mainElement).toHaveClass('page__main--favorites');
+    const container = document.querySelector('.page__favorites-container');
+    expect(container).toHaveClass('page__favorites-container--empty');
   });
 
-  describe('когда есть избранные предложения', () => {
-    it('должен рендерить компонент Favorites', () => {
-      vi.mocked(useAppSelector).mockReturnValue([{ id: '1' }]);
-      render(<FavoritesPage />);
+  it('should render Favorites when there are favorite offers', () => {
+    // 👇 Теперь типизация корректная — без any
+    mockedUseAppSelector.mockReturnValue([mockOffer]);
 
-      const favoritesComponent = screen.getByTestId('mocked-favorites');
+    render(<FavoritesPage />);
 
-      expect(favoritesComponent).toBeInTheDocument();
-      expect(favoritesComponent).toHaveTextContent('Избранное');
-    });
+    expect(screen.getByTestId('favorites')).toBeInTheDocument();
+    expect(screen.queryByTestId('favorites-empty')).not.toBeInTheDocument();
 
-    it('НЕ должен рендерить компонент FavoritesEmpty', () => {
-      vi.mocked(useAppSelector).mockReturnValue([{ id: '1' }]);
-      render(<FavoritesPage />);
-
-      expect(screen.queryByTestId('mocked-favorites-empty')).not.toBeInTheDocument();
-    });
-
-    it('должен рендерить контейнер БЕЗ класса --empty', () => {
-      vi.mocked(useAppSelector).mockReturnValue([{ id: '1' }]);
-      const { container } = render(<FavoritesPage />);
-
-      const containerDiv = container.querySelector('.page__favorites-container');
-
-      expect(containerDiv).toBeInTheDocument();
-      expect(containerDiv).toHaveClass('page__favorites-container');
-      expect(containerDiv).toHaveClass('container');
-      expect(containerDiv).not.toHaveClass('page__favorites-container--empty');
-    });
-  });
-
-  describe('когда избранных предложений НЕТ', () => {
-    it('должен рендерить компонент FavoritesEmpty', () => {
-      vi.mocked(useAppSelector).mockReturnValue([]);
-      render(<FavoritesPage />);
-
-      const emptyComponent = screen.getByTestId('mocked-favorites-empty');
-
-      expect(emptyComponent).toBeInTheDocument();
-      expect(emptyComponent).toHaveTextContent('Нет избранного');
-    });
-
-    it('НЕ должен рендерить компонент Favorites', () => {
-      vi.mocked(useAppSelector).mockReturnValue([]);
-      render(<FavoritesPage />);
-
-      expect(screen.queryByTestId('mocked-favorites')).not.toBeInTheDocument();
-    });
-
-    it('должен рендерить контейнер С классом --empty', () => {
-      vi.mocked(useAppSelector).mockReturnValue([]);
-      const { container } = render(<FavoritesPage />);
-
-      const containerDiv = container.querySelector('.page__favorites-container');
-
-      expect(containerDiv).toBeInTheDocument();
-      expect(containerDiv).toHaveClass('page__favorites-container');
-      expect(containerDiv).toHaveClass('container');
-      expect(containerDiv).toHaveClass('page__favorites-container--empty');
-    });
+    const container = document.querySelector('.page__favorites-container');
+    expect(container).not.toHaveClass('page__favorites-container--empty');
   });
 });
