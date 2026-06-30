@@ -4,10 +4,11 @@ import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { useEffect } from 'react';
 import { fetchCommentsOfferAction } from '../../store/api-actions';
 import { useParams } from 'react-router-dom';
-import { AuthorizationStatus, TYPE_OF_ERROR} from '../../const';
+import { AuthorizationStatus, TYPE_OF_ERROR, REVIEW_OFFER } from '../../const';
 import { getSelectedOfferCommentsLoadingStatus } from '../../store/selectors/offer-slice';
 import { Message } from '../message/message';
 import { setErrorType } from '../../store/action';
+import { sortCommentsByDate } from '../../utils';
 
 function Reviews(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -26,7 +27,6 @@ function Reviews(): JSX.Element {
     }
   }, [selectedOfferCommentsLoadingStatus, dispatch]);
 
-
   return (
     <section className='offer__reviews reviews'>
       <h2 className='reviews__title'>Reviews &middot;
@@ -34,10 +34,10 @@ function Reviews(): JSX.Element {
       </h2>
       {!selectedOfferCommentsLoadingStatus &&
         <Message />}
-      <ReviewsList comments={comments}/>
+      <ReviewsList comments={sortCommentsByDate(comments).slice(comments.length - REVIEW_OFFER.MAX_COMMENTS_COUNT)} />
       {statusAuthorization === AuthorizationStatus.Auth && <ReviewsForm />}
     </section>
   );
 }
 
-export {Reviews};
+export { Reviews };

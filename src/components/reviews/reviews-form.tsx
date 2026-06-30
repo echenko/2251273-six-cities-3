@@ -21,6 +21,13 @@ function ReviewsForm(): JSX.Element {
     });
   }
 
+  function checkButtonDisabled() {
+    if (reviewsOffer.comment.length >= REVIEW_OFFER.MIN_COMMENT_LENGTH && reviewsOffer.comment.length <= REVIEW_OFFER.MAX_COMMENT_LENGTH && reviewsOffer.rating !== 0) {
+      return false;
+    }
+    return true;
+  }
+
   async function handleFormSubmit(): Promise<void> {
     switchButton(formSubmitButtonRef.current, true);
     try {
@@ -40,7 +47,7 @@ function ReviewsForm(): JSX.Element {
     }
   }
 
-  function onFormSubmit (event: React.FormEvent<HTMLFormElement>) {
+  function onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     handleFormSubmit();
   }
@@ -96,7 +103,7 @@ function ReviewsForm(): JSX.Element {
           ref={formSubmitButtonRef}
           className='reviews__submit form__submit button'
           type='submit'
-          disabled={reviewsOffer.rating < REVIEW_OFFER.MIN_RATING_OFFER || reviewsOffer.comment.length <= REVIEW_OFFER.MIN_COMMENT_LENGTH}
+          disabled={checkButtonDisabled()}
         >Submit
         </button>
       </div>

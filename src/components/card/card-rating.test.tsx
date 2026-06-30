@@ -21,7 +21,7 @@ describe('Component: CardRating', () => {
     expect(starsSpan).toHaveStyle({ width: mockWidth });
 
     expect(convertRatingToStars).toHaveBeenCalledTimes(1);
-    expect(convertRatingToStars).toHaveBeenCalledWith(mockRating);
+    expect(convertRatingToStars).toHaveBeenCalledWith(Math.round(mockRating));
   });
 
   it('should handle different rating values', () => {

@@ -133,7 +133,7 @@ describe('OfferFeatures', () => {
     const offer = createMockOffer('apartment', 1, 2);
     render(<OfferFeatures offer={offer} />);
 
-    expect(screen.getByText('1 Bedrooms')).toBeInTheDocument();
+    expect(screen.getByText('1 Bedroom')).toBeInTheDocument();
   });
 
   it('должен корректно отображать много спален', () => {

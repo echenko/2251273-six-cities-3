@@ -21,11 +21,11 @@ function OfferPage(): JSX.Element {
   const selectedOffer = useAppSelector(getSelectedOffer);
   const nearOffers = useAppSelector(getNearOffers);
   const selectedOfferLoadingStatus = useAppSelector(getSelectedOfferLoadingStatus);
-  const [currentOffer, setCurrentOffer] = useState<string>('');
+  const [currentOffer, setCurrentOffer] = useState<string>(`${offerId}`);
   const [randomNearsOffers, setRandomNearsOffers] = useState<OffersElementType[]>([]);
 
   const handleOfferHover = (idOffer: string) => {
-    setCurrentOffer(idOffer);
+    setCurrentOffer(idOffer || `${offerId}`);
   };
 
   useEffect(() => {
@@ -43,27 +43,29 @@ function OfferPage(): JSX.Element {
     }
   }, [selectedOfferLoadingStatus, dispatch]);
 
-
   return (
     <main className='page__main page__main--offer'>
       <section className='offer'>
         {!selectedOfferLoadingStatus && <Message />}
-        {selectedOffer && <OfferGallery offer={selectedOffer}/>}
-        {selectedOffer && <Offer offer={selectedOffer}/>}
+        {selectedOffer && <OfferGallery offer={selectedOffer} />}
+        {selectedOffer && <Offer offer={selectedOffer} />}
         {selectedOffer &&
-        <Map
-          className="offer__map"
-          offers={randomNearsOffers}
-          location={getLocation(selectedOffer)}
-          currentOffer={currentOffer}
-        />}
+          <Map
+            className="offer__map"
+            offers={randomNearsOffers.concat({
+              ...selectedOffer,
+              previewImage: selectedOffer.images[0],
+            })}
+            location={getLocation(selectedOffer)}
+            currentOffer={currentOffer}
+          />}
       </section>
       <div className='container'>
         {selectedOffer &&
-        <NearPlaces
-          offers={randomNearsOffers}
-          onOfferHover={handleOfferHover}
-        />}
+          <NearPlaces
+            offers={randomNearsOffers}
+            onOfferHover={handleOfferHover}
+          />}
       </div>
     </main>
   );

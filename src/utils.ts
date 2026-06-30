@@ -1,5 +1,6 @@
 import { OffersElementType } from './types/offers';
 import { OfferType } from './types/offer';
+import { CommentElementType } from './types/comments';
 import { FavoriteType } from './types/favorite';
 import { REVIEW_OFFER, NEAREST_OFFERS_COUNT, PLACES_OPTIONS, CITIES } from './const';
 
@@ -76,6 +77,19 @@ function switchButton(button: HTMLButtonElement | null, isDisabled: boolean): vo
   }
 }
 
+function sortCommentsByDate(commentsSorting: CommentElementType[]): CommentElementType[] {
+  if (!commentsSorting) {
+    return [];
+  }
+
+  return commentsSorting
+    .toSorted((a, b) => {
+      const dateA = new Date(a.date).getTime() || 0;
+      const dateB = new Date(b.date).getTime() || 0;
+      return dateA - dateB;
+    });
+}
+
 export {
   convertRatingToStars,
   checkGoodOffer,
@@ -88,4 +102,5 @@ export {
   getPlacesOptionsLabel,
   getRandomNearsOffers,
   switchButton,
+  sortCommentsByDate
 };

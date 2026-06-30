@@ -75,6 +75,13 @@ function Map({ className, offers, location, currentOffer }: MapProps): JSX.Eleme
         marker.setZIndexOffset(1000);
       });
       marker.on('mouseout', () => {
+        const currentOfferLat = offers.find((item) => item.id === currentOffer)?.location.latitude;
+        const currentOfferLng = offers.find((item) => item.id === currentOffer)?.location.longitude;
+        const markerLat = marker.getLatLng().lat;
+        const markerLng = marker.getLatLng().lng;
+        if(currentOfferLat === markerLat && currentOfferLng === markerLng) {
+          return;
+        }
         marker.setIcon(leaflet.icon(MAP_MARKER_DEFAULT));
         marker.setZIndexOffset(0);
       });
