@@ -1,144 +1,100 @@
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
 import { OfferGallery } from './offer-gallery';
+import { OfferImage } from './offer-image';
+import { MAX_OFFER_IMAGES_COUNT } from '../../const';
 import type { OfferType } from '../../types/offer';
 
 vi.mock('./offer-image', () => ({
   OfferImage: vi.fn(({ imgSrc, imgAlt }: { imgSrc: string; imgAlt: string }) => (
-    <div data-testid="offer-image" data-src={imgSrc} data-alt={imgAlt}>
-      Mocked OfferImage
+    <div data-testid="mock-image" data-src={imgSrc} data-alt={imgAlt}>
+      Mock Image
     </div>
   )),
 }));
 
-describe('OfferGallery', () => {
-  const createMockOffer = (images: string[], title: string = 'Test Offer'): OfferType => ({
-    id: 'offer-1',
-    title,
+describe('Component: OfferGallery', () => {
+  const mockOffer: OfferType = {
+    id: '1',
+    title: 'Beautiful Apartment',
     type: 'apartment',
-    price: 100,
-    city: { name: 'Paris', location: { latitude: 48.8566, longitude: 2.3522, zoom: 12 } },
-    location: { latitude: 48.8566, longitude: 2.3522, zoom: 12 },
+    price: 120,
+    city: { name: 'Paris', location: { latitude: 48.8566, longitude: 2.3522, zoom: 13 } },
+    location: { latitude: 48.8566, longitude: 2.3522, zoom: 13 },
     isFavorite: false,
     isPremium: false,
-    rating: 4,
-    description: 'Test description',
+    rating: 4.5,
+    description: 'A nice place',
     bedrooms: 2,
-    goods: ['Wi-Fi'],
-    host: { name: 'John', avatarUrl: 'avatar.jpg', isPro: false },
-    images,
+    goods: ['Wi-Fi', 'Kitchen'],
+    host: { name: 'John', avatarUrl: '/avatar.jpg', isPro: false },
+    images: [
+      '/img/room.jpg',
+      '/img/apartment-01.jpg',
+      '/img/apartment-02.jpg',
+      '/img/apartment-03.jpg',
+      '/img/apartment-04.jpg',
+      '/img/apartment-05.jpg',
+      '/img/apartment-06.jpg',
+    ],
     maxAdults: 4,
+  };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
   });
 
-  it('должен корректно рендериться', () => {
-    const offer = createMockOffer(['image1.jpg']);
-    const { container } = render(<OfferGallery offer={offer} />);
+  it('should render gallery container with correct BEM classes', () => {
+    render(<OfferGallery offer={mockOffer} />);
 
-    expect(container).toBeInTheDocument();
+    expect(document.querySelector('.offer__gallery-container.container')).toBeInTheDocument();
+    expect(document.querySelector('.offer__gallery')).toBeInTheDocument();
   });
 
-  it('должен иметь правильные CSS классы для контейнера', () => {
-    const offer = createMockOffer(['image1.jpg']);
-    const { container } = render(<OfferGallery offer={offer} />);
+  it('should render all images if count is less than or equal to MAX_OFFER_IMAGES_COUNT', () => {
+    const offerWithFewImages = {
+      ...mockOffer,
+      images: ['/img/room.jpg', '/img/apartment-01.jpg'],
+    };
 
-    const galleryContainer = container.querySelector('.offer__gallery-container');
-    expect(galleryContainer).toBeInTheDocument();
-    expect(galleryContainer).toHaveClass('container');
+    render(<OfferGallery offer={offerWithFewImages} />);
+
+    const images = screen.getAllByTestId('mock-image');
+    expect(images).toHaveLength(2);
   });
 
-  it('должен иметь правильный CSS класс для галереи', () => {
-    const offer = createMockOffer(['image1.jpg']);
-    const { container } = render(<OfferGallery offer={offer} />);
+  it('should slice images to MAX_OFFER_IMAGES_COUNT if there are more images', () => {
+    render(<OfferGallery offer={mockOffer} />);
 
-    const gallery = container.querySelector('.offer__gallery');
-    expect(gallery).toBeInTheDocument();
+    const images = screen.getAllByTestId('mock-image');
+    expect(images).toHaveLength(MAX_OFFER_IMAGES_COUNT);
   });
 
-  it('должен рендерить OfferImage для каждого изображения', () => {
-    const images = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
-    const offer = createMockOffer(images);
-    render(<OfferGallery offer={offer} />);
+  it('should pass correct imgSrc and imgAlt props to OfferImage', () => {
+    render(<OfferGallery offer={mockOffer} />);
 
-    const offerImages = screen.getAllByTestId('offer-image');
-    expect(offerImages).toHaveLength(3);
-  });
+    const mockCalls = vi.mocked(OfferImage).mock.calls;
 
-  it('должен передавать правильные пропсы в OfferImage', () => {
-    const images = ['image1.jpg', 'image2.jpg'];
-    const title = 'Beautiful Apartment';
-    const offer = createMockOffer(images, title);
-    render(<OfferGallery offer={offer} />);
+    expect(mockCalls[0][0]).toEqual({
+      imgSrc: '/img/room.jpg',
+      imgAlt: 'Beautiful Apartment',
+    });
 
-    const offerImages = screen.getAllByTestId('offer-image');
-
-    expect(offerImages[0]).toHaveAttribute('data-src', 'image1.jpg');
-    expect(offerImages[0]).toHaveAttribute('data-alt', title);
-
-    expect(offerImages[1]).toHaveAttribute('data-src', 'image2.jpg');
-    expect(offerImages[1]).toHaveAttribute('data-alt', title);
-  });
-
-  it('должен корректно обрабатывать пустой массив images', () => {
-    const offer = createMockOffer([]);
-    const { container } = render(<OfferGallery offer={offer} />);
-
-    const gallery = container.querySelector('.offer__gallery');
-    expect(gallery).toBeInTheDocument();
-    expect(gallery?.children.length).toBe(0);
-  });
-
-  it('должен корректно обрабатывать одно изображение', () => {
-    const offer = createMockOffer(['image1.jpg']);
-    render(<OfferGallery offer={offer} />);
-
-    const offerImages = screen.getAllByTestId('offer-image');
-    expect(offerImages).toHaveLength(1);
-  });
-
-  it('должен корректно обрабатывать много изображений', () => {
-    const images = Array.from({ length: 10 }, (_, i) => `image${i + 1}.jpg`);
-    const offer = createMockOffer(images);
-    render(<OfferGallery offer={offer} />);
-
-    const offerImages = screen.getAllByTestId('offer-image');
-    expect(offerImages).toHaveLength(10);
-  });
-
-  it('должен иметь правильную структуру DOM', () => {
-    const offer = createMockOffer(['image1.jpg', 'image2.jpg']);
-    const { container } = render(<OfferGallery offer={offer} />);
-
-    const galleryContainer = container.querySelector('.offer__gallery-container');
-    expect(galleryContainer?.tagName).toBe('DIV');
-
-    const gallery = galleryContainer?.querySelector('.offer__gallery');
-    expect(gallery).toBeInTheDocument();
-    expect(gallery?.tagName).toBe('DIV');
-
-    const images = gallery?.querySelectorAll('[data-testid="offer-image"]');
-    expect(images?.length).toBe(2);
-  });
-
-  it('должен использовать title оффера как alt для всех изображений', () => {
-    const title = 'Luxury Villa';
-    const images = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
-    const offer = createMockOffer(images, title);
-    render(<OfferGallery offer={offer} />);
-
-    const offerImages = screen.getAllByTestId('offer-image');
-    offerImages.forEach((image) => {
-      expect(image).toHaveAttribute('data-alt', title);
+    expect(mockCalls[1][0]).toEqual({
+      imgSrc: '/img/apartment-01.jpg',
+      imgAlt: 'Beautiful Apartment',
     });
   });
 
-  it('должен сохранять порядок изображений', () => {
-    const images = ['first.jpg', 'second.jpg', 'third.jpg'];
-    const offer = createMockOffer(images);
-    render(<OfferGallery offer={offer} />);
+  it('should render nothing if offer.images is empty', () => {
+    const offerWithoutImages = {
+      ...mockOffer,
+      images: [],
+    };
 
-    const offerImages = screen.getAllByTestId('offer-image');
-    expect(offerImages[0]).toHaveAttribute('data-src', 'first.jpg');
-    expect(offerImages[1]).toHaveAttribute('data-src', 'second.jpg');
-    expect(offerImages[2]).toHaveAttribute('data-src', 'third.jpg');
+    render(<OfferGallery offer={offerWithoutImages} />);
+
+    const images = screen.queryAllByTestId('mock-image');
+    expect(images).toHaveLength(0);
   });
 });

@@ -23,6 +23,8 @@ const DEFAULT_SORTING = 'popular';
 
 const NEAREST_OFFERS_COUNT = 3;
 
+const MAX_OFFER_IMAGES_COUNT = 6;
+
 const DEFAULT_CITY = 'Paris';
 
 const CITIES = [
@@ -126,6 +128,7 @@ export enum NameSpace {
 }
 
 export {
+  MAX_OFFER_IMAGES_COUNT,
   DEFAULT_CITY,
   PLACES_OPTIONS,
   DEFAULT_SORTING,

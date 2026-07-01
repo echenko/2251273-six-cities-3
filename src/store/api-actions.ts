@@ -135,7 +135,7 @@ export const postCommentsOfferAction = createAsyncThunk<void, ReviewType, {
   'comments/postComment',
   async ({ offerId, comment, rating }, { dispatch, extra: api }) => {
     await api.post<ReviewType>(`${APIRoute.Comments}/${offerId}`, { comment, rating });
-    dispatch(fetchCommentsOfferAction(offerId));
+    await dispatch(fetchCommentsOfferAction(offerId));
   },
 );
 

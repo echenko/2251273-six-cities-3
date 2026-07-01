@@ -86,7 +86,7 @@ function sortCommentsByDate(commentsSorting: CommentElementType[]): CommentEleme
     .toSorted((a, b) => {
       const dateA = new Date(a.date).getTime() || 0;
       const dateB = new Date(b.date).getTime() || 0;
-      return dateA - dateB;
+      return dateB - dateA;
     });
 }
 
