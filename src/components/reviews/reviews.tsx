@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 2621530 (fix)
 import { ReviewsComments } from './reviews-comments';
 import { ReviewsForm } from './reviews-form';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
@@ -39,6 +42,7 @@ function Reviews(): JSX.Element {
       {statusAuthorization === AuthorizationStatus.Auth && <ReviewsForm />}
 
 
+<<<<<<< HEAD
 =======
 // Import Components
 import ReviewsList from './reviews-list';
@@ -52,6 +56,8 @@ function Reviews(): JSX.Element {
       <ReviewsList />
       <ReviewsForm />
 >>>>>>> 6b372f6 (add: components offer-page)
+=======
+>>>>>>> 2621530 (fix)
     </section>
   );
 }

@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 2621530 (fix)
 import { useState, Fragment } from 'react';
 import { REVIEW_OFFER, RATING_OFFER, TYPE_OF_ERROR } from '../../const';
 import { fetchCommentsOfferAction, postCommentsOfferAction } from '../../store/api-actions';
