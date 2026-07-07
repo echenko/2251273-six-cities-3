@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState, useRef } from 'react';
 import { clsx } from 'clsx';
 import { OffersElementType } from '../../types/offers';
@@ -54,6 +55,12 @@ function CardBookmark({ offer }: CardBookmarkProps): JSX.Element {
       type="button"
       onClick={onClick}
     >
+=======
+// Create CardBookmark
+function CardBookmark(): JSX.Element {
+  return (
+    <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
+>>>>>>> 6b372f6 (add: components offer-page)
       <svg className="place-card__bookmark-icon" width="18" height="19">
         <use xlinkHref="#icon-bookmark"></use>
       </svg>
@@ -62,4 +69,9 @@ function CardBookmark({ offer }: CardBookmarkProps): JSX.Element {
   );
 }
 
+<<<<<<< HEAD
 export { CardBookmark };
+=======
+// Export CardBookmark
+export default CardBookmark;
+>>>>>>> 6b372f6 (add: components offer-page)

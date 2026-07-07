@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { GlobalStyle } from '../styles/styles-global';
@@ -13,6 +14,11 @@ import { getAuthCheckedStatus } from '../../store/selectors/user-selector';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { useEffect } from 'react';
 import { checkAuthAction } from '../../store/api-actions';
+=======
+// Import Components Pages
+import MainPage from '../../pages/main-page';
+import OffersPage from '../../pages/offers-page';
+>>>>>>> 6b372f6 (add: components offer-page)
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -25,6 +31,7 @@ function App(): JSX.Element {
   }, [dispatch, isAuthChecked]);
 
   return (
+<<<<<<< HEAD
     <HelmetProvider>
       <GlobalStyle />
       < BrowserRouter>
@@ -72,6 +79,12 @@ function App(): JSX.Element {
       </ BrowserRouter>
     </HelmetProvider>
 
+=======
+    <>
+      <MainPage />
+      <OffersPage />
+    </>
+>>>>>>> 6b372f6 (add: components offer-page)
   );
 }
 
