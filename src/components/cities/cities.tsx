@@ -59,6 +59,7 @@ function Cities({ offers, city }: CitiesProps): JSX.Element {
                 offers={offers}
                 location={getLocation(offers[0])}
                 currentOffer={currentOffer}
+                isActiveMarker
               />}
           </div>
         </div>}

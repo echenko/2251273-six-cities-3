@@ -9,9 +9,10 @@ type MapProps = {
   offers: OffersElementType[];
   location: OffersElementType['location'] | null;
   currentOffer: string | null;
+  isActiveMarker: boolean;
 }
 
-function Map({ className, offers, location, currentOffer }: MapProps): JSX.Element {
+function Map({ className, offers, location, currentOffer, isActiveMarker }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const isRendered = useRef(false);
   const [map, setMap] = useState<leaflet.Map | null>(null);
@@ -71,7 +72,9 @@ function Map({ className, offers, location, currentOffer }: MapProps): JSX.Eleme
       );
       marker.bindPopup(offer.title);
       marker.on('mouseover', () => {
-        marker.setIcon(leaflet.icon(MAP_MARKER_ACTIVE));
+        if(isActiveMarker) {
+          marker.setIcon(leaflet.icon(MAP_MARKER_ACTIVE));
+        }
         marker.setZIndexOffset(1000);
       });
       marker.on('mouseout', () => {

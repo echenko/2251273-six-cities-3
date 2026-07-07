@@ -60,6 +60,7 @@ function OfferPage(): JSX.Element {
             })}
             location={getLocation(selectedOffer)}
             currentOffer={currentOffer}
+            isActiveMarker={false}
           />}
       </section>
       <div className='container'>
