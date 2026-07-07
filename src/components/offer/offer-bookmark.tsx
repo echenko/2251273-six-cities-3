@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useRef } from 'react';
 import { clsx } from 'clsx';
 import { OfferType } from '../../types/offer';
@@ -52,6 +53,12 @@ function OfferBookmark({ offer }: OfferBookmarkProps): JSX.Element {
       type='button'
       onClick={onClick}
     >
+=======
+// Create OfferBookmark
+function OfferBookmark(): JSX.Element {
+  return (
+    <button className='offer__bookmark-button button' type='button'>
+>>>>>>> 6b372f6 (add: components offer-page)
       <svg className='offer__bookmark-icon' width='31' height='33'>
         <use xlinkHref='#icon-bookmark'></use>
       </svg>
@@ -60,4 +67,9 @@ function OfferBookmark({ offer }: OfferBookmarkProps): JSX.Element {
   );
 }
 
+<<<<<<< HEAD
 export { OfferBookmark };
+=======
+// Export OfferBookmark
+export default OfferBookmark;
+>>>>>>> 6b372f6 (add: components offer-page)

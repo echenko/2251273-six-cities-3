@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import { CardBookmark } from './card-bookmark';
 import { OffersElementType } from '../../types/offers';
+=======
+// Import Components
+import CardBookmark from './card-bookmark';
+>>>>>>> 6b372f6 (add: components offer-page)
 
 type CardPriceProps = {
   offer: OffersElementType;
@@ -12,7 +17,11 @@ function CardPrice({offer}: CardPriceProps): JSX.Element {
         <b className="place-card__price-value">&euro;{offer.price}</b>
         <span className="place-card__price-text">&#47;&nbsp;night</span>
       </div>
+<<<<<<< HEAD
       <CardBookmark offer={offer} />
+=======
+      <CardBookmark />
+>>>>>>> 6b372f6 (add: components offer-page)
     </div>
   );
 }
