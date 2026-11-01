@@ -13,7 +13,7 @@ type MapProps = {
 }
 
 function Map({ className, offers, location, currentOffer, isActiveMarker }: MapProps): JSX.Element {
-  const mapRef = useRef(null);
+  const mapRef = useRef<HTMLDivElement | null>(null);
   const isRendered = useRef(false);
   const [map, setMap] = useState<leaflet.Map | null>(null);
   const markersRef = useRef<leaflet.Marker[]>([]);
@@ -28,17 +28,16 @@ function Map({ className, offers, location, currentOffer, isActiveMarker }: MapP
         zoom: location.zoom,
       });
 
+
       const layer = leaflet.tileLayer(
-        'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         },
       );
 
       layer.addTo(mapInstance);
-
       setMap(mapInstance);
-
       isRendered.current = true;
     }
   }, [location]);
@@ -52,11 +51,11 @@ function Map({ className, offers, location, currentOffer, isActiveMarker }: MapP
     }
   }, [map, location]);
 
-
   useEffect(() => {
     if (!map) {
       return;
     }
+
     const markersLayer = leaflet.layerGroup().addTo(map);
     const markers: leaflet.Marker[] = [];
 
@@ -70,24 +69,29 @@ function Map({ className, offers, location, currentOffer, isActiveMarker }: MapP
           icon: leaflet.icon(MAP_MARKER_DEFAULT),
         }
       );
+
       marker.bindPopup(offer.title);
+
       marker.on('mouseover', () => {
-        if(isActiveMarker) {
+        if (isActiveMarker) {
           marker.setIcon(leaflet.icon(MAP_MARKER_ACTIVE));
         }
         marker.setZIndexOffset(1000);
       });
+
       marker.on('mouseout', () => {
         const currentOfferLat = offers.find((item) => item.id === currentOffer)?.location.latitude;
         const currentOfferLng = offers.find((item) => item.id === currentOffer)?.location.longitude;
         const markerLat = marker.getLatLng().lat;
         const markerLng = marker.getLatLng().lng;
-        if(currentOfferLat === markerLat && currentOfferLng === markerLng) {
+
+        if (currentOfferLat === markerLat && currentOfferLng === markerLng) {
           return;
         }
         marker.setIcon(leaflet.icon(MAP_MARKER_DEFAULT));
         marker.setZIndexOffset(0);
       });
+
       marker.on('click', () => {
         map?.flyTo({
           lat: offer.location.latitude,
@@ -105,7 +109,7 @@ function Map({ className, offers, location, currentOffer, isActiveMarker }: MapP
       map?.removeLayer(markersLayer);
       markersRef.current = [];
     };
-  }, [map, offers]);
+  }, [map, offers, isActiveMarker, currentOffer]);
 
   useEffect(() => {
     markersRef.current.forEach((marker, index) => {
@@ -113,10 +117,8 @@ function Map({ className, offers, location, currentOffer, isActiveMarker }: MapP
       if (!offer) {
         return;
       }
-
       marker.setZIndexOffset(currentOffer === offer.id ? 1000 : 0);
       marker.setIcon(currentOffer === offer.id ? leaflet.icon(MAP_MARKER_ACTIVE) : leaflet.icon(MAP_MARKER_DEFAULT));
-
     });
   }, [currentOffer, offers]);
 
