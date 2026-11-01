@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { GlobalStyle } from '../styles/styles-global';
 import { MainPage } from '../../pages/main-page';
@@ -27,7 +27,7 @@ function App(): JSX.Element {
   return (
     <HelmetProvider>
       <GlobalStyle />
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
@@ -69,7 +69,7 @@ function App(): JSX.Element {
             />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </HelmetProvider>
   );
 }
