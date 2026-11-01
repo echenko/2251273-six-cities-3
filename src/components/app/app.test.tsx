@@ -10,7 +10,8 @@ vi.mock('react-router-dom', async (importOriginal) => {
   const actual = await importOriginal<typeof import('react-router-dom')>();
   return {
     ...actual,
-    BrowserRouter: ({ children }: { children: React.ReactNode }) => (
+    // Заменили BrowserRouter на HashRouter
+    HashRouter: ({ children }: { children: React.ReactNode }) => (
       <actual.MemoryRouter initialEntries={initialEntries}>
         {children}
       </actual.MemoryRouter>
